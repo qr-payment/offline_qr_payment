@@ -1,0 +1,54 @@
+@import "../../colors.scss";
+
+.orderPage {
+  margin: 0 auto;
+  // background-color: yellow;
+
+  .inlineBlock {
+    display: inline-block;
+    width: '50%';
+    // background-color: blue($color: #000000);
+  }
+
+  .alignRight {
+    width: '100%';
+    // box-align: right;
+    vertical-align: center;
+    float: right;
+  }
+  
+  .buttonContainer {
+    display: inline-block;
+    align-self: center;
+    // background-color: aqua;
+    width: 55%;
+    height: 19%;
+    margin: 0%;
+    padding: 0%
+  }
+  .inlineBlock {
+    display: inline-block;
+  }
+}
+
+.tableTitle {
+  font-size: 17;
+}
+
+.orderTable {
+  background-color: rgba($color: $naverGreen, $alpha: 1);
+  .tableText {
+    border: solid rgba($color: $naverGreen, $alpha: 1);
+    color: white;
+    font-size: 15px;
+  }
+}
+
+.orderResult {
+  background-color: rgba($color: $naverGreen, $alpha: 1);
+  .tableText {
+    border: solid rgba($color: $naverGreen, $alpha: 1);
+    font-size: 19px;
+    color: white;
+  }
+}

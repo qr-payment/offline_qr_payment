@@ -1,0 +1,76 @@
+@import "./colors.scss";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.App {
+  display: flex;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+
+  .loading {
+    position: absolute; 
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: $naverGreen, $alpha: 1);
+    z-index: 13;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .progress {
+      color: white;
+    }
+  }
+
+  .bar {
+    width: 100vw;
+  }
+
+  .root {
+    display: flex;
+    width: 100vw;
+    height: 95vh;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: row;
+
+    padding: 3px;
+  
+    overflow: hidden;
+    position: bottom;
+  
+    .leftContainer {
+      flex-basis: 700px;
+      flex-shrink: 0;
+      flex-grow: 0;
+      width: 50%;
+      height: 100%;
+      background-color: white;
+  
+      border-right: 1px solid #dcdcdc;
+
+      overflow: hidden;
+    }
+  
+    .rightContainer {
+      flex: 1;
+      
+      min-width: 500px;
+      flex-shrink: 0;
+      height: 100%;
+      background-color: white;
+  
+      overflow: hidden;
+    }
+  
+  }  
+}
+
+
