@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: production
+
+server:
+  port: 8080
+---
+spring:
+  profiles: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/offline_qr_payment?serverTimezone=Asia/Seoul
+    username: hackday
+    password: 1234
+---
+
+spring:
+  profiles: dev
+
+---
+
+spring:
+  profiles: production
