@@ -1,0 +1,14 @@
+@import "../../colors.scss";
+
+.App {
+
+    width: 100vw;
+    height: 100vh;
+    
+    background-color: rgba($color: $naverGreen, $alpha: 1);
+    color: white;
+    display:table-cell;
+    vertical-align:middle;
+    text-align: center;
+
+}
