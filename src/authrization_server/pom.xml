@@ -8,10 +8,10 @@
         <version>2.1.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.payment.auth</groupId>
-    <artifactId>authorization_server</artifactId>
+    <groupId>com.payment</groupId>
+    <artifactId>auth</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>authorization_server</name>
+    <name>auth</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

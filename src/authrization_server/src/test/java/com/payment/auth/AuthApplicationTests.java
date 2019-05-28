@@ -1,4 +1,4 @@
-package com.payment.auth.authorization_server;
+package com.payment.auth;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AuthorizationServerApplicationTests {
+public class AuthApplicationTests {
 
     @Test
     public void contextLoads() {
