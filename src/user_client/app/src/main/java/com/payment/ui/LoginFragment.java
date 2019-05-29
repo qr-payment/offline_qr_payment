@@ -61,6 +61,12 @@ public class LoginFragment extends Fragment {
             }
             return false;
         });
+
+        //회원가입 버튼
+        binding.signUpButton.setOnClickListener(v -> getFragmentManager().beginTransaction()
+                .replace(R.id.main_container_view, new SignupFragment())
+                .addToBackStack(null)
+                .commit());
     }
 
     @Override
