@@ -4,7 +4,7 @@ public class User {
     private String id;
     private String password;
     private String name;
-    private int transaction_pw;
+    private String transaction_pw;
 
     public String getId() {
         return id;
@@ -30,11 +30,11 @@ public class User {
         this.name = name;
     }
 
-    public int getTransaction_pw() {
+    public String getTransaction_pw() {
         return transaction_pw;
     }
 
-    public void setTransaction_pw(int transaction_pw) {
+    public void setTransaction_pw(String transaction_pw) {
         this.transaction_pw = transaction_pw;
     }
 }
