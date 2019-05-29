@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.payment.R;
+import com.payment.databinding.FragmentLoginBinding;
 
 public class LoginFragment extends Fragment {
 
@@ -35,6 +37,24 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        FragmentLoginBinding binding = DataBindingUtil.bind(view);
+        binding.setLifecycleOwner(requireActivity());
+
+        binding.loginButton.setOnClickListener(v -> {
+            if (!isPasswordValid(binding.passwordEditText.getText())) {
+                binding.passwordTextInput.setError(getString(R.string.password_length_error));
+            } else {
+                //TODO:Login Success Logic 추가해야됨
+                binding.passwordTextInput.setError(null); //Clear the error
+            }
+        });
+
+        binding.passwordEditText.setOnKeyListener((view1, i, keyEvent) -> {
+            if (isPasswordValid(binding.passwordEditText.getText())) {
+                binding.passwordTextInput.setError(null); //Clear the error
+            }
+            return false;
+        });
     }
 
     @Override
