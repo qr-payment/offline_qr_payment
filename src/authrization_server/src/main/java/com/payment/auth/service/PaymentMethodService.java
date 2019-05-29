@@ -1,4 +1,4 @@
 package com.payment.auth.service;
 
-public class PaymentMethodService {
+public interface PaymentMethodService {
 }
