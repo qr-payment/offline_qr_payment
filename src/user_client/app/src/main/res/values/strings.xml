@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">qr_payment_client</string>
+    <string name="qr_app_name">QR Payment</string>
+    <string name="qr_hint_username">아이디</string>
+    <string name="qr_hint_password">비밀번호</string>
+    <string name="qr_button_next">로그인</string>
+    <string name="qr_button_regist">회원가입</string>
+    <string name="qr_button_findId">아이디 찾기</string>
+    <string name="qr_button_findPassword">비밀번호 찾기</string>
+
+    <string name="password_length_error">Password must contain at least 8 characters.</string>
+    <string name="password_not_correct_error">Passwords do not match</string>
+    <string name="id_not_exist_error">This account does not exist</string>
+    <string name="id_not_correct_error">These ID do not match</string>
+
+    <string name="test_call_url">http://testurl.com</string>
 </resources>
