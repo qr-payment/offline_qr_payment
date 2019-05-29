@@ -6,8 +6,6 @@ import com.payment.auth.exception.InvalidPasswordException;
 import com.payment.auth.model.response.wrapper.ResponseWrapper;
 import com.payment.auth.model.response.wrapper.StatusCode;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,10 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-public class ExceptionHandleAdvice {
-
-    @Autowired
-    private MessageSource messageSource;
+public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(AlreadyExistIdException.class)
     @ResponseStatus(HttpStatus.OK)
@@ -42,4 +37,5 @@ public class ExceptionHandleAdvice {
     public ResponseEntity handleInvalidPasswordException(){
         return new ResponseEntity<>(new ResponseWrapper(StatusCode.INVALID_PASSWORD),HttpStatus.OK);
     }
+
 }
