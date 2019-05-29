@@ -2,10 +2,10 @@ package com.payment.auth.model.response.wrapper;
 
 public enum StatusCode {
 
-    OK(0, "Success"),
-    ALREADY_EXIST_ID(100, "이미 존재하는 사용자 ID 입니다."),
-    INVALID_ID(101, "올바른 사용자 ID 를 입력해 주세요."),
-    INVALID_PASSWORD(102, "올바른 비밀번호를 입력해 주세요.");
+    OK(0, "SUCCESS"),
+    ALREADY_EXIST_ID(100, "ALREADY_EXIST_ID"),
+    INVALID_ID(101, "INVALID_ID"),
+    INVALID_PASSWORD(102, "INVALID_PASSWORD");
 
 
     private int code;
