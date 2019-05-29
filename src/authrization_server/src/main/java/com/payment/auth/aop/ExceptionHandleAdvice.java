@@ -3,8 +3,8 @@ package com.payment.auth.aop;
 import com.payment.auth.exception.AlreadyExistIdException;
 import com.payment.auth.exception.InvalidIdException;
 import com.payment.auth.exception.InvalidPasswordException;
-import com.payment.auth.model.response.wrapper.StatusCode;
 import com.payment.auth.model.response.wrapper.ResponseWrapper;
+import com.payment.auth.model.response.wrapper.StatusCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Locale;
 
 @Slf4j
 @RestController
