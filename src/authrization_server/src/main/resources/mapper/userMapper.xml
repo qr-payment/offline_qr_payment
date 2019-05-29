@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.payment.auth.database.UserMapper">
 
-    <insert id="createUser" parameterType="com.payment.auth.model.request.SignUp"
-            useGeneratedKeys="true" keyProperty="userIdx">
+    <insert id="createUser" parameterType="com.payment.auth.model.request.SignUp">
         INSERT INTO user (
             id,
             password,
@@ -19,4 +18,9 @@
             #{salt}
         )
     </insert>
+
+    <select id="idCheck" parameterType="com.payment.auth.model.request.IdCheck" resultType="Integer">
+        SELECT EXISTS (select id from user where id = #{targetId}) as success;
+    </select>
+
 </mapper>

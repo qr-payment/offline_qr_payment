@@ -1,10 +1,7 @@
 package com.payment.auth.model.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
 public class SignIn {
 
 

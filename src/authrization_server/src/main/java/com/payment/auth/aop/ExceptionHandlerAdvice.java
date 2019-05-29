@@ -1,6 +1,7 @@
 package com.payment.auth.aop;
 
 import com.payment.auth.exception.AlreadyExistIdException;
+import com.payment.auth.exception.InvalidDataException;
 import com.payment.auth.exception.InvalidIdException;
 import com.payment.auth.exception.InvalidPasswordException;
 import com.payment.auth.model.response.wrapper.ResponseWrapper;
@@ -8,14 +9,20 @@ import com.payment.auth.model.response.wrapper.StatusCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@RestController
+@RestControllerAdvice
+@Transactional
 public class ExceptionHandlerAdvice {
+
+    @ExceptionHandler(InvalidDataException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity handleInvalidDataException(){
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.INVALID_DATA),HttpStatus.OK);
+    }
 
     @ExceptionHandler(AlreadyExistIdException.class)
     @ResponseStatus(HttpStatus.OK)
@@ -34,8 +41,16 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(InvalidPasswordException.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public ResponseEntity handleInvalidPasswordException(){
-        return new ResponseEntity<>(new ResponseWrapper(StatusCode.INVALID_PASSWORD),HttpStatus.OK);
+    public ResponseEntity handleInvalidPasswordException() {
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.INVALID_PASSWORD), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity handleException(Exception ex) {
+        log.error("Exception", ex);
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.INTERNAL_SERVER_ERROR),HttpStatus.OK);
     }
 
 }

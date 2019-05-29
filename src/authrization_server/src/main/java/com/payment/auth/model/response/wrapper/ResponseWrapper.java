@@ -19,4 +19,5 @@ public class ResponseWrapper<T> {
         this.code = code.getCode();
         this.message = code.getMessage();
     }
+
 }
