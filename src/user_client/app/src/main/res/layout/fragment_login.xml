@@ -26,16 +26,18 @@
                 android:text="@string/qr_app_name"
                 android:textAllCaps="true"
                 android:textColor="#58B033"
-                android:textSize="40sp"
+                android:textSize="43sp"
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.QR.TextInputLayout"
+                android:id="@+id/id_text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/qr_hint_username">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/id_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"

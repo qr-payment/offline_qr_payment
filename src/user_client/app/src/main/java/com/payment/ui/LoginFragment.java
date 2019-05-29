@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.payment.R;
 import com.payment.databinding.FragmentLoginBinding;
 
@@ -46,11 +47,16 @@ public class LoginFragment extends Fragment {
             } else {
                 //TODO:Login Success Logic 추가해야됨
                 binding.passwordTextInput.setError(null); //Clear the error
+
+                if (binding.idEditText.getText().toString().equals("test") && binding.passwordEditText.getText().toString().equals("test")){
+                    Snackbar.make(view,"Test Scuccess",Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
         binding.passwordEditText.setOnKeyListener((view1, i, keyEvent) -> {
             if (isPasswordValid(binding.passwordEditText.getText())) {
+                //TODO:Error 상태에서 벗어날 때
                 binding.passwordTextInput.setError(null); //Clear the error
             }
             return false;
@@ -64,6 +70,6 @@ public class LoginFragment extends Fragment {
 
     //password valid check method
     private boolean isPasswordValid(@Nullable Editable text) {
-        return text != null && text.length() >= 8;
+        return text != null && text.length() >= 3;
     }
 }
