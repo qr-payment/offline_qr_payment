@@ -1,4 +1,4 @@
 package com.payment.auth.model.request;
 
-public class Login {
+public class SignUp {
 }

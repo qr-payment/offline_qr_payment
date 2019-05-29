@@ -1,4 +1,4 @@
 package com.payment.auth.model.response;
 
-public class LoginRes {
+public class SignInRes {
 }
