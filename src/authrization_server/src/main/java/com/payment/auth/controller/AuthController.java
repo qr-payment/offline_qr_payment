@@ -1,10 +1,11 @@
 package com.payment.auth.controller;
 
 import com.payment.auth.model.request.SignIn;
-import com.payment.auth.model.response.wrapper.ResponseWrapper;
+import com.payment.auth.model.response.SignUpRes;
 import com.payment.auth.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,9 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity signUp(SignIn signIn) {
-
-        return userService.signIn(signIn);
-
+    public ResponseEntity<SignUpRes> signUp(SignIn signIn) {
+         SignUpRes newUser = userService.signUp(signIn);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
 }

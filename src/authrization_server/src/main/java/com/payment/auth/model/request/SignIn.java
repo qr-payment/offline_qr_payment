@@ -7,9 +7,6 @@ import lombok.Setter;
 @Setter
 public class SignIn {
 
-    private String id;
-    private String password;
-    private String name;
-    private String transaction_pw;
+
 
 }

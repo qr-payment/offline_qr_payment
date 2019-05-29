@@ -4,6 +4,11 @@ spring:
 
 server:
   port: 8080
+
+mybatis:
+  type-aliases-package: com.example.myproject.mapper
+  mapper-locations: mapper/*.xml
+
 ---
 spring:
   profiles: local
@@ -12,6 +17,7 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/offline_qr_payment?serverTimezone=Asia/Seoul
     username: hackday
     password: 1234
+
 ---
 
 spring:

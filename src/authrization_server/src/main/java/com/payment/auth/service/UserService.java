@@ -1,11 +1,11 @@
 package com.payment.auth.service;
 
 import com.payment.auth.model.request.SignIn;
-import com.payment.auth.model.response.wrapper.ResponseWrapper;
-import org.springframework.http.ResponseEntity;
+import com.payment.auth.model.request.SignUp;
+import com.payment.auth.model.response.SignUpRes;
 
 public interface UserService {
 
-    ResponseEntity<ResponseWrapper> signIn(SignIn signIn);
+    SignUpRes signUp(SignUp signIn);
 
 }
