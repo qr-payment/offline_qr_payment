@@ -23,4 +23,13 @@
         SELECT EXISTS (select id from user where id = #{targetId}) as success;
     </select>
 
+    <select id="getPassword" parameterType="String" resultType="com.payment.auth.model.db.User">
+        SELECT
+            user_idx, password
+        FROM
+            user
+        WHERE
+            id = #{id}
+    </select>
+
 </mapper>

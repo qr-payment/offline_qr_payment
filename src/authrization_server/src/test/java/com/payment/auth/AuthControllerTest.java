@@ -3,6 +3,7 @@ package com.payment.auth;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payment.auth.database.UserMapper;
 import com.payment.auth.model.request.IdCheck;
+import com.payment.auth.model.request.SignIn;
 import com.payment.auth.model.request.SignUp;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class AuthControllerTest {
     private UserMapper userMapper;
 
     @Test
-    public void signUpTest() throws Exception {
+    public void signUp() throws Exception {
 
         // given : valid data
         SignUp signUp = SignUp.builder()
@@ -57,7 +58,7 @@ public class AuthControllerTest {
     }
 
     @Test
-    public void signUpWithInvalidData() throws Exception {
+    public void signUpWithNullData() throws Exception {
 
         // given : invalid data
         SignUp signUp = SignUp.builder()
@@ -79,7 +80,7 @@ public class AuthControllerTest {
     }
 
     @Test
-    public void idCheckWithNotExistId() throws Exception {
+    public void idCheck() throws Exception {
 
         // given : not exist id (valid data)
         IdCheck idCheck = IdCheck.builder()
@@ -121,7 +122,7 @@ public class AuthControllerTest {
     }
 
     @Test
-    public void idCheckWithInvalidData() throws Exception {
+    public void idCheckWithNullData() throws Exception {
 
         // given : invalid data
         IdCheck idCheck = new IdCheck();
@@ -138,17 +139,100 @@ public class AuthControllerTest {
 
     }
 
+    @Test
+    public void signIn() throws Exception {
+
+        // given : valid data
+        SignIn signIn = SignIn.builder()
+                .id("existId")
+                .password("existPw")
+                .build();
+
+        String json = asJsonString(signIn);
+
+        // when and then
+        mockMvc.perform(post(EndPoint.SignIn.getEndPoint())
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(0))
+                .andExpect(jsonPath("$.message").value("성공"))
+                .andExpect(jsonPath("$.body.userIdx").isNotEmpty());
+
+    }
+
+    @Test
+    public void signInWithNotExistId() throws Exception {
+
+        // given : valid data
+        SignIn signIn = SignIn.builder()
+                .id("notExistId")
+                .password("existPw")
+                .build();
+
+        String json = asJsonString(signIn);
+
+        // when and then
+        mockMvc.perform(post(EndPoint.SignIn.getEndPoint())
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(201))
+                .andExpect(jsonPath("$.message").value("올바른 사용자 아이디를 입력해 주세요."));
+
+    }
+
+    @Test
+    public void signInWithInvalidPW() throws Exception {
+
+        // given : valid data
+        SignIn signIn = SignIn.builder()
+                .id("existId")
+                .password("notExistPw")
+                .build();
+
+        String json = asJsonString(signIn);
+
+        // when and then
+        mockMvc.perform(post(EndPoint.SignIn.getEndPoint())
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(202))
+                .andExpect(jsonPath("$.message").value("올바른 비밀번호를 입력해 주세요."));
+
+    }
+
+    @Test
+    public void signInWithNullData() throws Exception {
+
+        // given : valid data
+        SignIn signIn = SignIn.builder()
+                .id("existId")
+                .build();
+
+        String json = asJsonString(signIn);
+
+        // when and then
+        mockMvc.perform(post(EndPoint.SignIn.getEndPoint())
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(100))
+                .andExpect(jsonPath("$.message").value("데이터 형식이 올바르지 않습니다."));
+
+    }
+
     @Before
     public void init() {
 
         SignUp signUp = SignUp.builder()
                 .id("existId")
-                .password("test")
+                .password("existPw")
                 .transactionPw("1234")
                 .salt("salt")
-                .name("테스터")
+                .name("유저")
                 .build();
-
 
         userMapper.createUser(signUp);
 
