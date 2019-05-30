@@ -1,4 +1,9 @@
 package com.payment.auth.model.request;
 
-public class Login {
+import lombok.*;
+
+public class SignIn {
+
+
+
 }

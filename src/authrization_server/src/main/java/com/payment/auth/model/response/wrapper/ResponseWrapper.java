@@ -19,4 +19,11 @@ public class ResponseWrapper<T> {
         this.code = code.getCode();
         this.message = code.getMessage();
     }
+
+    public ResponseWrapper(StatusCode code, T body) {
+        this.code = code.getCode();
+        this.message = code.getMessage();
+        this.body = body;
+    }
+
 }
