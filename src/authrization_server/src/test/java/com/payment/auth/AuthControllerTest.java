@@ -35,6 +35,7 @@ public class AuthControllerTest {
     @Test
     public void signUpTest() throws Exception {
 
+        // given : valid data
         SignUp signUp = SignUp.builder()
                 .id("test")
                 .password("test")
@@ -45,7 +46,8 @@ public class AuthControllerTest {
 
         String json = asJsonString(signUp);
 
-        mockMvc.perform(post("/auth/signup")
+        // when and then
+        mockMvc.perform(post(EndPoint.SignUp.getEndPoint())
                     .content(json)
                     .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isCreated())
@@ -57,6 +59,7 @@ public class AuthControllerTest {
     @Test
     public void signUpWithInvalidData() throws Exception {
 
+        // given : invalid data
         SignUp signUp = SignUp.builder()
                 .id("test")
                 .password("test")
@@ -65,7 +68,8 @@ public class AuthControllerTest {
 
         String json = asJsonString(signUp);
 
-        mockMvc.perform(post("/auth/signup")
+        // when and then
+        mockMvc.perform(post(EndPoint.SignUp.getEndPoint())
                 .content(json)
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
@@ -77,13 +81,15 @@ public class AuthControllerTest {
     @Test
     public void idCheckWithNotExistId() throws Exception {
 
+        // given : not exist id (valid data)
         IdCheck idCheck = IdCheck.builder()
                 .targetId("test")
                 .build();
 
         String json = asJsonString(idCheck);
 
-        mockMvc.perform(post("/auth/id/check")
+        // when and then
+        mockMvc.perform(post(EndPoint.IdCheck.getEndPoint())
                     .content(json)
                     .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
@@ -97,13 +103,15 @@ public class AuthControllerTest {
     @Test
     public void idCheckWithExistId() throws Exception {
 
+        // given : already exist id
         IdCheck idCheck = IdCheck.builder()
                 .targetId("existId")
                 .build();
 
         String json = asJsonString(idCheck);
 
-        mockMvc.perform(post("/auth/id/check")
+        // when and then
+        mockMvc.perform(post(EndPoint.IdCheck.getEndPoint())
                 .content(json)
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
@@ -115,11 +123,13 @@ public class AuthControllerTest {
     @Test
     public void idCheckWithInvalidData() throws Exception {
 
+        // given : invalid data
         IdCheck idCheck = new IdCheck();
 
         String json = asJsonString(idCheck);
 
-        mockMvc.perform(post("/auth/id/check")
+        // when and then
+        mockMvc.perform(post(EndPoint.IdCheck.getEndPoint())
                 .content(json)
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())

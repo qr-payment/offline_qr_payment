@@ -4,7 +4,9 @@ import com.payment.auth.database.UserMapper;
 import com.payment.auth.exception.AlreadyExistIdException;
 import com.payment.auth.exception.InvalidDataException;
 import com.payment.auth.model.request.IdCheck;
+import com.payment.auth.model.request.SignIn;
 import com.payment.auth.model.request.SignUp;
+import com.payment.auth.model.response.SignInRes;
 import com.payment.auth.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -37,6 +39,11 @@ public class UserServiceImpl implements UserService {
         if (result == 1)
             throw new AlreadyExistIdException();
 
+    }
+
+    @Override
+    public SignInRes signIn(SignIn signIn) {
+        return null;
     }
 
 }

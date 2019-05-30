@@ -1,5 +1,6 @@
-package com.payment.auth.aop;
+package com.payment.auth.advice;
 
+import com.payment.auth.controller.AuthController;
 import com.payment.auth.model.response.wrapper.ResponseWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.util.Locale;
 
-@ControllerAdvice
+
+@ControllerAdvice(basePackages = "com.payment.auth")
 @Slf4j
 public class MessageSourceAdvice implements ResponseBodyAdvice<ResponseWrapper> {
 

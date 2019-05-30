@@ -1,4 +1,4 @@
-package com.payment.auth.aop;
+package com.payment.auth.advice;
 
 import com.payment.auth.exception.AlreadyExistIdException;
 import com.payment.auth.exception.InvalidDataException;
