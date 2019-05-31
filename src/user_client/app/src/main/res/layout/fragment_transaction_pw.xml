@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="tranViewModel"
+            type="com.payment.model.TransactionViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#EBC758"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/transaction_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="130dp"
+                android:text="@string/check_transaction_pw"
+                android:textColor="#313131"
+                android:textSize="23sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/transaction_imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dot2_24dp"/>
+                <ImageView
+                    android:id="@+id/transaction_imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/dot2_24dp"/>
+                <ImageView
+                    android:id="@+id/transaction_imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/dot2_24dp"/>
+                <ImageView
+                    android:id="@+id/transaction_imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/dot2_24dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/transaction_pw_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:textColor="#D50000"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:orientation="vertical"
+            android:background="@color/loginPageBackgroundColor"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.QR.Button.Transaction"
+                    android:id="@+id/transaction_num_p1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{tranViewModel.transactionNumList.get(0)}"/>
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.QR.Button.Transaction"
+                    android:id="@+id/transaction_num_p2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{tranViewModel.transactionNumList.get(1)}" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.QR.Button.Transaction"
+                    android:id="@+id/transaction_num_p3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{tranViewModel.transactionNumList.get(2)}" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.QR.Button.Transaction"
+                    android:id="@+id/transaction_num_p4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{tranViewModel.transactionNumList.get(3)}" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.QR.Button.Transaction"
+                    android:id="@+id/transaction_num_p5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{tranViewModel.transactionNumList.get(4)}" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.QR.Button.Transaction"
+                    android:id="@+id/transaction_num_p6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{tranViewModel.transactionNumList.get(5)}" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.QR.Button.Transaction"
+                    android:id="@+id/transaction_num_p7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{tranViewModel.transactionNumList.get(6)}" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.QR.Button.Transaction"
+                    android:id="@+id/transaction_num_p8"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{tranViewModel.transactionNumList.get(7)}" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.QR.Button.Transaction"
+                    android:id="@+id/transaction_num_p9"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{tranViewModel.transactionNumList.get(8)}"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reset_transaction_btn"
+                    style="@style/Widget.QR.Button.TextButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/reset_transaction_pw" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.QR.Button.Transaction"
+                    android:id="@+id/transaction_num_p0"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@{tranViewModel.transactionNumList.get(9)}" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.QR.Button.TextButton"
+                    android:id="@+id/transaction_delete_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="지우는거" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

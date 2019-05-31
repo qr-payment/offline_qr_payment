@@ -1,13 +1,11 @@
 package com.payment.util;
 
-import com.payment.R;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
     private static Retrofit retrofit;
-    private static final String BASE_URL = String.valueOf(R.string.test_call_url);
+    private static final String BASE_URL = "http://223.194.132.171:8080/";
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {

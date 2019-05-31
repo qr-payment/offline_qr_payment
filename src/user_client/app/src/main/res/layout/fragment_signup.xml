@@ -21,8 +21,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:text="@string/qr_app_name"
                 android:textAllCaps="true"
                 android:textColor="#58B033"
@@ -30,158 +30,176 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/qr_hint_username"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/id_text_input"
-                style="@style/Widget.QR.TextInputLayout"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:errorEnabled="true"
-                app:hintEnabled="false">
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/id_edit_text"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/qr_hint_username"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/id_text_input"
+                    style="@style/Widget.QR.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="vertical"
+                    app:errorEnabled="true"
+                    app:hintEnabled="false">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/id_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/qr_hint_password"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_text_input"
-                style="@style/Widget.QR.TextInputLayout"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:errorEnabled="true"
-                app:hintEnabled="false">
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password_edit_text"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/qr_hint_password"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_text_input"
+                    style="@style/Widget.QR.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    app:errorEnabled="true"
+                    app:hintEnabled="false">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/qr_hint_password_check"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_check_text_input"
-                style="@style/Widget.QR.TextInputLayout"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:errorEnabled="true"
-                app:hintEnabled="false">
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password_check_edit_text"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/qr_hint_password_check"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_check_text_input"
+                    style="@style/Widget.QR.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    app:errorEnabled="true"
+                    app:hintEnabled="false">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password_check_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/qr_hint_name"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/name_text_input"
-                style="@style/Widget.QR.TextInputLayout"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:errorEnabled="false"
-                app:hintEnabled="false">
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/name_edit_text"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/qr_hint_name"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/name_text_input"
+                    style="@style/Widget.QR.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    app:errorEnabled="true"
+                    app:hintEnabled="false">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/sign_up_button"
-            style="@style/Widget.QR.Button2"
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="22dp"
-            android:layout_marginRight="20dp"
-            android:text="@string/qr_button_signup" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/name_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/setting_transaction_btn"
+                    style="@style/Widget.QR.Button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/set_transaction_pw" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/sign_up_button"
+                    style="@style/Widget.QR.Button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/qr_button_regist" />
+
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </layout>
