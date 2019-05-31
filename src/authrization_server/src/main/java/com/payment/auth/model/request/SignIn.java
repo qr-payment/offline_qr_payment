@@ -3,7 +3,6 @@ package com.payment.auth.model.request;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter

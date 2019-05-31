@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     public void signUp(SignUp signUp) {
 
         // TODO: Generate Salt and PW Encoding
-        
+
         try {
             userMapper.createUser(signUp);
         } catch (DataIntegrityViolationException e) {
