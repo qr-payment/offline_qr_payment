@@ -3,6 +3,9 @@ package com.payment.auth.service.impl;
 import com.payment.auth.database.UserMapper;
 import com.payment.auth.exception.AlreadyExistIdException;
 import com.payment.auth.exception.InvalidDataException;
+import com.payment.auth.exception.InvalidIdException;
+import com.payment.auth.exception.InvalidPasswordException;
+import com.payment.auth.model.db.User;
 import com.payment.auth.model.request.IdCheck;
 import com.payment.auth.model.request.SignIn;
 import com.payment.auth.model.request.SignUp;
@@ -21,6 +24,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void signUp(SignUp signUp) {
 
+        // TODO: Generate Salt and PW Encoding
+
         try {
             userMapper.createUser(signUp);
         } catch (DataIntegrityViolationException e) {
@@ -32,10 +37,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void idCheck(IdCheck idCheck) {
 
-        if (idCheck.getTargetId() == null)
-            throw new InvalidDataException();
-
         int result = userMapper.idCheck(idCheck);
+
         if (result == 1)
             throw new AlreadyExistIdException();
 
@@ -43,7 +46,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public SignInRes signIn(SignIn signIn) {
-        return null;
+
+        User user = userMapper.getPassword(signIn.getId());
+
+        if (user == null)
+            throw new InvalidIdException();
+
+        // TODO: Encoding PW
+        String encodedPassword = signIn.getPassword();
+
+         if(!encodedPassword.equals(user.getPassword()))
+             throw new InvalidPasswordException();
+
+        return user.toSignInRes();
+
     }
 
 }
