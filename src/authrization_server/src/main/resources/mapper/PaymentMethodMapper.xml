@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.payment.auth.database.PaymentMethodMapper">
+
+    <insert id="registPaymentMethod" parameterType="com.payment.auth.model.request.RegistPayMethod">
+        INSERT INTO payment_method (
+        method_type,
+        user_idx,
+        method_idx
+        )
+        VALUES (
+        #{paymentMethodType},
+        #{userIdx},
+        #{paymentIdx}
+        )
+    </insert>
+
+    <insert id="registAccount" parameterType="com.payment.auth.model.request.RegistPayMethod" useGeneratedKeys="true" keyProperty="paymentIdx">
+        INSERT INTO account (
+            account_num
+        )
+        VALUES (
+            #{paymentNum}
+        )
+    </insert>
+
+    <insert id="registCard" parameterType="com.payment.auth.model.request.RegistPayMethod" useGeneratedKeys="true" keyProperty="paymentIdx">
+        INSERT INTO card (
+            card_num
+        )
+        VALUES (
+            #{paymentNum}
+        )
+    </insert>
+
+</mapper>
