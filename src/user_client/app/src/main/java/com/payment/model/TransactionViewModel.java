@@ -22,7 +22,8 @@ public class TransactionViewModel extends ViewModel {
     public MutableLiveData<Integer> transactionPasswordLength = new MutableLiveData<>();
     public MutableLiveData<Boolean> buttonState = new MutableLiveData<>();
     public MutableLiveData<User> user = new MutableLiveData<>();
-    public MutableLiveData<String> successCode = new MutableLiveData<>();
+    public MutableLiveData<ServerResponse> successCode_Login = new MutableLiveData<>();
+    public MutableLiveData<String> successCode_SignUp = new MutableLiveData<>();
 
     private ArrayList<String> list = new ArrayList<>();
 
@@ -37,7 +38,8 @@ public class TransactionViewModel extends ViewModel {
         transactionPasswordLength.setValue(0);
         buttonState.setValue(false);
         user.setValue(new User());
-        successCode.setValue("9999");
+        successCode_Login.setValue(new ServerResponse());
+        successCode_SignUp.setValue("9999");
     }
 
     public void callSignUpServer(){
@@ -47,8 +49,7 @@ public class TransactionViewModel extends ViewModel {
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if (response.isSuccessful()){
                     if (response.body() != null){
-                        Log.e("signup","success");
-                        successCode.setValue(response.body().getCode());
+                        successCode_SignUp.setValue(response.body().getCode());
                     }
                 }
             }
@@ -66,7 +67,8 @@ public class TransactionViewModel extends ViewModel {
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if (response.isSuccessful()){
                     if (response.body() != null){
-                        successCode.setValue(response.body().getCode());
+                        successCode_Login.getValue().setBody(response.body().getBody().toString());
+                        successCode_Login.getValue().setCode(response.body().getCode());
                     }
                 }
             }

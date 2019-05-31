@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.payment.R;
@@ -65,6 +66,17 @@ public class SignupFragment extends Fragment {
             }
 
             viewModel.callSignUpServer();
+        });
+
+        viewModel.successCode_SignUp.observe(requireActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if (s.equals("0")){
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.main_container_view,new LoginFragment())
+                            .commit();
+                }
+            }
         });
 
         binding.settingTransactionBtn.setOnClickListener(new View.OnClickListener() {

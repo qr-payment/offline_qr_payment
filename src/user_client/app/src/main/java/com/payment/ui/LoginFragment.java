@@ -10,11 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.payment.R;
 import com.payment.databinding.FragmentLoginBinding;
+import com.payment.model.ServerResponse;
 import com.payment.model.TransactionViewModel;
 import com.payment.model.User;
 
@@ -47,13 +48,16 @@ public class LoginFragment extends Fragment {
         FragmentLoginBinding binding = DataBindingUtil.bind(view);
         binding.setLifecycleOwner(requireActivity());
 
-        viewModel.successCode.observe(requireActivity(), s -> {
-            if (s.equals("0")) {
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.main_container_view,new MainFragment())
-                        .commit();
-            }else{
-                Snackbar.make(view,"로그인실패",Snackbar.LENGTH_SHORT).show();
+        viewModel.successCode_Login.observe(requireActivity(), new Observer<ServerResponse>() {
+            @Override
+            public void onChanged(ServerResponse serverResponse) {
+                if (serverResponse.getCode() != null){
+                    if (serverResponse.getCode().equals("0")){
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.main_container_view,new MainFragment())
+                                .commit();
+                    }
+                }
             }
         });
 
