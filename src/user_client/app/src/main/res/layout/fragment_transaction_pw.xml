@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
             name="tranViewModel"
             type="com.payment.model.TransactionViewModel" />
+        <variable
+            name="fragment"
+            type="com.payment.ui.TransactionPWFragment" />
     </data>
 
     <LinearLayout
@@ -35,29 +37,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:id="@+id/parent_imageView"
                 android:gravity="center">
                 <ImageView
                     android:id="@+id/transaction_imageView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:tag="1"
                     android:src="@drawable/dot2_24dp"/>
                 <ImageView
                     android:id="@+id/transaction_imageView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:tag="2"
                     android:src="@drawable/dot2_24dp"/>
                 <ImageView
                     android:id="@+id/transaction_imageView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:tag="3"
                     android:src="@drawable/dot2_24dp"/>
                 <ImageView
                     android:id="@+id/transaction_imageView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:tag="4"
                     android:src="@drawable/dot2_24dp"/>
             </LinearLayout>
 
@@ -92,7 +99,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{tranViewModel.transactionNumList.get(0)}"/>
+                    android:text="@{tranViewModel.transactionNumList.get(0)}"
+                    android:onClick="@{()->fragment.pressTransactionPW(true,tranViewModel.transactionNumList.get(0))}"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.QR.Button.Transaction"
@@ -100,7 +108,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{tranViewModel.transactionNumList.get(1)}" />
+                    android:text="@{tranViewModel.transactionNumList.get(1)}"
+                    android:onClick="@{()->fragment.pressTransactionPW(true,tranViewModel.transactionNumList.get(1))}"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.QR.Button.Transaction"
@@ -108,7 +117,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{tranViewModel.transactionNumList.get(2)}" />
+                    android:text="@{tranViewModel.transactionNumList.get(2)}"
+                    android:onClick="@{()->fragment.pressTransactionPW(true,tranViewModel.transactionNumList.get(2))}"/>
 
             </LinearLayout>
 
@@ -124,7 +134,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{tranViewModel.transactionNumList.get(3)}" />
+                    android:text="@{tranViewModel.transactionNumList.get(3)}"
+                    android:onClick="@{()->fragment.pressTransactionPW(true,tranViewModel.transactionNumList.get(3))}"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.QR.Button.Transaction"
@@ -132,7 +143,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{tranViewModel.transactionNumList.get(4)}" />
+                    android:text="@{tranViewModel.transactionNumList.get(4)}"
+                    android:onClick="@{()->fragment.pressTransactionPW(true,tranViewModel.transactionNumList.get(4))}"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.QR.Button.Transaction"
@@ -140,7 +152,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{tranViewModel.transactionNumList.get(5)}" />
+                    android:text="@{tranViewModel.transactionNumList.get(5)}"
+                    android:onClick="@{()->fragment.pressTransactionPW(true,tranViewModel.transactionNumList.get(5))}"/>
 
             </LinearLayout>
 
@@ -156,7 +169,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{tranViewModel.transactionNumList.get(6)}" />
+                    android:text="@{tranViewModel.transactionNumList.get(6)}"
+                    android:onClick="@{()->fragment.pressTransactionPW(true,tranViewModel.transactionNumList.get(6))}"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.QR.Button.Transaction"
@@ -164,7 +178,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{tranViewModel.transactionNumList.get(7)}" />
+                    android:text="@{tranViewModel.transactionNumList.get(7)}"
+                    android:onClick="@{()->fragment.pressTransactionPW(true,tranViewModel.transactionNumList.get(7))}"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.QR.Button.Transaction"
@@ -172,7 +187,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{tranViewModel.transactionNumList.get(8)}"/>
+                    android:text="@{tranViewModel.transactionNumList.get(8)}"
+                    android:onClick="@{()->fragment.pressTransactionPW(true,tranViewModel.transactionNumList.get(8))}"/>
 
             </LinearLayout>
 
@@ -188,7 +204,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/reset_transaction_pw" />
+                    android:text="@string/reset_transaction_pw"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.QR.Button.Transaction"
@@ -196,7 +212,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@{tranViewModel.transactionNumList.get(9)}" />
+                    android:text="@{tranViewModel.transactionNumList.get(9)}"
+                    android:onClick="@{()->fragment.pressTransactionPW(true,tranViewModel.transactionNumList.get(9))}"/>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.QR.Button.TextButton"
@@ -204,7 +221,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="지우는거" />
+                    android:onClick="@{() -> fragment.deletePressed(false)}"
+                    android:text="지움" />
 
             </LinearLayout>
         </LinearLayout>

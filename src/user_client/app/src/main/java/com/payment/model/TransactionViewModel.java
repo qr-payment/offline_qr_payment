@@ -38,7 +38,6 @@ public class TransactionViewModel extends ViewModel {
         transactionPasswordLength.setValue(0);
         buttonState.setValue(false);
         user.setValue(new User());
-        successCode_Login.setValue(new ServerResponse());
         successCode_SignUp.setValue("9999");
     }
 
@@ -48,34 +47,42 @@ public class TransactionViewModel extends ViewModel {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if (response.isSuccessful()){
-                    if (response.body() != null){
+                    if (response.body() != null && response.body().getCode().equals("0")){
                         successCode_SignUp.setValue(response.body().getCode());
                     }
                 }
             }
             @Override
             public void onFailure(Call<ServerResponse> call, Throwable t) {
-                Log.e("failure-> ",""+t.toString());
+                Log.e("signUp failure-> ",""+t.toString());
             }
         });
     }
 
     public void callSignInServer(User loginUser){
+        ServerResponse serverResponse = new ServerResponse();
         RetrofitService retrofit = RetrofitInstance.getRetrofitInstance().create(RetrofitService.class);
         retrofit.signin(loginUser).enqueue(new Callback<ServerResponse>() {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if (response.isSuccessful()){
-                    if (response.body() != null){
-                        successCode_Login.getValue().setBody(response.body().getBody().toString());
-                        successCode_Login.getValue().setCode(response.body().getCode());
+                    if (response.body().getCode().equals("0")){
+                        serverResponse.setMessage(response.body().getMessage());
+                        serverResponse.setCode(response.body().getCode());
+                        serverResponse.setBody(response.body().getBody());
+                        successCode_Login.setValue(serverResponse);
+                    }else{
+                        serverResponse.setBody(null);
+                        serverResponse.setCode(response.body().getCode());
+                        serverResponse.setMessage(response.body().getMessage());
+                        successCode_Login.setValue(serverResponse);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ServerResponse> call, Throwable t) {
-                Log.e("signup failure",""+t.toString());
+                Log.e("signIn failure-> ",""+t.toString());
             }
         });
     }
@@ -91,8 +98,6 @@ public class TransactionViewModel extends ViewModel {
         if (transactionPasswordLength.getValue() < PASSWORD_LENGTH && buttonState.getValue()){
             transactionPassword.setValue(transactionPassword.getValue().concat(clickedNumber));
             transactionPasswordLength.setValue(transactionPassword.getValue().length());
-            Log.e("at ViewModel",""+transactionPassword.getValue());
-            Log.e("pass length",""+transactionPasswordLength.getValue());
         }
     }
 
@@ -100,8 +105,6 @@ public class TransactionViewModel extends ViewModel {
         if (transactionPasswordLength.getValue() > 0 && !buttonState.getValue()){
             transactionPassword.setValue(transactionPassword.getValue().substring(0,transactionPassword.getValue().length() - 1));
             transactionPasswordLength.setValue(transactionPassword.getValue().length());
-            Log.e("delete at ViewModel",""+transactionPassword.getValue());
-            Log.e("delete pass length",""+transactionPasswordLength.getValue());
         }
     }
 

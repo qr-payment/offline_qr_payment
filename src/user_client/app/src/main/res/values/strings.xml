@@ -26,5 +26,6 @@
     <string name="set_transaction_pw">거래 비밀번호 설정</string>
     <string name="login_null_error">아이디 또는 비밀번호를 모두 입력해주세요</string>
     <string name="error_notsame_password">비밀번호가 다릅니다.</string>
+    <string name="error_null_info">필수정보입니다.</string>
 
 </resources>

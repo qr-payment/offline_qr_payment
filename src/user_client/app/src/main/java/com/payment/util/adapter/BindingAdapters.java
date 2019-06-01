@@ -8,7 +8,7 @@ import com.payment.R;
 
 public class BindingAdapters{
 
-    @BindingAdapter("setImage1")
+    @BindingAdapter("setImage")
     public static void setImage(ImageView imageview, boolean buttonState){
         imageview.setImageResource(R.drawable.dot2_24dp);
         if (buttonState){
