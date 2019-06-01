@@ -41,10 +41,25 @@
         <item name="backgroundTint">#57B836</item>
     </style>
 
+    <style name="Widget.QR.Button3" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundTint">#D50000</item>
+    </style>
+
     <style name="Widget.QR.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">#777777</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:background">#ffffff</item>
+        <item name="rippleColor">#D6D6D6</item>
+    </style>
+
+    <style name="Widget.QR.Button.Transaction" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#777777</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:background">#ffffff</item>
         <item name="rippleColor">#D6D6D6</item>
     </style>
 
