@@ -1,10 +1,12 @@
-package com.payment.model;
+package com.payment.model.viewmodel;
 
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.payment.model.ServerResponse;
+import com.payment.model.User;
 import com.payment.util.RetrofitInstance;
 import com.payment.util.RetrofitService;
 
@@ -38,7 +40,6 @@ public class TransactionViewModel extends ViewModel {
         transactionPasswordLength.setValue(0);
         buttonState.setValue(false);
         user.setValue(new User());
-        successCode_SignUp.setValue("9999");
     }
 
     public void callSignUpServer(){

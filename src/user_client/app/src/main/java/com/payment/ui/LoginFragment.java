@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.snackbar.Snackbar;
 import com.payment.R;
 import com.payment.databinding.FragmentLoginBinding;
-import com.payment.model.TransactionViewModel;
+import com.payment.model.viewmodel.TransactionViewModel;
 import com.payment.model.User;
 
 public class LoginFragment extends Fragment {
@@ -51,7 +51,7 @@ public class LoginFragment extends Fragment {
             if (serverResponse != null) {
                 if (serverResponse.getCode().equals("0")) {
                     //TODO:User Index 내부저장해줘야함
-                    Log.e("User Index",""+serverResponse.getBody());
+                    Log.i("User Index",""+serverResponse.getBody());
                     if (getFragmentManager() != null) {
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.main_container_view, new MainFragment())

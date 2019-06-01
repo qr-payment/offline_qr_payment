@@ -14,13 +14,14 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.payment.R;
 import com.payment.databinding.FragmentTransactionPwBinding;
-import com.payment.model.TransactionViewModel;
+import com.payment.model.viewmodel.TransactionViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionPWFragment extends Fragment {
-
+    private static final int PASSWORD_LENGTH = 4;
+    private static final int PASSWORD_KIND = 2;
     private FragmentTransactionPwBinding binding;
     private TransactionViewModel viewModel;
     private List<String> checkPasswordList;
@@ -54,7 +55,7 @@ public class TransactionPWFragment extends Fragment {
         viewModel.setPassword(number);
         ImageView imageView = view.findViewWithTag(String.valueOf(viewModel.transactionPasswordLength.getValue()));
         imageView.setImageResource(R.drawable.dot1_24dp);
-        if (viewModel.transactionPassword != null && viewModel.transactionPasswordLength.getValue() == 4) {
+        if (viewModel.transactionPassword != null && viewModel.transactionPasswordLength.getValue() == PASSWORD_LENGTH) {
             resetPassword();
         }
     }
@@ -67,7 +68,7 @@ public class TransactionPWFragment extends Fragment {
     }
 
     private boolean checkPassword(List<String> passwords) {
-        if (passwords.size() == 2) {
+        if (passwords.size() == PASSWORD_KIND) {
             if (passwords.get(0).equals(passwords.get(1))) {
                 return true;
             } else {
@@ -81,7 +82,7 @@ public class TransactionPWFragment extends Fragment {
 
     private void resetPassword() {
         binding.transactionTitle.setText(getString(R.string.transaction_re_check));
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i <= PASSWORD_LENGTH; i++) {
             ImageView imageView = view.findViewWithTag(String.valueOf(i));
             imageView.setImageResource(R.drawable.dot2_24dp);
         }

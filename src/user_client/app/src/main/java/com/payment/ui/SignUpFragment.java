@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.payment.R;
 import com.payment.databinding.FragmentSignupBinding;
-import com.payment.model.TransactionViewModel;
+import com.payment.model.viewmodel.TransactionViewModel;
 
 public class SignUpFragment extends Fragment {
 

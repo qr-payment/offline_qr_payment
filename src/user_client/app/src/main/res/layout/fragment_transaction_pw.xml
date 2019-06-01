@@ -4,7 +4,7 @@
     <data>
         <variable
             name="tranViewModel"
-            type="com.payment.model.TransactionViewModel" />
+            type="com.payment.model.viewmodel.TransactionViewModel" />
         <variable
             name="fragment"
             type="com.payment.ui.TransactionPWFragment" />
