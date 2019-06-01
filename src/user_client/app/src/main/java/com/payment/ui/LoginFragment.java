@@ -54,7 +54,7 @@ public class LoginFragment extends Fragment {
                     Log.i("User Index",""+serverResponse.getBody());
                     if (getFragmentManager() != null) {
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.main_container_view, new MainFragment())
+                                .remove(this)
                                 .commit();
                     }
                 } else {

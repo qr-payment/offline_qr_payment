@@ -28,4 +28,8 @@
     <string name="error_notsame_password">비밀번호가 다릅니다.</string>
     <string name="error_null_info">필수정보입니다.</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="toolbar_name">QR_PAYMENT</string>
+
 </resources>
