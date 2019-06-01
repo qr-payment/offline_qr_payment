@@ -88,7 +88,8 @@ public class TransactionPWFragment extends Fragment {
         checkPasswordList.add(viewModel.transactionPassword.getValue());
         if (checkPassword(checkPasswordList)) {
             viewModel.user.getValue().setTransactionPw(viewModel.transactionPassword.getValue());
-            getFragmentManager().beginTransaction().add(R.id.main_container_view, new SignUpFragment()).commit();
+            getFragmentManager().beginTransaction().remove(TransactionPWFragment.this).commit();
+            getFragmentManager().popBackStack();
         }
         viewModel.initViewModels();
     }
