@@ -85,7 +85,7 @@ public class PaymentMethodControllerTest {
         mockMvc.perform(post(EndPoint.RegistPayMethod.getEndPoint())
                 .content(json)
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.code").value(0))
                 .andExpect(jsonPath("$.message").value("성공"));
 
@@ -129,7 +129,7 @@ public class PaymentMethodControllerTest {
         mockMvc.perform(post(EndPoint.RegistPayMethod.getEndPoint())
                 .content(json)
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value(300))
                 .andExpect(jsonPath("$.message").value("이미 등록되어 있는 결제 수단입니다."));
 
