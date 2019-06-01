@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
     public void signUp(SignUp signUp) {
 
         // TODO: Generate Salt and PW Encoding
+        signUp.setSalt("salt");
 
         try {
             userMapper.createUser(signUp);

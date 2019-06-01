@@ -1,9 +1,6 @@
 package com.payment.auth.advice;
 
-import com.payment.auth.exception.AlreadyExistIdException;
-import com.payment.auth.exception.InvalidDataException;
-import com.payment.auth.exception.InvalidIdException;
-import com.payment.auth.exception.InvalidPasswordException;
+import com.payment.auth.exception.*;
 import com.payment.auth.model.response.wrapper.ResponseWrapper;
 import com.payment.auth.model.response.wrapper.StatusCode;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +43,20 @@ public class ExceptionHandlerAdvice {
     @ResponseBody
     public ResponseEntity handleInvalidPasswordException() {
         return new ResponseEntity<>(new ResponseWrapper(StatusCode.INVALID_PASSWORD), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(AlreadyExistMethodException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity handleAlreadyExistMethodException() {
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.ALREADY_EXIST_METHOD), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(InvalidPaymentMethodTypeException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity handleInvalidPaymentMethodTypeException() {
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.INVALID_PAYMENT_METHOD_TYPE), HttpStatus.OK);
     }
 
     @ExceptionHandler(Exception.class)

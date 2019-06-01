@@ -2,19 +2,20 @@ package com.payment.auth;
 
 public enum EndPoint {
 
-    SignIn("/signin"),
-    SignUp("/signup"),
-    IdCheck("/id/check");
+    SignIn("/auth/signin"),
+    SignUp("/auth/signup"),
+    IdCheck("/auth/id/check"),
+
+    RegistPayMethod("/method/regist");
 
     String endPoint;
-    final String base = "/auth";
 
     EndPoint(String endPoint) {
         this.endPoint = endPoint;
     }
 
     public String getEndPoint() {
-        return base + endPoint;
+        return endPoint;
     }
 
 }
