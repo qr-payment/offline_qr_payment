@@ -1,10 +1,12 @@
 package com.payment.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String id;
     private String password;
     private String name;
-    private String transaction_pw;
+    private String transactionPw;
 
     public String getId() {
         return id;
@@ -30,11 +32,21 @@ public class User {
         this.name = name;
     }
 
-    public String getTransaction_pw() {
-        return transaction_pw;
+    public String getTransactionPw() {
+        return transactionPw;
     }
 
-    public void setTransaction_pw(String transaction_pw) {
-        this.transaction_pw = transaction_pw;
+    public void setTransactionPw(String transactionPw) {
+        this.transactionPw = transactionPw;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", transactionPw='" + transactionPw + '\'' +
+                '}';
     }
 }
