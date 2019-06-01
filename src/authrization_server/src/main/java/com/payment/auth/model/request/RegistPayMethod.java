@@ -24,6 +24,6 @@ public class RegistPayMethod {
     private String paymentMethodType;
 
     @NotEmpty
-    private String paymentNum;
+    private String paymentMethodNum;
 
 }

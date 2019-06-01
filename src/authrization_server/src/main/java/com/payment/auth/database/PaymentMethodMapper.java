@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface PaymentMethodMapper {
 
-    void registAccount(RegistPayMethod registPayMethod);
-    void registCard(RegistPayMethod registPayMethod);
     void registPaymentMethod(RegistPayMethod registPayMethod);
 
 }

@@ -5,31 +5,13 @@
     <insert id="registPaymentMethod" parameterType="com.payment.auth.model.request.RegistPayMethod">
         INSERT INTO payment_method (
         method_type,
-        user_idx,
-        method_idx
+        method_num,
+        user_idx
         )
         VALUES (
         #{paymentMethodType},
-        #{userIdx},
-        #{paymentIdx}
-        )
-    </insert>
-
-    <insert id="registAccount" parameterType="com.payment.auth.model.request.RegistPayMethod" useGeneratedKeys="true" keyProperty="paymentIdx">
-        INSERT INTO account (
-            account_num
-        )
-        VALUES (
-            #{paymentNum}
-        )
-    </insert>
-
-    <insert id="registCard" parameterType="com.payment.auth.model.request.RegistPayMethod" useGeneratedKeys="true" keyProperty="paymentIdx">
-        INSERT INTO card (
-            card_num
-        )
-        VALUES (
-            #{paymentNum}
+        #{paymentMethodNum},
+        #{userIdx}
         )
     </insert>
 

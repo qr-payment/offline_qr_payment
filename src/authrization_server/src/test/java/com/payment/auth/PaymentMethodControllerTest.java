@@ -47,31 +47,92 @@ public class PaymentMethodControllerTest {
 
     public long userIdx;
 
-//    @Test
-//    public void signUp() throws Exception {
-//
-//        // given : valid data
-//        SignUp signUp = SignUp.builder()
-//                .id("test")
-//                .password("test")
-//                .transactionPw("1234")
-//                .salt("salt")
-//                .name("테스터")
-//                .build();
-//
-//        String json = asJsonString(signUp);
-//
-//        // when and then
-//        mockMvc.perform(post(EndPoint.SignUp.getEndPoint())
-//                    .content(json)
-//                    .contentType(MediaType.APPLICATION_JSON_UTF8))
-//                .andExpect(status().isCreated())
-//                .andExpect(jsonPath("$.code").value(0))
-//                .andExpect(jsonPath("$.message").value("성공"));
-//
-//    }
     @Test
-    public void contextLoads() {
+    public void registAccountWithAccount() throws Exception {
+
+        // given : valid account data
+        RegistPayMethod registPayMethod = RegistPayMethod.builder()
+                .paymentMethodType("Account")
+                .paymentMethodNum("1235-1235")
+                .userIdx(userIdx)
+                .build();
+
+        String json = asJsonString(registPayMethod);
+
+        // when and then
+        mockMvc.perform(post(EndPoint.RegistPayMethod.getEndPoint())
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.code").value(0))
+                .andExpect(jsonPath("$.message").value("성공"));
+
+    }
+
+    @Test
+    public void registAccountWithCard() throws Exception {
+
+        // given : valid card data
+        RegistPayMethod registPayMethod = RegistPayMethod.builder()
+                .paymentMethodType("Card")
+                .paymentMethodNum("1235-1235")
+                .userIdx(userIdx)
+                .build();
+
+        String json = asJsonString(registPayMethod);
+
+        // when and then
+        mockMvc.perform(post(EndPoint.RegistPayMethod.getEndPoint())
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(0))
+                .andExpect(jsonPath("$.message").value("성공"));
+
+    }
+
+    @Test
+    public void registAccountWithExistAccount() throws Exception {
+
+        // given : already exist account data
+        RegistPayMethod registPayMethod = RegistPayMethod.builder()
+                .paymentMethodType("Account")
+                .paymentMethodNum("1234-1234")
+                .userIdx(userIdx)
+                .build();
+
+        String json = asJsonString(registPayMethod);
+
+        // when and then
+        mockMvc.perform(post(EndPoint.RegistPayMethod.getEndPoint())
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(300))
+                .andExpect(jsonPath("$.message").value("이미 등록되어 있는 결제 수단입니다."));
+
+    }
+
+    @Test
+    public void registAccountWithExistCard() throws Exception {
+
+        // given : already exist card data
+        RegistPayMethod registPayMethod = RegistPayMethod.builder()
+                .paymentMethodType("Card")
+                .paymentMethodNum("1234-1234")
+                .userIdx(userIdx)
+                .build();
+
+        String json = asJsonString(registPayMethod);
+
+        // when and then
+        mockMvc.perform(post(EndPoint.RegistPayMethod.getEndPoint())
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.code").value(300))
+                .andExpect(jsonPath("$.message").value("이미 등록되어 있는 결제 수단입니다."));
+
     }
 
     @Before
@@ -97,7 +158,7 @@ public class PaymentMethodControllerTest {
 
         RegistPayMethod registPayMethod = RegistPayMethod.builder()
                 .paymentMethodType("Account")
-                .paymentNum("1234-1234")
+                .paymentMethodNum("1234-1234")
                 .userIdx(userIdx)
                 .build();
 
