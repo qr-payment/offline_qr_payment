@@ -19,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.payment.databinding.ActivityMainBinding;
+import com.payment.ui.AddCardFragment;
 import com.payment.ui.AddQRFragment;
 import com.payment.ui.LoginFragment;
 
@@ -56,7 +57,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .addToBackStack(null)
                     .commit();
         });
-        binding.appBarContents.fab2Card.setOnClickListener(v -> anim());
+        binding.appBarContents.fab2Card.setOnClickListener(v -> {
+            anim();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.main_container_view, new AddCardFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
 
     public void anim() {
@@ -117,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        //  = 0x0000c0de; // Only use bottom 16 bits
         if (requestCode == IntentIntegrator.REQUEST_CODE) {
             IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
             if (result == null) {
