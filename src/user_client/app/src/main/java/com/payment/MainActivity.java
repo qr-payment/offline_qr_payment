@@ -3,6 +3,8 @@ package com.payment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,13 +19,21 @@ import com.google.android.material.navigation.NavigationView;
 import com.payment.databinding.ActivityMainBinding;
 import com.payment.ui.LoginFragment;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Animation fab_open, fab_close;
+    private ActivityMainBinding binding;
+    private Boolean isFabOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
         binding.setLifecycleOwner(this);
+
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_container_view, new LoginFragment())
@@ -38,6 +48,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         mToolbar.setTitle(getString(R.string.toolbar_name));
+
+        binding.appBarContents.fab.setOnClickListener(v -> anim());
+        binding.appBarContents.fab1Qr.setOnClickListener(v -> anim());
+        binding.appBarContents.fab2Card.setOnClickListener(v -> anim());
+    }
+
+    public void anim() {
+        if (isFabOpen) {
+            binding.appBarContents.fab1Qr.hide();
+            binding.appBarContents.fab2Card.hide();
+            isFabOpen = false;
+        } else {
+            binding.appBarContents.fab1Qr.show();
+            binding.appBarContents.fab2Card.show();
+            isFabOpen = true;
+        }
     }
 
     @Override
@@ -59,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_test1:
                 Toast.makeText(this, "test1", Toast.LENGTH_SHORT).show();
                 break;
