@@ -1,13 +1,13 @@
 package com.payment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,12 +16,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.payment.databinding.ActivityMainBinding;
+import com.payment.ui.AddQRFragment;
 import com.payment.ui.LoginFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Animation fab_open, fab_close;
     private ActivityMainBinding binding;
     private Boolean isFabOpen = false;
 
@@ -31,9 +33,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         binding.setLifecycleOwner(this);
-
-        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
-        fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_container_view, new LoginFragment())
@@ -50,7 +49,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mToolbar.setTitle(getString(R.string.toolbar_name));
 
         binding.appBarContents.fab.setOnClickListener(v -> anim());
-        binding.appBarContents.fab1Qr.setOnClickListener(v -> anim());
+        binding.appBarContents.fab1Qr.setOnClickListener(v -> {
+            anim();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.main_container_view, new AddQRFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
         binding.appBarContents.fab2Card.setOnClickListener(v -> anim());
     }
 
@@ -108,5 +113,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //  = 0x0000c0de; // Only use bottom 16 bits
+        if (requestCode == IntentIntegrator.REQUEST_CODE) {
+            IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+            if (result == null) {
+                // 취소됨
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                // 스캔된 QRCode --> result.getContents()
+                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

@@ -67,10 +67,14 @@ public class LoginFragment extends Fragment {
             if (binding.passwordEditText.getText().toString().length() == 0 || binding.idEditText.getText().toString().length() == 0) {
                 binding.passwordTextInput.setError(getString(R.string.login_null_error));
             } else {
-                binding.passwordTextInput.setError(null);
-                user.setId(binding.idEditText.getText().toString());
-                user.setPassword(binding.passwordEditText.getText().toString());
-                viewModel.callSignInServer(user);
+                //서버 없이 테스트
+                getFragmentManager().beginTransaction()
+                        .remove(this)
+                        .commit();
+//                binding.passwordTextInput.setError(null);
+//                user.setId(binding.idEditText.getText().toString());
+//                user.setPassword(binding.passwordEditText.getText().toString());
+//                viewModel.callSignInServer(user);
             }
         });
 
