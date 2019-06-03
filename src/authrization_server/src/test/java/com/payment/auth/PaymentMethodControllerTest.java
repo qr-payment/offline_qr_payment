@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -55,6 +56,8 @@ public class PaymentMethodControllerTest {
                 .paymentMethodType("Account")
                 .paymentMethodNum("1235-1235")
                 .userIdx(userIdx)
+                .BankName("신한")
+                .nickName("신한S20계좌")
                 .build();
 
         String json = asJsonString(registPayMethod);
@@ -77,6 +80,8 @@ public class PaymentMethodControllerTest {
                 .paymentMethodType("Card")
                 .paymentMethodNum("1235-1235")
                 .userIdx(userIdx)
+                .BankName("신한")
+                .nickName("신한S20")
                 .build();
 
         String json = asJsonString(registPayMethod);
@@ -99,6 +104,8 @@ public class PaymentMethodControllerTest {
                 .paymentMethodType("Account")
                 .paymentMethodNum("1234-1234")
                 .userIdx(userIdx)
+                .BankName("신한")
+                .nickName("신한S20계좌")
                 .build();
 
         String json = asJsonString(registPayMethod);
@@ -121,6 +128,8 @@ public class PaymentMethodControllerTest {
                 .paymentMethodType("Card")
                 .paymentMethodNum("1234-1234")
                 .userIdx(userIdx)
+                .BankName("신한")
+                .nickName("신한S20")
                 .build();
 
         String json = asJsonString(registPayMethod);
@@ -132,6 +141,18 @@ public class PaymentMethodControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value(300))
                 .andExpect(jsonPath("$.message").value("이미 등록되어 있는 결제 수단입니다."));
+
+    }
+
+    @Test
+    public void getMethodsList() throws Exception {
+
+        // given : valid account data
+        // when and then
+        mockMvc.perform(get(EndPoint.GetPayMethods.getEndPoint() + "/" + userIdx))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(0))
+                .andExpect(jsonPath("$.message").value("성공"));
 
     }
 
@@ -160,6 +181,8 @@ public class PaymentMethodControllerTest {
                 .paymentMethodType("Account")
                 .paymentMethodNum("1234-1234")
                 .userIdx(userIdx)
+                .BankName("신한")
+                .nickName("신한S20")
                 .build();
 
         paymentMethodService.registPayMethod(registPayMethod);
