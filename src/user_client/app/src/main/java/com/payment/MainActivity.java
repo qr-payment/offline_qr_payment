@@ -2,6 +2,7 @@ package com.payment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -14,19 +15,23 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.payment.databinding.ActivityMainBinding;
+import com.payment.model.viewmodel.RegistrationViewModel;
 import com.payment.ui.AddCardFragment;
-import com.payment.ui.AddQRFragment;
 import com.payment.ui.LoginFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ActivityMainBinding binding;
     private Boolean isFabOpen = false;
+    public RegistrationViewModel viewModel;
+
+    //SharedPreferences sf = getSharedPreferences("sFile",MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +39,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         binding.setLifecycleOwner(this);
-
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_container_view, new LoginFragment())
                 .commit();
 
+        viewModel = ViewModelProviders.of(this).get(RegistrationViewModel.class);
         Toolbar mToolbar = findViewById(R.id.toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -52,10 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding.appBarContents.fab.setOnClickListener(v -> anim());
         binding.appBarContents.fab1Qr.setOnClickListener(v -> {
             anim();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.main_container_view, new AddQRFragment())
-                    .addToBackStack(null)
-                    .commit();
+            new IntentIntegrator(this).initiateScan();
         });
         binding.appBarContents.fab2Card.setOnClickListener(v -> {
             anim();
@@ -128,10 +130,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
             if (result == null) {
                 // 취소됨
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.re_scan_error), Toast.LENGTH_SHORT).show();
             } else {
                 // 스캔된 QRCode --> result.getContents()
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                Log.e("scan Url-> ",""+result.getContents());
+                viewModel.scanUrlLiveData.setValue(result.getContents());
+
+                if (viewModel.scanUrlLiveData.getValue() != null){
+                    viewModel.scanRequest();
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

@@ -5,6 +5,7 @@ import com.payment.model.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface RetrofitService {
@@ -15,4 +16,6 @@ public interface RetrofitService {
     @POST("auth/signin")
     Call<ServerResponse> signin(@Body User user);
 
+    @GET
+    Call<ServerResponse> qrScanUrl();
 }

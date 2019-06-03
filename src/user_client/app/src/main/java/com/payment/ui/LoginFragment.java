@@ -25,6 +25,17 @@ public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
 
     public LoginFragment() {
+        /*
+        SharedPreferences sharedPreferences = getSharedPreferences("sFile",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("text",text);
+        */
+
+        /*json
+        String json = userindex ?
+        JSONObject jsonObject = new JSONObject(json);
+        String name = jsonObject.getString("name");
+        */
     }
 
     @Override

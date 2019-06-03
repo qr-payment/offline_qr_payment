@@ -31,5 +31,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="toolbar_name">QR_PAYMENT</string>
+    <string name="re_scan_error">Scan을 다시 해주세요.</string>
 
 </resources>

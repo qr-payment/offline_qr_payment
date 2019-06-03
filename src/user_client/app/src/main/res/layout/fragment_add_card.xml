@@ -9,134 +9,35 @@
         android:orientation="vertical"
         android:background="#ffffff"
         tools:context=".ui.AddCardFragment">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp">
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="100dp"
                 android:gravity="center"
+                android:background="#ffffff"
+                android:text="결제수단 등록"
                 android:textAllCaps="true"
-                android:textSize="43sp"
-                android:text="카드등록" />
-
+                android:textSize="25sp" />
+            <include
+                android:id="@+id/cardView_layout"
+                layout="@layout/add_card_layout" />
         </LinearLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cardNum_text_input_1"
-                style="@style/Widget.QR.TextInputLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:layout_margin="5dp"
-                app:errorEnabled="false"
-                app:hintEnabled="false">
+            <include
+                android:id="@+id/input_card_layout"
+                layout="@layout/input_card_num_layout"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cardNum_edit_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <include
+                android:id="@+id/input_account_layout"
+                layout="@layout/input_account_num_layout"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cardNum_text_input_2"
-                style="@style/Widget.QR.TextInputLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:layout_margin="5dp"
-                app:errorEnabled="false"
-                app:hintEnabled="false">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cardNum_edit_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cardNum_text_input_3"
-                style="@style/Widget.QR.TextInputLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:layout_margin="5dp"
-                app:errorEnabled="false"
-                app:hintEnabled="false">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cardNum_edit_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cardNum_text_input_4"
-                style="@style/Widget.QR.TextInputLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:layout_margin="5dp"
-                app:errorEnabled="false"
-                app:hintEnabled="false">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cardNum_edit_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="50dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/card_nickName_input"
-                style="@style/Widget.QR.TextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:hint="별명"
-                app:errorEnabled="true"
-                app:hintEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/card_nickName_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/login_button"
-                style="@style/Widget.QR.Button2"
-                android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_gravity="center_vertical"
-                android:text="카드 등록" />
-
-        </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
 </layout>

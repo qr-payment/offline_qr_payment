@@ -4,6 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
+    private static Retrofit QR_retrofit;
     private static Retrofit retrofit;
     private static final String BASE_URL = "http://121.132.155.221:8080/";
 
@@ -15,5 +16,15 @@ public class RetrofitInstance {
                     .build();
         }
         return retrofit;
+    }
+
+    public static Retrofit getQRRetrofitInstance(String url) {
+        if (QR_retrofit == null) {
+            QR_retrofit = new retrofit2.Retrofit.Builder()
+                    .baseUrl(url)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return QR_retrofit;
     }
 }
