@@ -4,15 +4,32 @@
 
     <insert id="registPaymentMethod" parameterType="com.payment.auth.model.request.RegistPayMethod">
         INSERT INTO payment_method (
-        method_type,
-        method_num,
-        user_idx
+            method_type,
+            method_num,
+            user_idx,
+            bank_name,
+            nick_name
         )
         VALUES (
-        #{paymentMethodType},
-        #{paymentMethodNum},
-        #{userIdx}
+            #{paymentMethodType},
+            #{paymentMethodNum},
+            #{userIdx},
+            #{bankName},
+            #{nickName}
         )
     </insert>
+
+    <select id="getPayMethods" parameterType="Long" resultType="com.payment.auth.model.response.internal.PayMethod">
+        SELECT
+            method_type as paymentMethodType,
+            method_num as paymentMethodNum,
+            UNIX_TIMESTAMP(create_at) as registAt,
+            bank_name as bankName,
+            nick_name as nickName
+        FROM
+            payment_method
+        WHERE
+            user_idx = #{value} and status = 0;
+    </select>
 
 </mapper>
