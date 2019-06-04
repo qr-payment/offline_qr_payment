@@ -5,7 +5,9 @@ import lombok.Getter;
 @Getter
 public enum StatusCode {
 
-    OK(0, "SUCCESS");
+    OK(0, "SUCCESS"),
+
+    INVALID_DATA(100, "INVALID_DATA");
 
     private int code;
     private String message;

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.payment.pay.database.PayMapper">
+
+    <insert id="insertReserve" parameterType="com.payment.pay.model.request.Reserve">
+        INSERT INTO reservation (
+            merchant_id,
+            product_name,
+            amount,
+            count
+        )
+        VALUES (
+            #{merchantId}
+            #{productName},
+            #{amount},
+            #{count}
+        )
+    </insert>
+
+</mapper>

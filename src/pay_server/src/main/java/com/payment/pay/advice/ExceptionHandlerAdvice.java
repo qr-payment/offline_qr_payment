@@ -1,5 +1,6 @@
 package com.payment.pay.advice;
 
+import com.payment.pay.exception.InvalidDataException;
 import com.payment.pay.model.response.wrapper.ResponseWrapper;
 import com.payment.pay.model.response.wrapper.StatusCode;
 import lombok.extern.slf4j.Slf4j;
@@ -14,10 +15,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
 
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(InvalidDataException.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public ResponseEntity<ResponseWrapper> exceptionHandler() {
+    public ResponseEntity<ResponseWrapper> invalidDataExceptionHandler() {
         return new ResponseEntity<>(new ResponseWrapper(StatusCode.OK), HttpStatus.OK);
     }
 

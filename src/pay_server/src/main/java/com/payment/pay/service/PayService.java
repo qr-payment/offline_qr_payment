@@ -1,4 +1,10 @@
 package com.payment.pay.service;
 
-public class PayService {
+import com.payment.pay.model.request.Reserve;
+import com.payment.pay.model.response.ReserveRes;
+
+public interface PayService {
+
+    ReserveRes reserve(Reserve reserve, long merchantId);
+
 }
