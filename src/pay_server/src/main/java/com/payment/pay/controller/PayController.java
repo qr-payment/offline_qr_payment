@@ -1,11 +1,14 @@
 package com.payment.pay.controller;
 
+import com.payment.pay.document.DocReserveRes;
 import com.payment.pay.exception.InvalidDataException;
 import com.payment.pay.model.request.Reserve;
 import com.payment.pay.model.response.ReserveRes;
 import com.payment.pay.model.response.wrapper.ResponseWrapper;
 import com.payment.pay.model.response.wrapper.StatusCode;
 import com.payment.pay.service.PayService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +26,10 @@ public class PayController {
 
     @PostMapping("/reserve")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ResponseWrapper> reserve(@RequestBody Reserve reserve, @RequestHeader(value = "merchant_id") long merchantId,  BindingResult bindingResult) {
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK", response = DocReserveRes.class)
+    })
+    public ResponseEntity<ResponseWrapper> reserve(@RequestBody Reserve reserve, @RequestHeader(value = "merchant_id") Long merchantId,  BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException();
