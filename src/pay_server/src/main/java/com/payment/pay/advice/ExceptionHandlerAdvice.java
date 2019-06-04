@@ -1,5 +1,6 @@
 package com.payment.pay.advice;
 
+import com.payment.pay.exception.EmptyHeaderException;
 import com.payment.pay.exception.InvalidDataException;
 import com.payment.pay.model.response.wrapper.ResponseWrapper;
 import com.payment.pay.model.response.wrapper.StatusCode;
@@ -19,7 +20,14 @@ public class ExceptionHandlerAdvice {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ResponseEntity<ResponseWrapper> invalidDataExceptionHandler() {
-        return new ResponseEntity<>(new ResponseWrapper(StatusCode.OK), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.INVALID_DATA), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(EmptyHeaderException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<ResponseWrapper> emptyHeaderExceptionHandler() {
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.EMPTY_HEADER), HttpStatus.OK);
     }
 
 }

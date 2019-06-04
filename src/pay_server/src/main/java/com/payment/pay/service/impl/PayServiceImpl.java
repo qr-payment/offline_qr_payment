@@ -1,6 +1,7 @@
 package com.payment.pay.service.impl;
 
 import com.payment.pay.database.PayMapper;
+import com.payment.pay.exception.EmptyHeaderException;
 import com.payment.pay.exception.InvalidDataException;
 import com.payment.pay.model.request.Reserve;
 import com.payment.pay.model.response.ReserveRes;
@@ -18,7 +19,7 @@ public class PayServiceImpl implements PayService {
     public ReserveRes reserve(Reserve reserve, Long merchantId) {
 
         if(merchantId == null)
-            throw new InvalidDataException();
+            throw new EmptyHeaderException();
 
         reserve.setMerchantId(merchantId);
 

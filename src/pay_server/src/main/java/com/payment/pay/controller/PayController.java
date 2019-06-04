@@ -29,7 +29,7 @@ public class PayController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK", response = DocReserveRes.class)
     })
-    public ResponseEntity<ResponseWrapper> reserve(@RequestBody Reserve reserve, @RequestHeader(value = "merchant_id") Long merchantId,  BindingResult bindingResult) {
+    public ResponseEntity<ResponseWrapper> reserve(@RequestBody Reserve reserve, @RequestHeader(value = "merchant_id", required = false) Long merchantId,  BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException();
