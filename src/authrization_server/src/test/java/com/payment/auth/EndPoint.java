@@ -6,7 +6,8 @@ public enum EndPoint {
     SignUp("/auth/signup"),
     IdCheck("/auth/id/check"),
 
-    RegistPayMethod("/method/regist");
+    RegistPayMethod("/method/regist"),
+    GetPayMethods("/method/methods");
 
     String endPoint;
 
