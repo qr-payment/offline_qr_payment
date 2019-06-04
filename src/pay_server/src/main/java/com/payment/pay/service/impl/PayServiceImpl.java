@@ -5,7 +5,9 @@ import com.payment.pay.model.request.Reserve;
 import com.payment.pay.model.response.ReserveRes;
 import com.payment.pay.service.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PayServiceImpl implements PayService {
 
     @Autowired

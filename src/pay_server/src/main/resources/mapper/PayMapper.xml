@@ -10,7 +10,7 @@
             count
         )
         VALUES (
-            #{merchantId}
+            #{merchantId},
             #{productName},
             #{amount},
             #{count}

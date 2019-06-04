@@ -1,12 +1,12 @@
 package com.payment.pay.model.response.wrapper;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResponseWrapper<T> {
 
     private int code;
