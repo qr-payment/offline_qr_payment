@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,6 +49,9 @@ public class PaymentMethidServiceImpl implements PaymentMethodService {
     public GetPayMethods getPaymentMethodList(Long userIdx) {
 
         List<PayMethod> methods = paymentMethodMapper.getPayMethods(userIdx);
+
+        if(methods == null)
+            methods = new ArrayList<>();
 
         GetPayMethods payMethods = GetPayMethods.builder()
                 .methods(methods)
