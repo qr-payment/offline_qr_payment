@@ -21,8 +21,9 @@ import com.payment.databinding.FragmentAddCardBinding;
 import com.payment.model.Account;
 import com.payment.model.Card;
 import com.payment.model.viewmodel.RegistrationViewModel;
+import com.payment.model.viewmodel.TransactionViewModel;
 
-public class AddCardFragment extends Fragment {
+public class AddCardFragment extends Fragment{
 
     private FragmentAddCardBinding binding;
     private RegistrationViewModel viewModel;
@@ -30,6 +31,7 @@ public class AddCardFragment extends Fragment {
     private Account userAccount;
     private String resultCardNum;
     private Boolean isFabOpen = false;
+    private TransactionViewModel transactionViewModel;
 
     public AddCardFragment() {
         // Required empty public constructor
@@ -46,6 +48,7 @@ public class AddCardFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_card, container, false);
         View view = binding.getRoot();
         viewModel = ViewModelProviders.of(requireActivity()).get(RegistrationViewModel.class);
+        transactionViewModel = ViewModelProviders.of(requireActivity()).get(TransactionViewModel.class);
         binding.setLifecycleOwner(this);
         userCard = new Card();
         userAccount = new Account();
@@ -58,6 +61,7 @@ public class AddCardFragment extends Fragment {
         String[] bankArray = getResources().getStringArray(R.array.bank);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireActivity(), android.R.layout.simple_spinner_dropdown_item, bankArray);
         binding.inputAccountLayout.bankSpinner.setAdapter(adapter);
+        binding.inputCardLayout.bankSpinner.setAdapter(adapter);
 
         binding.inputCardLayout.cardRegistrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,14 +72,20 @@ public class AddCardFragment extends Fragment {
                 checkEditTextState(binding.inputCardLayout.cardNumEdit4.getText(), 4);
 
                 if (binding.inputCardLayout.cardNickNameEditText.getText() != null && binding.inputCardLayout.cardNickNameEditText.getText().toString().length() > 0) {
-                    userCard.setCardNickName(binding.inputCardLayout.cardNickNameEditText.getText().toString());
+                    userCard.setNickName(binding.inputCardLayout.cardNickNameEditText.getText().toString());
                     resultCardNum = binding.inputCardLayout.cardNumEdit1.getText().toString() + binding.inputCardLayout.cardNumEdit2.getText().toString() + binding.inputCardLayout.cardNumEdit3.getText().toString()
                             + binding.inputCardLayout.cardNumEdit4.getText().toString();
                     if (resultCardNum.length() == 16) {
-                        userCard.setCardNum(resultCardNum);
+                        userCard.setPaymentMethodNum(resultCardNum);
+                        userCard.setPaymentMethodType("Card");
+                        userCard.setNickName(binding.inputCardLayout.cardNickNameEditText.getText().toString());
+                        userCard.setUserIdx((Long) transactionViewModel.successCode_Login.getValue().getBody());
+                        userCard.setBankName(binding.inputCardLayout.bankSpinner.getSelectedItem().toString());
                         getFragmentManager().beginTransaction()
                                 .remove(AddCardFragment.this)
                                 .commit();
+                        viewModel.cardLiveData.setValue(userCard);
+                        viewModel.registCard();
                         Snackbar.make(view, "설정완료" + userCard.toString(), Snackbar.LENGTH_SHORT).show();
                     }
                 }

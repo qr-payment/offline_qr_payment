@@ -36,10 +36,28 @@ public class RegistrationViewModel extends ViewModel {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<ServerResponse> call, Throwable t) {
                 Log.e("Scanned fail-> ",""+t.toString());
+            }
+        });
+    }
+
+    public void registCard(){
+        RetrofitService retrofit = RetrofitInstance.getRetrofitInstance().create(RetrofitService.class);
+        retrofit.registcard(cardLiveData.getValue()).enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                if (response.isSuccessful()){
+                    if (response.body() != null){
+                        Log.e("regist Card success",""+response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Log.e("regist Card fail-> ",""+t.toString());
             }
         });
     }

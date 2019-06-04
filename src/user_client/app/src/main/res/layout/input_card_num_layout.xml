@@ -15,6 +15,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="13sp"
+            android:text="은행선택"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/bank_spinner"
+                android:background="#E9E9E9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
             android:text="카드번호"/>
 
         <LinearLayout
@@ -27,7 +48,7 @@
                 style="@style/Widget.QR.TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:layout_weight="0.2"
                 android:imeOptions="actionNext"
                 app:errorEnabled="true"
@@ -48,7 +69,7 @@
                 style="@style/Widget.QR.TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:layout_weight="0.2"
                 app:errorEnabled="true"
                 app:hintEnabled="true">
@@ -69,7 +90,7 @@
                 style="@style/Widget.QR.TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:layout_weight="0.2"
                 app:errorEnabled="true"
                 app:hintEnabled="true">
@@ -90,7 +111,7 @@
                 style="@style/Widget.QR.TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="3dp"
                 android:layout_weight="0.2"
                 app:errorEnabled="true"
                 app:hintEnabled="true">
@@ -131,7 +152,7 @@
                 android:id="@+id/card_registration_button"
                 style="@style/Widget.QR.Button2"
                 android:layout_width="match_parent"
-                android:layout_height="62dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center_vertical"
                 android:text="카드 등록" />
 

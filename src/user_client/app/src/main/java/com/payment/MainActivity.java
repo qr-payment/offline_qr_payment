@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 if (viewModel.scanUrlLiveData.getValue() != null){
                     viewModel.scanRequest();
+                    //TODO:결제창띄우기
                 }
             }
         } else {

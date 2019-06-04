@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ServerResponse<T> {
-    private String code;
+    private int code;
     private String message;
     private T body;
 }

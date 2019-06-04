@@ -8,6 +8,9 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Card {
-    private String cardNum;
-    private String cardNickName;
+    private String paymentMethodNum;
+    private String paymentMethodType;
+    private String nickName;
+    private String bankName;
+    private Long userIdx;
 }
