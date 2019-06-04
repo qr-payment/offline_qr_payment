@@ -45,7 +45,8 @@ public class PayControllerTest {
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.code").value(0))
-            .andExpect(jsonPath("$.message").value("성공"));
+            .andExpect(jsonPath("$.message").value("성공"))
+            .andExpect(jsonPath("$.body.reserveId").isNotEmpty());
 
     }
 
