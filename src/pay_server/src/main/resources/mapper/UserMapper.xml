@@ -12,4 +12,12 @@
                 user_idx = #{userIdx} AND method_num = #{methodNum} AND method_type = #{methodType} AND status = 0) as success;
     </select>
 
+    <select id="getTransactionPw" parameterType="com.payment.pay.model.request.Temporary" resultType="String">
+        SELECT
+            transaction_pw
+        FROM
+            user
+        WHERE
+            user_idx = #{userIdx}
+    </select>
 </mapper>

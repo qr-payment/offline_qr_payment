@@ -30,6 +30,8 @@ public class Temporary {
     private String methodType;
     @NotEmpty
     private String methodNum;
+    @NotEmpty
+    private String transactionPw;
 
     private String payId;
 
