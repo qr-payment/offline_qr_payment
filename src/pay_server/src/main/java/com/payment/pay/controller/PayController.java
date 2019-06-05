@@ -3,7 +3,9 @@ package com.payment.pay.controller;
 import com.payment.pay.document.DocReserveRes;
 import com.payment.pay.exception.InvalidDataException;
 import com.payment.pay.model.request.Reserve;
+import com.payment.pay.model.request.Temporary;
 import com.payment.pay.model.response.ReserveRes;
+import com.payment.pay.model.response.TemporaryRes;
 import com.payment.pay.model.response.wrapper.ResponseWrapper;
 import com.payment.pay.model.response.wrapper.StatusCode;
 import com.payment.pay.service.PayService;
@@ -15,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @Slf4j
@@ -29,7 +33,7 @@ public class PayController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK", response = DocReserveRes.class)
     })
-    public ResponseEntity<ResponseWrapper> reserve(@RequestBody Reserve reserve, @RequestHeader(value = "merchant_id", required = false) Long merchantId,  BindingResult bindingResult) {
+    public ResponseEntity<ResponseWrapper> reserve(@RequestBody @Valid Reserve reserve, @RequestHeader(value = "merchant_id", required = false) Long merchantId,  BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException();
@@ -38,6 +42,23 @@ public class PayController {
         ReserveRes reserveRes = payService.reserve(reserve, merchantId);
 
         return new ResponseEntity<>(new ResponseWrapper(StatusCode.OK, reserveRes), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/temporary")
+    @ResponseStatus(HttpStatus.OK)
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK", response = Object.class)
+    })
+    public ResponseEntity<ResponseWrapper> temporary(@RequestBody @Valid Temporary temporary, @RequestHeader(value = "merchant_id", required = false) Long merchantId, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new InvalidDataException();
+        }
+
+        TemporaryRes temporaryRes = payService.temporary(temporary, merchantId);;
+
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.OK, temporaryRes), HttpStatus.OK);
 
     }
 
