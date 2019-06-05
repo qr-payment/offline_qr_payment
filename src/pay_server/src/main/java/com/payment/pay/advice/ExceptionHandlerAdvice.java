@@ -85,6 +85,13 @@ public class ExceptionHandlerAdvice {
         return new ResponseEntity<>(new ResponseWrapper(StatusCode.NOT_MATCH_MERCHANT_ID), HttpStatus.OK);
     }
 
+    @ExceptionHandler(NotMatchTransactionPwException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<ResponseWrapper> notMatchTransactionPwExceptionHandler() {
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.NOT_MATCH_TRANSACTION_PW), HttpStatus.OK);
+    }
+
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
