@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -14,13 +15,13 @@ public class Reserve {
     private long reserveId;
     private long merchantId;
 
-    @NotEmpty
+    @NotNull
     private Integer amount;
-
-    @NotEmpty
+    @NotNull
     private Integer count;
-
     @NotEmpty
     private String productName;
+    @NotNull
+    private Long userIdx;
 
 }

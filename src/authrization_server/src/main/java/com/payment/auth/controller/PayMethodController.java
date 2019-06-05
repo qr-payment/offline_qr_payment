@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/method")
 public class PayMethodController {
@@ -25,7 +27,7 @@ public class PayMethodController {
 
     @PostMapping("/regist")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ResponseWrapper> registPayMethod(@RequestBody RegistPayMethod registPayMethod, BindingResult bindingResult) {
+    public ResponseEntity<ResponseWrapper> registPayMethod(@RequestBody @Valid RegistPayMethod registPayMethod, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors())
             throw new InvalidDataException();
