@@ -18,7 +18,7 @@ public class SwaggerConfig {
     public Docket swaggerSpringMvcPlugin() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.payment.auth"))
+                .apis(RequestHandlerSelectors.basePackage("com.payment.pay"))
                 .paths(PathSelectors.any())
                 .build();
 

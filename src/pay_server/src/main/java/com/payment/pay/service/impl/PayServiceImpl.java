@@ -5,6 +5,8 @@ import com.payment.pay.database.UserMapper;
 import com.payment.pay.enums.TxnStatus;
 import com.payment.pay.exception.*;
 import com.payment.pay.model.dao.ReserveDAO;
+import com.payment.pay.model.dao.TransactionDAO;
+import com.payment.pay.model.request.Approve;
 import com.payment.pay.model.request.Reserve;
 import com.payment.pay.model.request.Temporary;
 import com.payment.pay.model.response.ReserveRes;
@@ -81,6 +83,28 @@ public class PayServiceImpl implements PayService {
                 .build();
 
         return temporaryRes;
+
+    }
+
+    @Override
+    @Transactional
+    public void approve(Approve approve, Long merchantId) {
+
+        if(merchantId == null)
+            throw new EmptyHeaderException();
+
+        TransactionDAO transaction = payMapper.getTransaction(approve);
+
+        if(transaction == null)
+            throw new InvalidPayIdException();
+        else if(transaction.getStatus().equals(TxnStatus.Approve.getStatus()))
+            throw new AlreadyPaidException();
+        else if(transaction.getStatus().equals(TxnStatus.Cancel.getStatus()))
+            throw new AlreadyCancelledException();
+        else if(!transaction.getMerchantId().equals(merchantId))
+            throw new NotMatchMerchantIdException();
+
+        payMapper.approveTransaction(approve);
 
     }
 

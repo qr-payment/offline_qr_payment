@@ -3,7 +3,8 @@ package com.payment.pay;
 public enum EndPoint {
 
     Reserve("/pay/reserve"),
-    Temporary("/pay/temporary");
+    Temporary("/pay/temporary"),
+    Approve("/pay/approve");
 
     String endPoint;
 

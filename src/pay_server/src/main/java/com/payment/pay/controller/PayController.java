@@ -1,7 +1,9 @@
 package com.payment.pay.controller;
 
 import com.payment.pay.document.DocReserveRes;
+import com.payment.pay.document.DocTemporaryRes;
 import com.payment.pay.exception.InvalidDataException;
+import com.payment.pay.model.request.Approve;
 import com.payment.pay.model.request.Reserve;
 import com.payment.pay.model.request.Temporary;
 import com.payment.pay.model.response.ReserveRes;
@@ -48,7 +50,7 @@ public class PayController {
     @PostMapping("/temporary")
     @ResponseStatus(HttpStatus.OK)
     @ApiResponses({
-            @ApiResponse(code = 200, message = "OK", response = Object.class)
+            @ApiResponse(code = 200, message = "OK", response = DocTemporaryRes.class)
     })
     public ResponseEntity<ResponseWrapper> temporary(@RequestBody @Valid Temporary temporary, @RequestHeader(value = "merchant_id", required = false) Long merchantId, BindingResult bindingResult) {
 
@@ -59,6 +61,20 @@ public class PayController {
         TemporaryRes temporaryRes = payService.temporary(temporary, merchantId);;
 
         return new ResponseEntity<>(new ResponseWrapper(StatusCode.OK, temporaryRes), HttpStatus.OK);
+
+    }
+
+    @PostMapping("/approve")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ResponseWrapper> approve(@RequestBody @Valid Approve approve, @RequestHeader(value = "merchant_id", required = false) Long merchantId, BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            throw new InvalidDataException();
+        }
+
+        payService.approve(approve, merchantId);
+
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.OK), HttpStatus.OK);
 
     }
 

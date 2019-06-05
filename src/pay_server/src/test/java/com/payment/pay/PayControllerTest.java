@@ -1,9 +1,11 @@
 package com.payment.pay;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.payment.pay.model.request.Approve;
 import com.payment.pay.model.request.Reserve;
 import com.payment.pay.model.request.Temporary;
 import com.payment.pay.model.response.ReserveRes;
+import com.payment.pay.model.response.TemporaryRes;
 import com.payment.pay.service.PayService;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest
-@Transactional
 public class PayControllerTest {
 
     @Autowired
@@ -33,6 +34,11 @@ public class PayControllerTest {
 
     @Autowired
     private PayService payService;
+
+    private Long reserveId;
+    private String payId;
+
+    private String alreadyApprovalPayId = "10a8ef80-4fd1-4e65-815d-b7e814175574";
 
     @Test
     public void reserve() throws Exception {
@@ -254,8 +260,136 @@ public class PayControllerTest {
 
     }
 
+    @Test
+    public void approve() throws Exception {
+
+        Approve approve = Approve.builder()
+                .payId(this.payId)
+                .build();
+
+        String json = asJsonString(approve);
+
+        mockMvc.perform(post(EndPoint.Approve.getEndPoint())
+                .header("merchant_id", 0L)
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(0))
+                .andExpect(jsonPath("$.message").value("성공"));
+
+    }
+
+    @Test
+    public void approveWithAlreadyApprovalPayId() throws Exception {
+
+        Approve approve = Approve.builder()
+                .payId(this.alreadyApprovalPayId)
+                .build();
+
+        String json = asJsonString(approve);
+
+        mockMvc.perform(post(EndPoint.Approve.getEndPoint())
+                .header("merchant_id", 0L)
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(301))
+                .andExpect(jsonPath("$.message").value("이미 결제가 완료되었습니다."));
+
+    }
+
+    @Test
+    public void approveWithNotMetchantPayId() throws Exception {
+
+        Reserve reserve = Reserve.builder()
+                .productName("드라이빙 로퍼 슈즈 외 3건")
+                .amount(278700)
+                .count(4)
+                .userIdx(117L)
+                .build();
+
+        long merchantId = 0L;
+
+        ReserveRes reserveRes = payService.reserve(reserve, merchantId);
+        this.reserveId = reserveRes.getReserveId();
+
+        // set transaction
+        Temporary temporary = Temporary.builder()
+                .productName("드라이빙 로퍼 슈즈 외 3건")
+                .amount(278700)
+                .count(4)
+                .userIdx(117L)
+                .methodType("Card")
+                .methodNum("1234123412341234")
+                .reserveId(this.reserveId)
+                .build();
+
+        TemporaryRes temporaryRes = payService.temporary(temporary, merchantId);
+
+        Approve approve = Approve.builder()
+                .payId(temporaryRes.getPayId())
+                .build();
+
+        String json = asJsonString(approve);
+
+        mockMvc.perform(post(EndPoint.Approve.getEndPoint())
+                .header("merchant_id", 1L)
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(303))
+                .andExpect(jsonPath("$.message").value("상점 정보가 일치하지 않습니다."));
+
+    }
+
+    @Test
+    public void approveWithInvalidPayId() throws Exception {
+
+        Approve approve = Approve.builder()
+                .payId("invalidpayid")
+                .build();
+
+        String json = asJsonString(approve);
+
+        mockMvc.perform(post(EndPoint.Approve.getEndPoint())
+                .header("merchant_id", 0L)
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(300))
+                .andExpect(jsonPath("$.message").value("존재하지 않는 결제 번호 입니다."));
+
+    }
+
     @Before
     public void init() {
+
+        // set reserve
+        Reserve reserve = Reserve.builder()
+                .productName("드라이빙 로퍼 슈즈 외 3건")
+                .amount(278700)
+                .count(4)
+                .userIdx(117L)
+                .build();
+
+        long merchantId = 0L;
+
+        ReserveRes reserveRes = payService.reserve(reserve, merchantId);
+        this.reserveId = reserveRes.getReserveId();
+
+        // set transaction
+        Temporary temporary = Temporary.builder()
+                .productName("드라이빙 로퍼 슈즈 외 3건")
+                .amount(278700)
+                .count(4)
+                .userIdx(117L)
+                .methodType("Card")
+                .methodNum("1234123412341234")
+                .reserveId(this.reserveId)
+                .build();
+
+        TemporaryRes temporaryRes = payService.temporary(temporary, merchantId);
+        this.payId = temporaryRes.getPayId();
 
     }
 

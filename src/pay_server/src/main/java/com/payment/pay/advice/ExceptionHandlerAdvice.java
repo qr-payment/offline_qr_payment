@@ -57,5 +57,39 @@ public class ExceptionHandlerAdvice {
         return new ResponseEntity<>(new ResponseWrapper(StatusCode.INVALID_PAY_METHOD), HttpStatus.OK);
     }
 
+    @ExceptionHandler(InvalidPayIdException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<ResponseWrapper> invalidPayIdExceptionHandler() {
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.INVALID_PAY_ID), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(AlreadyPaidException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<ResponseWrapper> alreadyPaidExceptionHandler() {
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.ALREADY_PAID), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(AlreadyCancelledException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<ResponseWrapper> alreadyCancelledExceptionHandler() {
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.ALREADY_CANCELLED), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(NotMatchMerchantIdException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<ResponseWrapper> notMatchMerchantIdExceptionHandler() {
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.NOT_MATCH_MERCHANT_ID), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<ResponseWrapper> runtimeExceptionHandler() {
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.INTERNAL_SERVER_ERROR), HttpStatus.OK);
+    }
 
 }
