@@ -16,6 +16,9 @@ restTemplate:
     maxConnTotal: 100
     maxConnPerRoute: 5
 
+merchant:
+  name: QR Code 쇼핑몰
+
 ---
 spring:
   profiles: local

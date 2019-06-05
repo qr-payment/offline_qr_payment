@@ -1,6 +1,7 @@
 package com.payment.merchant.controller;
 
 import com.payment.merchant.Document.QrScanRes;
+import com.payment.merchant.model.response.QRScanRes;
 import com.payment.merchant.model.wrapper.ResponseWrapper;
 import com.payment.merchant.model.wrapper.StatusCode;
 import com.payment.merchant.service.OrderService;
@@ -25,9 +26,9 @@ public class MerchantController {
     })
     public ResponseEntity<ResponseWrapper> qrScan(@RequestParam(value = "orderName")String encodedOrderName, @RequestParam(value = "amount")int amount, @RequestParam(value = "count")int count) {
 
-        String endpoint = orderService.reserve(encodedOrderName, amount, count);
+        QRScanRes qrScanRes = orderService.reserve(encodedOrderName, amount, count);
 
-        return new ResponseEntity<>(new ResponseWrapper(StatusCode.OK, endpoint), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseWrapper(StatusCode.OK, qrScanRes), HttpStatus.OK);
 
     }
 
