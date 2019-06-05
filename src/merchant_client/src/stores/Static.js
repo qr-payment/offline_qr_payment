@@ -8,6 +8,6 @@ export default class Static {
         this.root = root
     }
 
-    @observable ORDER_BASE_URL = "http://223.194.135.152:8081/merchant/qrscan/";
+    @observable ORDER_BASE_URL = "http://223.194.128.154:8081/merchant/qrscan/";
     
 }

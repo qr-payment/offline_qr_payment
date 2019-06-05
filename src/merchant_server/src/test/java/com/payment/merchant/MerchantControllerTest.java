@@ -35,7 +35,8 @@ public class MerchantControllerTest {
                 "?orderName=" + orderName + "&amount=" + amount + "&count=" + count))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value(0))
-                .andExpect(jsonPath("$.message").value("성공"));
+                .andExpect(jsonPath("$.message").value("성공"))
+                .andExpect(jsonPath("$.body.merchantName").value("QR Code 쇼핑몰"));
 
 
     }
