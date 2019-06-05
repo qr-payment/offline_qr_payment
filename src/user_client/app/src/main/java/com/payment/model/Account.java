@@ -9,5 +9,8 @@ import lombok.ToString;
 @ToString
 public class Account {
     private String bankName;
-    private String bankAccount;
+    private String nickName;
+    private String paymentMethodNum;
+    private String paymentMethodType;
+    private Long userIdx;
 }

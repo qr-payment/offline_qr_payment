@@ -31,19 +31,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Boolean isFabOpen = false;
     public RegistrationViewModel viewModel;
 
-    //SharedPreferences sf = getSharedPreferences("sFile",MODE_PRIVATE);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
         binding.setLifecycleOwner(this);
+        viewModel = ViewModelProviders.of(this).get(RegistrationViewModel.class);
+
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_container_view, new LoginFragment())
                 .commit();
 
-        viewModel = ViewModelProviders.of(this).get(RegistrationViewModel.class);
         Toolbar mToolbar = findViewById(R.id.toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -129,13 +127,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (requestCode == IntentIntegrator.REQUEST_CODE) {
             IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
             if (result == null) {
-                // 취소됨
                 Toast.makeText(this, getString(R.string.re_scan_error), Toast.LENGTH_SHORT).show();
             } else {
-                // 스캔된 QRCode --> result.getContents()
                 Log.e("scan Url-> ",""+result.getContents());
                 viewModel.scanUrlLiveData.setValue(result.getContents());
-
                 if (viewModel.scanUrlLiveData.getValue() != null){
                     viewModel.scanRequest();
                     //TODO:결제창띄우기

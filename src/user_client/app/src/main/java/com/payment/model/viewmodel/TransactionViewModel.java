@@ -30,7 +30,6 @@ public class TransactionViewModel extends ViewModel {
 
     private ArrayList<String> list = new ArrayList<>();
 
-
     public TransactionViewModel() {
         for (int i = 0; i < 10; i++) {
             list.add(String.valueOf(i));
@@ -73,7 +72,6 @@ public class TransactionViewModel extends ViewModel {
                         serverResponse.setCode(response.body().getCode());
                         serverResponse.setBody(response.body().getBody().getUserIdx());
                         successCode_Login.setValue(serverResponse);
-                        Log.e("userIndex-> ",""+response.body().getBody().getUserIdx()+""+serverResponse.getBody());
                     }else{
                         serverResponse.setBody(null);
                         serverResponse.setCode(response.body().getCode());
@@ -85,7 +83,7 @@ public class TransactionViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<ServerResponse<SignInRes>> call, Throwable t) {
-
+                Log.e("SignIn onFailure",""+t.toString());
             }
         });
     }

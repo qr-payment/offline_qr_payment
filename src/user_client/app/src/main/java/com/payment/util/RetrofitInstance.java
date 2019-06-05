@@ -7,7 +7,7 @@ public class RetrofitInstance {
     private static Retrofit QR_retrofit;
     private static Retrofit retrofit;
 //    private static final String BASE_URL = "http://121.132.155.221:8080/";
-    private static final String BASE_URL = "http://223.194.135.152:8080/";
+    private static final String BASE_URL = "http://223.194.128.154:8080/";
 
     public static Retrofit getRetrofitInstance() {
 

@@ -1,5 +1,6 @@
 package com.payment.util;
 
+import com.payment.model.Account;
 import com.payment.model.Card;
 import com.payment.model.ServerResponse;
 import com.payment.model.User;
@@ -20,7 +21,10 @@ public interface RetrofitService {
     Call<ServerResponse<SignInRes>> signin(@Body User user);
 
     @POST("method/regist")
-    Call<ServerResponse> registcard(@Body Card card);
+    Call<ServerResponse> registCard(@Body Card card);
+
+    @POST("method/regist")
+    Call<ServerResponse> registAccount(@Body Account account);
 
     @POST("method/list/{userIdx}")
     Call<ServerResponse> callpay(@Path("userIdx") Long userIdx);

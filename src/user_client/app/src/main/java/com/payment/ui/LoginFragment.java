@@ -16,29 +16,15 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.snackbar.Snackbar;
 import com.payment.R;
 import com.payment.databinding.FragmentLoginBinding;
-import com.payment.model.viewmodel.RegistrationViewModel;
-import com.payment.model.viewmodel.TransactionViewModel;
 import com.payment.model.User;
+import com.payment.model.viewmodel.TransactionViewModel;
 
 public class LoginFragment extends Fragment {
 
     private TransactionViewModel viewModel;
     private FragmentLoginBinding binding;
-    private RegistrationViewModel registrationViewModel;
 
-    public LoginFragment() {
-        /*
-        SharedPreferences sharedPreferences = getSharedPreferences("sFile",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("text",text);
-        */
-
-        /*json
-        String json = userindex ?
-        JSONObject jsonObject = new JSONObject(json);
-        String name = jsonObject.getString("name");
-        */
-    }
+    public LoginFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +34,6 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        registrationViewModel = ViewModelProviders.of(requireActivity()).get(RegistrationViewModel.class);
         viewModel = ViewModelProviders.of(requireActivity()).get(TransactionViewModel.class);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         View view = binding.getRoot();
