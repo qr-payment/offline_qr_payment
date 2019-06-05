@@ -33,8 +33,6 @@
             reservation
         where
             reserve_id = #{value}
-            and
-            status = 'Reserve'
     </select>
 
     <insert id="insertTransaction" parameterType="com.payment.pay.model.request.Temporary" useGeneratedKeys="true" keyProperty="transactionIdx">
@@ -53,5 +51,14 @@
             #{userIdx}
         )
     </insert>
+
+    <update id="updateReserveToTemporary" parameterType="Long">
+        UPDATE
+            reservation
+        SET
+            status = 'Temporary'
+        WHERE
+            reserve_id = #{reserveId}
+    </update>
 
 </mapper>

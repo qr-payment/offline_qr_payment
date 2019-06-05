@@ -12,6 +12,7 @@ import com.payment.pay.model.response.TemporaryRes;
 import com.payment.pay.service.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -43,6 +44,7 @@ public class PayServiceImpl implements PayService {
     }
 
     @Override
+    @Transactional
     public TemporaryRes temporary(Temporary temporary, Long merchantId) {
 
         if(merchantId == null)
@@ -67,7 +69,12 @@ public class PayServiceImpl implements PayService {
         String payId = UUID.randomUUID().toString();
         temporary.setPayId(payId);
 
-        payMapper.insertTransaction(temporary);
+        try {
+            payMapper.updateReserveToTemporary(temporary.getReserveId());
+            payMapper.insertTransaction(temporary);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
 
         TemporaryRes temporaryRes = TemporaryRes.builder()
                 .payId(payId)

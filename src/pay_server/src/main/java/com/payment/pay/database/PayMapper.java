@@ -13,5 +13,6 @@ public interface PayMapper {
     void insertReserve(Reserve reserve);
     ReserveDAO getReserve(Long reserveId);
     void insertTransaction(Temporary temporary);
+    void updateReserveToTemporary(Long reserveId);
 
 }
