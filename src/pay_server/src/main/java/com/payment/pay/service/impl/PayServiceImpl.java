@@ -68,6 +68,11 @@ public class PayServiceImpl implements PayService {
         if (methodCheck != 1)
             throw new InvalidPayMethodException();
 
+        String transactionPw = userMapper.getTransactionPw(temporary);
+
+        if(!transactionPw.equals(temporary.getTransactionPw()))
+            throw new NotMatchTransactionPwException();
+
         String payId = UUID.randomUUID().toString();
         temporary.setPayId(payId);
 

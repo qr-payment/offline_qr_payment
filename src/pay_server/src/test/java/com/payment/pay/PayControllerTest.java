@@ -109,6 +109,7 @@ public class PayControllerTest {
                 .amount(278700)
                 .count(4)
                 .userIdx(117L)
+                .transactionPw("6666")
                 .methodType("Card")
                 .methodNum("1234123412341234")
                 .reserveId(reserveRes.getReserveId())
@@ -137,6 +138,7 @@ public class PayControllerTest {
                 .amount(278700)
                 .count(4)
                 .userIdx(117L)
+                .transactionPw("6666")
                 .methodType("Card")
                 .methodNum("1234123412341234")
                 .reserveId(2L)
@@ -176,6 +178,7 @@ public class PayControllerTest {
                 .amount(27870)
                 .count(4)
                 .userIdx(117L)
+                .transactionPw("6666")
                 .methodType("Card")
                 .methodNum("1234123412341234")
                 .reserveId(reserveRes.getReserveId())
@@ -215,6 +218,7 @@ public class PayControllerTest {
                 .amount(278700)
                 .count(4)
                 .userIdx(117L)
+                .transactionPw("6666")
                 .methodType("Card")
                 .methodNum("11111132313141")
                 .reserveId(reserveRes.getReserveId())
@@ -243,6 +247,35 @@ public class PayControllerTest {
                 .count(4)
                 .userIdx(117L)
                 .methodType("Card")
+                .transactionPw("6666")
+                .methodNum("1234123412341234")
+                .reserveId(0L)
+                .build();
+
+        String json = asJsonString(temporary);
+
+        // when & then
+        mockMvc.perform(post(EndPoint.Temporary.getEndPoint())
+                .header("merchant_id", 0)
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value(200))
+                .andExpect(jsonPath("$.message").value("존재하지 않는 예약 정보입니다."));
+
+    }
+
+    @Test
+    public void temporaryWithInvalidTransactionPW() throws Exception {
+
+        // given : valid data
+        Temporary temporary = Temporary.builder()
+                .productName("드라이빙 로퍼 슈즈 외 3건")
+                .amount(27870)
+                .count(4)
+                .userIdx(117L)
+                .methodType("Card")
+                .transactionPw("6665")
                 .methodNum("1234123412341234")
                 .reserveId(0L)
                 .build();
@@ -319,6 +352,7 @@ public class PayControllerTest {
                 .amount(278700)
                 .count(4)
                 .userIdx(117L)
+                .transactionPw("6666")
                 .methodType("Card")
                 .methodNum("1234123412341234")
                 .reserveId(this.reserveId)
@@ -383,6 +417,7 @@ public class PayControllerTest {
                 .amount(278700)
                 .count(4)
                 .userIdx(117L)
+                .transactionPw("6666")
                 .methodType("Card")
                 .methodNum("1234123412341234")
                 .reserveId(this.reserveId)

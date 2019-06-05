@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 
     int userPaymentMethodCheck(Temporary temporary);
+    String getTransactionPw(Temporary temporary);
 
 }
