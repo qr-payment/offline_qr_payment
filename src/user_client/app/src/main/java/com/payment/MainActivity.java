@@ -24,6 +24,7 @@ import com.payment.databinding.ActivityMainBinding;
 import com.payment.model.viewmodel.RegistrationViewModel;
 import com.payment.ui.AddCardFragment;
 import com.payment.ui.LoginFragment;
+import com.payment.ui.TransactionViewFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -134,10 +135,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (viewModel.scanUrlLiveData.getValue() != null){
                     viewModel.scanRequest();
                     //TODO:결제창띄우기
+                    transView();
                 }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("onresume","!@#!@#");
+    }
+
+    public void transView(){
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.main_container_view, new TransactionViewFragment())
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
     }
 }
