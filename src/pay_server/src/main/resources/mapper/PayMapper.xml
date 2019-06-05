@@ -7,14 +7,58 @@
             merchant_id,
             product_name,
             amount,
-            count
+            count,
+            user_idx
         )
         VALUES (
             #{merchantId},
             #{productName},
             #{amount},
-            #{count}
+            #{count},
+            #{userIdx}
         )
     </insert>
+
+    <select id="getReserve" parameterType="Long" resultType="com.payment.pay.model.dao.ReserveDAO">
+        SELECT
+            reserve_id as reserveId,
+            merchant_id as merchantId,
+            UNIX_TIMESTAMP(create_at) as createAt,
+            amount,
+            product_name as productName,
+            count,
+            user_idx as userIdx,
+            status
+        FROM
+            reservation
+        where
+            reserve_id = #{value}
+    </select>
+
+    <insert id="insertTransaction" parameterType="com.payment.pay.model.request.Temporary" useGeneratedKeys="true" keyProperty="transactionIdx">
+        INSERT INTO transaction (
+            merchant_id,
+            product_name,
+            amount,
+            count,
+            user_idx
+        )
+        VALUES (
+            #{merchantId},
+            #{productName},
+            #{amount},
+            #{count},
+            #{userIdx}
+        )
+    </insert>
+
+    <update id="updateReserveToTemporary" parameterType="Long">
+        UPDATE
+            reservation
+        SET
+            status = 'Temporary'
+        WHERE
+            reserve_id = #{reserveId}
+    </update>
 
 </mapper>

@@ -1,0 +1,47 @@
+package com.payment.pay.model.request;
+
+import com.payment.pay.model.dao.ReserveDAO;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@Getter
+@Setter
+@Builder
+public class Temporary {
+
+    private Long transactionIdx;
+    private Long merchantId;
+
+    @NotNull
+    private Long reserveId;
+    @NotNull
+    private Long userIdx;
+    @NotNull
+    private Integer amount;
+    @NotNull
+    private Integer count;
+    @NotEmpty
+    private String productName;
+    @NotEmpty
+    private String methodType;
+    @NotEmpty
+    private String methodNum;
+
+    private String payId;
+
+    public boolean isSameOrder(ReserveDAO reserveDAO) {
+
+        return this.amount.equals(reserveDAO.getAmount()) &&
+                this.count.equals(reserveDAO.getCount()) &&
+                this.merchantId.equals(reserveDAO.getMerchantId()) &&
+                this.productName.equals(reserveDAO.getProductName()) &&
+                this.reserveId.equals(reserveDAO.getReserveId()) &&
+                this.userIdx.equals(reserveDAO.getUserIdx());
+
+    }
+
+}
