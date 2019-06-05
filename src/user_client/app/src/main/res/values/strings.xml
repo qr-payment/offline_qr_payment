@@ -28,4 +28,16 @@
     <string name="error_notsame_password">비밀번호가 다릅니다.</string>
     <string name="error_null_info">필수정보입니다.</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="toolbar_name">QR_PAYMENT</string>
+    <string name="re_scan_error">Scan을 다시 해주세요.</string>
+    <string name="select_bank">은행선택</string>
+    <string name="card_number">카드번호</string>
+    <string name="nickname">별명</string>
+    <string name="card_regist">카드 등록</string>
+    <string name="card_num_null_error">카드번호를 모두 입력하세요</string>
+    <string name="account_number">계좌번호</string>
+    <string name="regist_account">계좌 등록</string>
+
 </resources>

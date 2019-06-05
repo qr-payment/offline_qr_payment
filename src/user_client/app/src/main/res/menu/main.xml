@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_account"
+        android:title="카드등록"
+        android:icon="@drawable/dot1_24dp"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/cartFragment"
+        android:title="테스트"
+        android:icon="@drawable/dot2_24dp"
+        android:orderInCategory="101"
+        app:showAsAction="ifRoom" />
+
+</menu>

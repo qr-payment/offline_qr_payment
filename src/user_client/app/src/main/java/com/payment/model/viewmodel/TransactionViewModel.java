@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.payment.model.ServerResponse;
 import com.payment.model.User;
+import com.payment.model.internal.SignInRes;
 import com.payment.util.RetrofitInstance;
 import com.payment.util.RetrofitService;
 
@@ -25,10 +26,9 @@ public class TransactionViewModel extends ViewModel {
     public MutableLiveData<Boolean> buttonState = new MutableLiveData<>();
     public MutableLiveData<User> user = new MutableLiveData<>();
     public MutableLiveData<ServerResponse> successCode_Login = new MutableLiveData<>();
-    public MutableLiveData<String> successCode_SignUp = new MutableLiveData<>();
+    public MutableLiveData<Integer> successCode_SignUp = new MutableLiveData<>();
 
     private ArrayList<String> list = new ArrayList<>();
-
 
     public TransactionViewModel() {
         for (int i = 0; i < 10; i++) {
@@ -48,7 +48,7 @@ public class TransactionViewModel extends ViewModel {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if (response.isSuccessful()){
-                    if (response.body() != null && response.body().getCode().equals("0")){
+                    if (response.body() != null && response.body().getCode() == 0){
                         successCode_SignUp.setValue(response.body().getCode());
                     }
                 }
@@ -63,14 +63,14 @@ public class TransactionViewModel extends ViewModel {
     public void callSignInServer(User loginUser){
         ServerResponse serverResponse = new ServerResponse();
         RetrofitService retrofit = RetrofitInstance.getRetrofitInstance().create(RetrofitService.class);
-        retrofit.signin(loginUser).enqueue(new Callback<ServerResponse>() {
+        retrofit.signin(loginUser).enqueue(new Callback<ServerResponse<SignInRes>>() {
             @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+            public void onResponse(Call<ServerResponse<SignInRes>> call, Response<ServerResponse<SignInRes>> response) {
                 if (response.isSuccessful()){
-                    if (response.body().getCode().equals("0")){
+                    if (response.body().getCode() == 0){
                         serverResponse.setMessage(response.body().getMessage());
                         serverResponse.setCode(response.body().getCode());
-                        serverResponse.setBody(response.body().getBody());
+                        serverResponse.setBody(response.body().getBody().getUserIdx());
                         successCode_Login.setValue(serverResponse);
                     }else{
                         serverResponse.setBody(null);
@@ -82,8 +82,8 @@ public class TransactionViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
-                Log.e("signIn failure-> ",""+t.toString());
+            public void onFailure(Call<ServerResponse<SignInRes>> call, Throwable t) {
+                Log.e("SignIn onFailure",""+t.toString());
             }
         });
     }

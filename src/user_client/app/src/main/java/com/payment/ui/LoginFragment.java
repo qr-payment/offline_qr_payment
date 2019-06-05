@@ -16,16 +16,15 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.snackbar.Snackbar;
 import com.payment.R;
 import com.payment.databinding.FragmentLoginBinding;
-import com.payment.model.viewmodel.TransactionViewModel;
 import com.payment.model.User;
+import com.payment.model.viewmodel.TransactionViewModel;
 
 public class LoginFragment extends Fragment {
 
     private TransactionViewModel viewModel;
     private FragmentLoginBinding binding;
 
-    public LoginFragment() {
-    }
+    public LoginFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,15 +48,16 @@ public class LoginFragment extends Fragment {
 
         viewModel.successCode_Login.observe(requireActivity(), serverResponse -> {
             if (serverResponse != null) {
-                if (serverResponse.getCode().equals("0")) {
+                if (serverResponse.getCode() == 0) {
                     //TODO:User Index 내부저장해줘야함
                     Log.i("User Index",""+serverResponse.getBody());
                     if (getFragmentManager() != null) {
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.main_container_view, new MainFragment())
+                                .remove(this)
                                 .commit();
                     }
                 } else {
+                    Log.e("error message",""+serverResponse.getMessage());
                     Snackbar.make(requireView(), serverResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                 }
             }
@@ -67,6 +67,10 @@ public class LoginFragment extends Fragment {
             if (binding.passwordEditText.getText().toString().length() == 0 || binding.idEditText.getText().toString().length() == 0) {
                 binding.passwordTextInput.setError(getString(R.string.login_null_error));
             } else {
+                //서버 없이 테스트
+//                getFragmentManager().beginTransaction()
+//                        .remove(this)
+//                        .commit();
                 binding.passwordTextInput.setError(null);
                 user.setId(binding.idEditText.getText().toString());
                 user.setPassword(binding.passwordEditText.getText().toString());
