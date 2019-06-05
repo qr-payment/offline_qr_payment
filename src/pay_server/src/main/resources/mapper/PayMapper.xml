@@ -41,14 +41,22 @@
             product_name,
             amount,
             count,
-            user_idx
+            user_idx,
+            pay_id,
+            reserve_id,
+            method_num,
+            method_type
         )
         VALUES (
             #{merchantId},
             #{productName},
             #{amount},
             #{count},
-            #{userIdx}
+            #{userIdx},
+            #{payId},
+            #{reserveId},
+            #{methodNum},
+            #{methodType}
         )
     </insert>
 
@@ -59,6 +67,26 @@
             status = 'Temporary'
         WHERE
             reserve_id = #{reserveId}
+    </update>
+
+    <select id="getTransaction" parameterType="com.payment.pay.model.request.Approve" resultType="com.payment.pay.model.dao.TransactionDAO">
+        SELECT
+            merchant_id as merchantId,
+            status,
+            pay_id as payId
+        FROM
+            transaction
+        WHERE
+            pay_id = #{payId}
+    </select>
+
+    <update id="approveTransaction" parameterType="com.payment.pay.model.request.Approve">
+        UPDATE
+            transaction
+        SET
+            status = 'Approve'
+        WHERE
+            pay_id = #{payId}
     </update>
 
 </mapper>
