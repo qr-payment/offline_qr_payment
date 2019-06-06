@@ -1,6 +1,7 @@
 package com.payment.pay.model.request;
 
 import com.payment.pay.model.dao.ReserveDAO;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,9 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class Temporary {
 
+    @ApiModelProperty(hidden = true)
     private Long transactionIdx;
+    @ApiModelProperty(hidden = true)
     private Long merchantId;
 
     @NotNull
@@ -33,6 +36,7 @@ public class Temporary {
     @NotEmpty
     private String transactionPw;
 
+    @ApiModelProperty(hidden = true)
     private String payId;
 
     public boolean isSameOrder(ReserveDAO reserveDAO) {

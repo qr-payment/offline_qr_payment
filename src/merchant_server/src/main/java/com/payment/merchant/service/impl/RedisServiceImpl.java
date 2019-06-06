@@ -1,8 +1,8 @@
 package com.payment.merchant.service.impl;
 
-import com.payment.merchant.model.Order;
-import com.payment.merchant.model.connector.response.ApproveRes;
+import com.payment.merchant.model.Redis.Order;
 import com.payment.merchant.model.connector.response.CancelRes;
+import com.payment.merchant.model.connector.response.TemporaryRes;
 import com.payment.merchant.repository.OrderRedisRepository;
 import com.payment.merchant.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
@@ -51,13 +51,26 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public void updateOrder(String redisId, ApproveRes response) {
+    public void updateOrder(String redisId, TemporaryRes temporaryRes) {
 
         Optional<Order> object = orderRedisRepository.findById(redisId);
 
         Order order = object.get();
 
-        // TODO: Order Setting
+        order.setPayId(temporaryRes.getPayId());
+
+        orderRedisRepository.save(order);
+
+    }
+
+    @Override
+    public void updateApproveAt(String redisId) {
+
+        Optional<Order> object = orderRedisRepository.findById(redisId);
+
+        Order order = object.get();
+
+        order.setApproveAt(System.currentTimeMillis() / 1000L);
 
         orderRedisRepository.save(order);
 

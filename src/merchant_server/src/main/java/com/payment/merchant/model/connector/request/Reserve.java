@@ -1,6 +1,5 @@
 package com.payment.merchant.model.connector.request;
 
-import com.payment.merchant.model.Order;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,5 +13,6 @@ public class Reserve {
     private String returnUrl;
     private int count;
     private String productName;
+    private long userIdx;
 
 }

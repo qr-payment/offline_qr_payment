@@ -18,6 +18,7 @@ restTemplate:
 
 merchant:
   name: QR Code 쇼핑몰
+  id: 0
 
 ---
 spring:

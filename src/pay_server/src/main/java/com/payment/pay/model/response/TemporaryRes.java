@@ -11,4 +11,13 @@ public class TemporaryRes {
 
     private String payId;
     
+    private long reserveId;
+    private String productName;
+    private int amount;
+    private int count;
+    private String methodType;
+    private String methodNum;
+    private long userIdx;
+    private long merchantId;
+    
 }

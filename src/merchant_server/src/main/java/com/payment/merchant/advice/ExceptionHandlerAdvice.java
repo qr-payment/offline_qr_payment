@@ -1,5 +1,7 @@
 package com.payment.merchant.advice;
 
+import com.payment.merchant.exception.InvalidHeaderException;
+import com.payment.merchant.exception.NotMatchOrderException;
 import com.payment.merchant.model.wrapper.ResponseWrapper;
 import com.payment.merchant.model.wrapper.StatusCode;
 import lombok.extern.slf4j.Slf4j;
@@ -16,14 +18,26 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Transactional
 public class ExceptionHandlerAdvice {
 
-
-
     @ExceptionHandler(Exception.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity handleException(Exception ex) {
         log.error("Exception", ex);
         return new ResponseEntity<>(new ResponseWrapper(StatusCode.INTERNAL_SERVER_ERROR),HttpStatus.OK);
+    }
+
+    @ExceptionHandler(InvalidHeaderException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity invalidHeaderExceptionHandler() {
+        return new ResponseEntity<>(new ResponseWrapper<>(StatusCode.INVALID_HEADER), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(NotMatchOrderException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity notMatchOrderExceptionHandler() {
+        return new ResponseEntity<>(new ResponseWrapper<>(StatusCode.NOT_MATCH_ORDER), HttpStatus.OK);
     }
 
 }

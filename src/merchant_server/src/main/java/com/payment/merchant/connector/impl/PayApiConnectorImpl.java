@@ -2,10 +2,13 @@ package com.payment.merchant.connector.impl;
 
 import com.payment.merchant.connector.PayApiConnector;
 import com.payment.merchant.exception.PayServerException;
-import com.payment.merchant.model.Order;
+import com.payment.merchant.model.Redis.Order;
+import com.payment.merchant.model.connector.request.Approve;
 import com.payment.merchant.model.connector.request.Reserve;
-import com.payment.merchant.model.connector.response.ApproveRes;
+import com.payment.merchant.model.connector.request.Temporary;
 import com.payment.merchant.model.connector.response.CancelRes;
+import com.payment.merchant.model.connector.response.ReserveRes;
+import com.payment.merchant.model.connector.response.TemporaryRes;
 import com.payment.merchant.model.connector.response.wrapper.PayApiResWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,34 +29,50 @@ public class PayApiConnectorImpl implements PayApiConnector {
     private String apiUrl;
 
     @Override
-    public Long orderReserve(Order order) {
+    public ReserveRes orderReserve(Order order) {
 
         HttpHeaders headers = createHeader();
+
         Reserve requestBody = Reserve.builder()
                 .amount(order.getAmount())
                 .count(order.getCount())
                 .productName(order.getOrderName())
-                .returnUrl(order.getReturnUrl())
+                .userIdx(order.getUserIdx())
                 .build();
 
         HttpEntity<Reserve> request = new HttpEntity<>(requestBody, headers);
-        PayApiResWrapper<Long> result = null;
+        PayApiResWrapper<ReserveRes> result = null;
 
-        try {
-            result = restTemplate.postForObject(apiUrl + "/payment/reserve", request, PayApiResWrapper.class);
-            if (result.getCode() == 0) {
-                return result.getBody();
-            }
-        } catch (Exception e) {
+        result = restTemplate.postForObject(apiUrl + "/pay/reserve", request, PayApiResWrapper.class);
+
+        if(result == null) {
             throw new PayServerException();
+        } else if (result.getCode() == 0) {
+            return result.getBody();
         }
-
-        return null;
-
+        throw new PayServerException();
     }
 
     @Override
-    public ApproveRes orderApprove(String payId) {
+    public TemporaryRes orderTemporary(Temporary temporary) {
+
+        HttpHeaders headers = createHeader();
+
+        HttpEntity<Temporary> request = new HttpEntity<>(temporary, headers);
+        PayApiResWrapper<TemporaryRes> result = null;
+
+        result = restTemplate.postForObject(apiUrl + "/pay/temporary", request, PayApiResWrapper.class);
+
+        if(result == null) {
+            throw new PayServerException();
+        } else if (result.getCode() == 0) {
+            return result.getBody();
+        }
+        throw new PayServerException();
+    }
+
+    @Override
+    public ApproveRes orderApprove(Approve approve) {
         return null;
     }
 
@@ -68,6 +87,7 @@ public class PayApiConnectorImpl implements PayApiConnector {
 
         headers.add("client_id", "test");
         headers.add("client_secret", "test");
+        headers.add("merchant_id", "0");
 
         return headers;
 
