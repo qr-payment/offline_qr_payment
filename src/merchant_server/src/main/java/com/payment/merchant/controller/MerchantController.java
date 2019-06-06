@@ -25,7 +25,7 @@ public class MerchantController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK", response = QrScanRes.class)
     })
-    public ResponseEntity<ResponseWrapper> qrScan(@RequestParam(value = "orderName")String encodedOrderName, @RequestParam(value = "amount")int amount, @RequestParam(value = "count")int count, @RequestHeader(value = "userIdx")Long userIdx) {
+    public ResponseEntity<ResponseWrapper> qrScan(@RequestParam(value = "orderName")String encodedOrderName, @RequestParam(value = "amount")int amount, @RequestParam(value = "count")int count, @RequestHeader(value = "userIdx", required = false)Long userIdx) {
 
         QRScanRes qrScanRes = orderService.reserve(encodedOrderName, amount, count, userIdx);
 
@@ -34,7 +34,7 @@ public class MerchantController {
     }
 
     @PostMapping("/payment")
-    public ResponseEntity<ResponseWrapper> payment(@RequestBody Payment payment, @RequestParam(value = "redisKey")String redisKey, @RequestParam(value = "reserveId")Long reserveId, @RequestHeader(value = "userIdx")Long userIdx) {
+    public ResponseEntity<ResponseWrapper> payment(@RequestBody Payment payment, @RequestParam(value = "redisKey")String redisKey, @RequestParam(value = "reserveId")Long reserveId, @RequestHeader(value = "userIdx", required = false)Long userIdx) {
 
         orderService.payment(payment, redisKey, reserveId, userIdx);
 

@@ -13,8 +13,10 @@ import com.payment.merchant.model.connector.response.wrapper.PayApiResWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -41,9 +43,11 @@ public class PayApiConnectorImpl implements PayApiConnector {
                 .build();
 
         HttpEntity<Reserve> request = new HttpEntity<>(requestBody, headers);
-        PayApiResWrapper<ReserveRes> result = null;
 
-        result = restTemplate.postForObject(apiUrl + "/pay/reserve", request, PayApiResWrapper.class);
+        PayApiResWrapper<ReserveRes> result = restTemplate.exchange(apiUrl + "/pay/reserve",
+                HttpMethod.POST,
+                request,
+                new ParameterizedTypeReference<PayApiResWrapper<ReserveRes>>() {}).getBody();
 
         if(result == null) {
             throw new PayServerException();
@@ -51,6 +55,22 @@ public class PayApiConnectorImpl implements PayApiConnector {
             return result.getBody();
         }
         throw new PayServerException();
+    }
+
+    @Override
+    public void orderApprove(Approve approve) {
+
+        HttpHeaders headers = createHeader();
+
+        HttpEntity<Approve> request = new HttpEntity<>(approve, headers);
+        PayApiResWrapper result = null;
+
+        result = restTemplate.postForObject(apiUrl + "/pay/approce", request, PayApiResWrapper.class);
+
+        if(result == null || result.getCode() != 0) {
+            throw new PayServerException();
+        }
+
     }
 
     @Override
@@ -69,11 +89,7 @@ public class PayApiConnectorImpl implements PayApiConnector {
             return result.getBody();
         }
         throw new PayServerException();
-    }
 
-    @Override
-    public ApproveRes orderApprove(Approve approve) {
-        return null;
     }
 
     @Override
