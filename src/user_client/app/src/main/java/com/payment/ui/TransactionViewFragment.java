@@ -14,20 +14,19 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.payment.R;
 import com.payment.databinding.FragmentTransactionViewBinding;
-import com.payment.model.Card;
+import com.payment.model.PaymentMethods;
 import com.payment.model.viewmodel.RegistrationViewModel;
+import com.payment.model.viewmodel.TransactionViewModel;
 import com.payment.util.adapter.ViewPagerAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TransactionViewFragment extends Fragment {
 
     private FragmentTransactionViewBinding binding;
     private View view;
     private RegistrationViewModel viewModel;
-    private List<Card> cardList;
-    private Card selectedCard = null;
+    private TransactionViewModel transactionViewModel;
+    private PaymentMethods cardList;
+    private ViewPagerAdapter adapter;
 
     public TransactionViewFragment() {
         // Required empty public constructor
@@ -39,27 +38,27 @@ public class TransactionViewFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_transaction_view, container, false);
         view = binding.getRoot();
         viewModel = ViewModelProviders.of(requireActivity()).get(RegistrationViewModel.class);
+        transactionViewModel = ViewModelProviders.of(requireActivity()).get(TransactionViewModel.class);
         binding.setLifecycleOwner(this);
-        cardList = new ArrayList<>();
-        setCardInfo();
+        transactionViewModel.serverChecker.setValue(false);
+        cardList = new PaymentMethods();
+
+        if (transactionViewModel.cardInfo.getValue() != null){
+            cardList.setMethods(transactionViewModel.cardInfo.getValue().getMethods());
+            adapter = new ViewPagerAdapter(cardList.getMethods());
+            binding.transactionViewPager.setAdapter(adapter);
+        }
+
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ViewPagerAdapter adapter = new ViewPagerAdapter(cardList);
-        binding.transactionViewPager.setAdapter(adapter);
-    }
-
-    private void setCardInfo(){
-        if (viewModel.cardLiveData.getValue()!= null){
-            cardList.add(viewModel.cardLiveData.getValue());
-        }
+        transactionViewModel.transactionLiveData.getValue().getUrl();
     }
 }

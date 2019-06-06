@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout">
 
+    <data>
+        <variable
+            name="transactionViewModel"
+            type="com.payment.model.viewmodel.TransactionViewModel" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +63,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="8dp"
-                        android:text="TextView"
+                        android:text="@{transactionViewModel.transactionLiveData.getValue().getMerchantName()}"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +76,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="8dp"
-                        android:text="TextView"
+                        android:text="@{transactionViewModel.transactionLiveData.getValue().getProductName()}"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +89,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="TextView"
+                        android:text="@{Integer.toString(transactionViewModel.transactionLiveData.getValue().getAmount())}"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -140,12 +146,13 @@
                             android:text="총 결제금액"/>
 
                         <TextView
+                            android:id="@+id/result_amount_textView"
                             android:gravity="right|center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:text="@{Integer.toString(transactionViewModel.transactionLiveData.getValue().getAmount())}"
                             android:paddingEnd="15dp"
-                            android:textColor="#3030E7"
-                            android:text="12345678910원"/>
+                            android:textColor="#3030E7"/>
                     </LinearLayout>
 
                 </LinearLayout>

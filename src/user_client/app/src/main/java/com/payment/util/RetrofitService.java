@@ -2,13 +2,16 @@ package com.payment.util;
 
 import com.payment.model.Account;
 import com.payment.model.Card;
+import com.payment.model.PaymentMethods;
 import com.payment.model.ServerResponse;
+import com.payment.model.TransactionResponse;
 import com.payment.model.User;
 import com.payment.model.internal.SignInRes;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -26,9 +29,9 @@ public interface RetrofitService {
     @POST("method/regist")
     Call<ServerResponse> registAccount(@Body Account account);
 
-    @POST("method/list/{userIdx}")
-    Call<ServerResponse> callpay(@Path("userIdx") Long userIdx);
+    @GET("method/methods/{userIdx}")
+    Call<ServerResponse<PaymentMethods>> userExistCard(@Path("userIdx") Long userIdx);
 
     @GET(" ")
-    Call<ServerResponse> qrScanUrl();
+    Call<ServerResponse<TransactionResponse>> qrScanUrl(@Header("userIdx") Long userIdx);
 }

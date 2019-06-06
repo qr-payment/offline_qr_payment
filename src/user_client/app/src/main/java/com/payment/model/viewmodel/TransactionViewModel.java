@@ -5,7 +5,9 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.payment.model.PaymentMethods;
 import com.payment.model.ServerResponse;
+import com.payment.model.TransactionResponse;
 import com.payment.model.User;
 import com.payment.model.internal.SignInRes;
 import com.payment.util.RetrofitInstance;
@@ -27,6 +29,10 @@ public class TransactionViewModel extends ViewModel {
     public MutableLiveData<User> user = new MutableLiveData<>();
     public MutableLiveData<ServerResponse> successCode_Login = new MutableLiveData<>();
     public MutableLiveData<Integer> successCode_SignUp = new MutableLiveData<>();
+    public MutableLiveData<PaymentMethods> cardInfo = new MutableLiveData<>();
+    public MutableLiveData<Boolean> serverChecker = new MutableLiveData<>();
+    public MutableLiveData<TransactionResponse> transactionLiveData = new MutableLiveData<>();
+    public MutableLiveData<String> scanUrlLiveData = new MutableLiveData<>();
 
     private ArrayList<String> list = new ArrayList<>();
 
@@ -40,6 +46,48 @@ public class TransactionViewModel extends ViewModel {
         transactionPasswordLength.setValue(0);
         buttonState.setValue(false);
         user.setValue(new User());
+        serverChecker.setValue(false);
+    }
+
+    public void scanRequest(){
+        RetrofitService qr_retrofit = RetrofitInstance.getQRRetrofitInstance(scanUrlLiveData.getValue()).create(RetrofitService.class);
+        qr_retrofit.qrScanUrl((Long) successCode_Login.getValue().getBody()).enqueue(new Callback<ServerResponse<TransactionResponse>>() {
+            @Override
+            public void onResponse(Call<ServerResponse<TransactionResponse>> call, Response<ServerResponse<TransactionResponse>> response) {
+                if (response.isSuccessful()){
+                    if (response.body() != null){
+                        transactionLiveData.setValue(response.body().getBody());
+                        userExistCard();
+                        Log.e("Scan Request Success Data-> ",""+transactionLiveData.getValue().toString());
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ServerResponse<TransactionResponse>> call, Throwable t) {
+                Log.e("Scan Request Failure",""+t.toString());
+            }
+        });
+    }
+
+    public void userExistCard(){
+        RetrofitService retrofit = RetrofitInstance.getRetrofitInstance().create(RetrofitService.class);
+        retrofit.userExistCard((Long) successCode_Login.getValue().getBody()).enqueue(new Callback<ServerResponse<PaymentMethods>>() {
+            @Override
+            public void onResponse(Call<ServerResponse<PaymentMethods>> call, Response<ServerResponse<PaymentMethods>> response) {
+                if (response.isSuccessful()){
+                    if (response.body() != null) {
+                        cardInfo.setValue(new PaymentMethods());
+                        cardInfo.getValue().setMethods(response.body().getBody().getMethods());
+                        Log.e("Response Card Info-> ",""+response.body().getBody().getMethods());
+                        serverChecker.setValue(true);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ServerResponse<PaymentMethods>> call, Throwable t) {
+                Log.e("Response Card Fail",""+t.toString());
+            }
+        });
     }
 
     public void callSignUpServer(){
@@ -50,12 +98,14 @@ public class TransactionViewModel extends ViewModel {
                 if (response.isSuccessful()){
                     if (response.body() != null && response.body().getCode() == 0){
                         successCode_SignUp.setValue(response.body().getCode());
+                        serverChecker.setValue(true);
+                        Log.e("SignUp Success-> ",""+response.body().toString());
                     }
                 }
             }
             @Override
             public void onFailure(Call<ServerResponse> call, Throwable t) {
-                Log.e("signUp failure-> ",""+t.toString());
+                Log.e("SignUp failure-> ",""+t.toString());
             }
         });
     }

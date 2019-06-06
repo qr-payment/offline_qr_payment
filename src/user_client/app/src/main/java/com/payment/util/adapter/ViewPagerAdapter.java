@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.payment.R;
 import com.payment.databinding.ViewpagerItemBinding;
-import com.payment.model.Card;
+import com.payment.model.Method;
 
 import java.util.List;
 
 public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<Card> mItems;
+    private List<Method> mItems;
 
-    public ViewPagerAdapter(List<Card> mItems) {
-        this.mItems = mItems;
+    public ViewPagerAdapter(List<Method> list){
+        mItems = list;
         mItems.add(null);
     }
 
@@ -33,8 +33,6 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewpager_item, parent, false);
             return new CardViewHolder(view);
         }
-
-
     }
 
     @Override
@@ -55,6 +53,8 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
+        if (mItems == null)
+            return 0;
         return mItems.size();
     }
 

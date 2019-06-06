@@ -8,6 +8,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class TransactionResponse {
+    private String url;
     private String productName;
     private int amount;
     private String merchantName;

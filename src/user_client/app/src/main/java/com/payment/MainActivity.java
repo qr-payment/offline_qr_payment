@@ -22,6 +22,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.payment.databinding.ActivityMainBinding;
 import com.payment.model.viewmodel.RegistrationViewModel;
+import com.payment.model.viewmodel.TransactionViewModel;
 import com.payment.ui.AddCardFragment;
 import com.payment.ui.LoginFragment;
 import com.payment.ui.TransactionViewFragment;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActivityMainBinding binding;
     private Boolean isFabOpen = false;
     public RegistrationViewModel viewModel;
+    public TransactionViewModel transactionViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setLifecycleOwner(this);
         viewModel = ViewModelProviders.of(this).get(RegistrationViewModel.class);
+        transactionViewModel = ViewModelProviders.of(this).get(TransactionViewModel.class);
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_container_view, new LoginFragment())
@@ -65,6 +68,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .addToBackStack(null)
                     .commit();
         });
+
+        transactionViewModel.serverChecker.observe(this, aBoolean -> {
+            if (aBoolean){
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.main_container_view, new TransactionViewFragment())
+                        .addToBackStack(null)
+                        .commitAllowingStateLoss();
+            }
+        });
+
     }
 
     public void anim() {
@@ -130,29 +143,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (result == null) {
                 Toast.makeText(this, getString(R.string.re_scan_error), Toast.LENGTH_SHORT).show();
             } else {
-                Log.e("scan Url-> ",""+result.getContents());
-                viewModel.scanUrlLiveData.setValue(result.getContents());
-                if (viewModel.scanUrlLiveData.getValue() != null){
-                    viewModel.scanRequest();
-                    //TODO:결제창띄우기
-                    transView();
+                Log.e("scan Url-> ", "" + result.getContents());
+                transactionViewModel.scanUrlLiveData.setValue(result.getContents());
+                if (transactionViewModel.scanUrlLiveData.getValue() != null) {
+                    transactionViewModel.scanRequest();
                 }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.e("onresume","!@#!@#");
-    }
-
-    public void transView(){
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.main_container_view, new TransactionViewFragment())
-                .addToBackStack(null)
-                .commitAllowingStateLoss();
     }
 }
