@@ -61,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
 
         order.setReservedId(reserveRes.getReserveId());
         order.setReserveAt(System.currentTimeMillis() / 1000L);
-        order.setReturnUrl(returnUrl + reserveRes.getReserveId());
+        order.setReturnUrl(returnUrl + reserveRes.getReserveId() + "L");
         redisService.insertOrder(order);
 
         QRScanRes qrScanRes = QRScanRes.builder()
@@ -69,6 +69,7 @@ public class OrderServiceImpl implements OrderService {
                 .merchantName(merchantName)
                 .productName(decodedOrderName)
                 .url(order.getReturnUrl())
+                .count(count)
                 .build();
 
         return qrScanRes;
