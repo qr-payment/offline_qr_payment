@@ -39,5 +39,9 @@
     <string name="card_num_null_error">카드번호를 모두 입력하세요</string>
     <string name="account_number">계좌번호</string>
     <string name="regist_account">계좌 등록</string>
+    <string name="transaction_send">결제하기</string>
+    <string name="account_simple_transaction">계좌간편결제</string>
+    <string name="card_simple_transaction">카드간편결제</string>
+    <string name="transaction_info">결제정보</string>
 
 </resources>

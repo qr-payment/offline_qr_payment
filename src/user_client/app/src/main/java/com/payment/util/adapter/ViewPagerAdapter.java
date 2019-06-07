@@ -1,5 +1,6 @@
 package com.payment.util.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,9 @@ import java.util.List;
 
 public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Method> mItems;
+    private boolean imageCheck = true;
+    private String payMethodNum;
+    private String payMethodType;
 
     public ViewPagerAdapter(List<Method> list){
         mItems = list;
@@ -39,7 +43,27 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == 2){
             ((CardViewHolder)holder).binding.setCardViewModel(mItems.get(position));
+            ((CardViewHolder)holder).binding.cardSelectedImageView.setOnClickListener(v -> {
+                if (!imageCheck){
+                    ((CardViewHolder)holder).binding.cardSelectedImageView.setImageResource(R.drawable.not_checked_24dp);
+                    imageCheck = true;
+                }else{
+                    ((CardViewHolder)holder).binding.cardSelectedImageView.setImageResource(R.drawable.on_checked_24dp);
+                    payMethodNum = mItems.get(position).getPaymentMethodNum();
+                    payMethodType = mItems.get(position).getPaymentMethodType();
+                    Log.e("adapter",""+payMethodType+" , "+payMethodNum);
+                    imageCheck = false;
+                }
+            });
         }
+    }
+
+    public String getPayMethodNum(){
+        return payMethodNum;
+    }
+
+    public String getPayMethodType(){
+        return payMethodType;
     }
 
     @Override

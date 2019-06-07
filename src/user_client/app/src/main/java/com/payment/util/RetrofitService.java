@@ -4,6 +4,7 @@ import com.payment.model.Account;
 import com.payment.model.Card;
 import com.payment.model.PaymentMethods;
 import com.payment.model.ServerResponse;
+import com.payment.model.TransactionRequest;
 import com.payment.model.TransactionResponse;
 import com.payment.model.User;
 import com.payment.model.internal.SignInRes;
@@ -34,4 +35,7 @@ public interface RetrofitService {
 
     @GET(" ")
     Call<ServerResponse<TransactionResponse>> qrScanUrl(@Header("userIdx") Long userIdx);
+
+    @POST("/")
+    Call<ServerResponse> transactionComplete(@Body TransactionRequest transactionRequest);
 }

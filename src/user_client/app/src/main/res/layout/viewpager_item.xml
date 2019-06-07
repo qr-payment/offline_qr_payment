@@ -54,6 +54,7 @@
                     android:gravity="center|right">
 
                     <ImageView
+                        android:id="@+id/card_selected_imageView"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_marginRight="15dp"
@@ -70,6 +71,7 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/card_paymentMethodNum_textView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"

@@ -63,7 +63,6 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="8dp"
-                        android:text="@{transactionViewModel.transactionLiveData.getValue().getMerchantName()}"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +75,6 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="8dp"
-                        android:text="@{transactionViewModel.transactionLiveData.getValue().getProductName()}"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +87,6 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="@{Integer.toString(transactionViewModel.transactionLiveData.getValue().getAmount())}"
                         android:textSize="24sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -150,7 +147,6 @@
                             android:gravity="right|center_vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="@{Integer.toString(transactionViewModel.transactionLiveData.getValue().getAmount())}"
                             android:paddingEnd="15dp"
                             android:textColor="#3030E7"/>
                     </LinearLayout>
@@ -190,7 +186,7 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="8dp"
-                            android:text="결제정보"
+                            android:text="@string/transaction_info"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -207,7 +203,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:layout_weight="1"
-                            android:text="카드간편결제" />
+                            android:text="@string/card_simple_transaction" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/account_transaction_button"
@@ -216,7 +212,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:layout_weight="1"
-                            android:text="계좌 간편결제" />
+                            android:text="@string/account_simple_transaction" />
 
                     </LinearLayout>
 
@@ -236,7 +232,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
-                android:text="결제하기"/>
+                android:text="@string/transaction_send"/>
         </LinearLayout>
     </ScrollView>
 </layout>

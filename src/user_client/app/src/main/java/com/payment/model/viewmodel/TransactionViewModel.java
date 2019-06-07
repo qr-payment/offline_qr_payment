@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.payment.model.PaymentMethods;
 import com.payment.model.ServerResponse;
+import com.payment.model.TransactionRequest;
 import com.payment.model.TransactionResponse;
 import com.payment.model.User;
 import com.payment.model.internal.SignInRes;
@@ -34,6 +35,10 @@ public class TransactionViewModel extends ViewModel {
     public MutableLiveData<TransactionResponse> transactionLiveData = new MutableLiveData<>();
     public MutableLiveData<String> scanUrlLiveData = new MutableLiveData<>();
 
+    public MutableLiveData<TransactionRequest> transactionRequestMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<String> transactionUrl = new MutableLiveData<>();
+    public MutableLiveData<Boolean> recycleFragment = new MutableLiveData<>();
+
     private ArrayList<String> list = new ArrayList<>();
 
     public TransactionViewModel() {
@@ -47,6 +52,25 @@ public class TransactionViewModel extends ViewModel {
         buttonState.setValue(false);
         user.setValue(new User());
         serverChecker.setValue(false);
+        recycleFragment.setValue(false);
+    }
+
+    public void sendTransaction(){
+        RetrofitService tr_retrofit = RetrofitInstance.getTrRetrofitInstance(transactionUrl.getValue()).create(RetrofitService.class);
+        tr_retrofit.transactionComplete(transactionRequestMutableLiveData.getValue()).enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        Log.e("sendTransaction", "" + response.body().toString());
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Log.e("sendTransaction Failure-> ",""+t.toString());
+            }
+        });
     }
 
     public void scanRequest(){
@@ -59,6 +83,8 @@ public class TransactionViewModel extends ViewModel {
                         transactionLiveData.setValue(response.body().getBody());
                         userExistCard();
                         Log.e("Scan Request Success Data-> ",""+transactionLiveData.getValue().toString());
+                        transactionUrl.setValue(transactionLiveData.getValue().getUrl());
+                        Log.e("url",""+transactionLiveData.getValue().getUrl()+" , "+transactionUrl.getValue());
                     }
                 }
             }
