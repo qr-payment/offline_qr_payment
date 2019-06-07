@@ -14,9 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -44,10 +42,11 @@ public class PayApiConnectorImpl implements PayApiConnector {
 
         HttpEntity<Reserve> request = new HttpEntity<>(requestBody, headers);
 
-        PayApiResWrapper<ReserveRes> result = restTemplate.exchange(apiUrl + "/pay/reserve",
+        ResponseEntity<PayApiResWrapper<ReserveRes>> responseEntity = restTemplate.exchange(apiUrl + "/pay/reserve",
                 HttpMethod.POST,
                 request,
-                new ParameterizedTypeReference<PayApiResWrapper<ReserveRes>>() {}).getBody();
+                new ParameterizedTypeReference<PayApiResWrapper<ReserveRes>>() {});
+        PayApiResWrapper<ReserveRes> result = responseEntity.getBody();
 
         if(result == null) {
             throw new PayServerException();
@@ -65,7 +64,12 @@ public class PayApiConnectorImpl implements PayApiConnector {
         HttpEntity<Approve> request = new HttpEntity<>(approve, headers);
         PayApiResWrapper result = null;
 
-        result = restTemplate.postForObject(apiUrl + "/pay/approce", request, PayApiResWrapper.class);
+        ResponseEntity<PayApiResWrapper> responseEntity = restTemplate.exchange(apiUrl + "/pay/reserve",
+                HttpMethod.POST,
+                request,
+                new ParameterizedTypeReference<PayApiResWrapper>() {});
+
+        result = responseEntity.getBody();
 
         if(result == null || result.getCode() != 0) {
             throw new PayServerException();
@@ -79,9 +83,11 @@ public class PayApiConnectorImpl implements PayApiConnector {
         HttpHeaders headers = createHeader();
 
         HttpEntity<Temporary> request = new HttpEntity<>(temporary, headers);
-        PayApiResWrapper<TemporaryRes> result = null;
 
-        result = restTemplate.postForObject(apiUrl + "/pay/temporary", request, PayApiResWrapper.class);
+        PayApiResWrapper<TemporaryRes> result = restTemplate.exchange(apiUrl + "/pay/temporary",
+                HttpMethod.POST,
+                request,
+                new ParameterizedTypeReference<PayApiResWrapper<TemporaryRes>>() {}).getBody();
 
         if(result == null) {
             throw new PayServerException();

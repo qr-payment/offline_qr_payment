@@ -36,9 +36,9 @@ public class MerchantController {
     @PostMapping("/payment")
     public ResponseEntity<ResponseWrapper> payment(@RequestBody Payment payment, @RequestParam(value = "redisKey")String redisKey, @RequestParam(value = "reserveId")Long reserveId, @RequestHeader(value = "userIdx", required = false)Long userIdx) {
 
-        orderService.payment(payment, redisKey, reserveId, userIdx);
+        ResponseWrapper response = orderService.payment(payment, redisKey, reserveId, userIdx);
 
-        return null;
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 

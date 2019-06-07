@@ -10,11 +10,13 @@ import com.payment.merchant.model.connector.response.ReserveRes;
 import com.payment.merchant.model.connector.response.TemporaryRes;
 import com.payment.merchant.model.request.Payment;
 import com.payment.merchant.model.response.QRScanRes;
+import com.payment.merchant.model.wrapper.ResponseWrapper;
 import com.payment.merchant.service.OrderService;
 import com.payment.merchant.service.RedisService;
 import com.payment.merchant.util.Base64Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -74,7 +76,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void payment(Payment payment, String redisKey, Long reserveId, Long userIdx) {
+    public ResponseWrapper payment(Payment payment, String redisKey, Long reserveId, Long userIdx) {
 
         if(reserveId == null || userIdx == null)
             throw new InvalidHeaderException();
@@ -99,5 +101,13 @@ public class OrderServiceImpl implements OrderService {
 
         redisService.updateApproveAt(redisKey);
 
+        ResponseWrapper response = ResponseWrapper.builder()
+                .code(0)
+                .message("성공")
+                .build();
+
+        return response;
+
     }
+
 }
