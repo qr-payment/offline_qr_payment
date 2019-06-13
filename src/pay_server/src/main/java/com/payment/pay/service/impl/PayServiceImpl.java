@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.UUID;
 
 @Service
@@ -85,6 +86,14 @@ public class PayServiceImpl implements PayService {
 
         TemporaryRes temporaryRes = TemporaryRes.builder()
                 .payId(payId)
+                .reserveId(temporary.getReserveId())
+                .productName(temporary.getProductName())
+                .amount(temporary.getAmount())
+                .count(temporary.getCount())
+                .methodType(temporary.getMethodType())
+                .methodNum(temporary.getMethodNum())
+                .userIdx(temporary.getUserIdx())
+                .merchantId(temporary.getMerchantId())
                 .build();
 
         return temporaryRes;

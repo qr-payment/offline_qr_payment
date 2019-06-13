@@ -7,12 +7,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class Reserve {
+public class Temporary {
 
     private int amount;
-    private String returnUrl;
     private int count;
+    private String methodType;
+    private String methodNum;
     private String productName;
+    private long reserveId;
+    private String transactionPw;
     private long userIdx;
 
 }

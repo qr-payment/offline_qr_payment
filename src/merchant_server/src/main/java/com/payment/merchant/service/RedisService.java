@@ -1,8 +1,8 @@
 package com.payment.merchant.service;
 
-import com.payment.merchant.model.Order;
-import com.payment.merchant.model.connector.response.ApproveRes;
+import com.payment.merchant.model.Redis.Order;
 import com.payment.merchant.model.connector.response.CancelRes;
+import com.payment.merchant.model.connector.response.TemporaryRes;
 
 public interface RedisService {
 
@@ -12,7 +12,9 @@ public interface RedisService {
 
     Order getOrder(String redisId);
 
-    void updateOrder(String redisId, ApproveRes response);
+    void updateOrder(String redisId, TemporaryRes response);
+
+    void updateApproveAt(String redisId);
 
     void updateOrder(String redisId, CancelRes response);
 

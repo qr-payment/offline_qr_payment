@@ -1,5 +1,6 @@
 package com.payment.pay.model.request;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,9 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class Reserve {
 
+    @ApiModelProperty(hidden = true)
     private long reserveId;
+    @ApiModelProperty(hidden = true)
     private long merchantId;
 
     @NotNull
@@ -23,5 +26,8 @@ public class Reserve {
     private String productName;
     @NotNull
     private Long userIdx;
+
+    @ApiModelProperty(hidden = true)
+    private long reserveAt;
 
 }

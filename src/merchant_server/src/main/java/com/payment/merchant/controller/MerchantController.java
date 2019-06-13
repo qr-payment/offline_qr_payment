@@ -1,6 +1,7 @@
 package com.payment.merchant.controller;
 
 import com.payment.merchant.Document.QrScanRes;
+import com.payment.merchant.model.request.Payment;
 import com.payment.merchant.model.response.QRScanRes;
 import com.payment.merchant.model.wrapper.ResponseWrapper;
 import com.payment.merchant.model.wrapper.StatusCode;
@@ -24,20 +25,20 @@ public class MerchantController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "OK", response = QrScanRes.class)
     })
-    public ResponseEntity<ResponseWrapper> qrScan(@RequestParam(value = "orderName")String encodedOrderName, @RequestParam(value = "amount")int amount, @RequestParam(value = "count")int count) {
+    public ResponseEntity<ResponseWrapper> qrScan(@RequestParam(value = "orderName")String encodedOrderName, @RequestParam(value = "amount")int amount, @RequestParam(value = "count")int count, @RequestHeader(value = "userIdx", required = false)Long userIdx) {
 
-        QRScanRes qrScanRes = orderService.reserve(encodedOrderName, amount, count);
+        QRScanRes qrScanRes = orderService.reserve(encodedOrderName, amount, count, userIdx);
 
         return new ResponseEntity<>(new ResponseWrapper(StatusCode.OK, qrScanRes), HttpStatus.OK);
 
     }
 
-    @RequestMapping(value = "/payment", method = RequestMethod.GET)
-    public String payment(@RequestParam(value = "redisKey")String redisKey, @RequestParam(value = "reserveId")String reserveId) {
+    @PostMapping("/payment")
+    public ResponseEntity<ResponseWrapper> payment(@RequestBody Payment payment, @RequestParam(value = "redisKey")String redisKey, @RequestParam(value = "reserveId")Long reserveId, @RequestHeader(value = "userIdx", required = false)Long userIdx) {
 
-        orderService.payment(redisKey, reserveId);
+        ResponseWrapper response = orderService.payment(payment, redisKey, reserveId, userIdx);
 
-        return null;
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
