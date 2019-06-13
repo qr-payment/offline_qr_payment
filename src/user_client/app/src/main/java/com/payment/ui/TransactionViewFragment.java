@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +20,6 @@ import com.payment.databinding.FragmentTransactionViewBinding;
 import com.payment.model.PaymentMethods;
 import com.payment.model.TransactionRequest;
 import com.payment.model.User;
-import com.payment.model.viewmodel.RegistrationViewModel;
 import com.payment.model.viewmodel.TransactionViewModel;
 import com.payment.util.adapter.ViewPagerAdapter;
 
@@ -27,7 +27,6 @@ public class TransactionViewFragment extends Fragment{
 
     private FragmentTransactionViewBinding binding;
     private View view;
-    private RegistrationViewModel viewModel;
     private TransactionViewModel transactionViewModel;
     private PaymentMethods cardList;
     private ViewPagerAdapter adapter;
@@ -46,7 +45,6 @@ public class TransactionViewFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_transaction_view, container, false);
         view = binding.getRoot();
-        viewModel = ViewModelProviders.of(requireActivity()).get(RegistrationViewModel.class);
         transactionViewModel = ViewModelProviders.of(requireActivity()).get(TransactionViewModel.class);
         binding.setLifecycleOwner(this);
         transactionViewModel.serverChecker.setValue(false);
@@ -85,28 +83,28 @@ public class TransactionViewFragment extends Fragment{
         binding.amountTextView.setText(Integer.toString(transactionViewModel.transactionLiveData.getValue().getAmount()));
         binding.productNameTextView.setText(transactionViewModel.transactionLiveData.getValue().getProductName());
 
+        transactionRequest.setAmount(transactionViewModel.transactionLiveData.getValue().getAmount());
+        transactionRequest.setCount(transactionViewModel.transactionLiveData.getValue().getCount());
+        transactionRequest.setProductName(transactionViewModel.transactionLiveData.getValue().getProductName());
+
+        if (adapter.getPayMethodNum() != null && adapter.getPayMethodType() != null){
+            transactionRequest.setMethodNum(adapter.getPayMethodNum());
+            transactionRequest.setMethodType(adapter.getPayMethodType());
+            transactionViewModel.setTransactionRequest(transactionRequest);
+        }
 
         //결제하기버튼
         binding.sendTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                transactionViewModel.recycleFragment.setValue(true);
-                getFragmentManager().beginTransaction()
-                        .add(R.id.main_container_view,new TransactionPWFragment())
-                        .commit();
-                transactionRequest.setAmount(transactionViewModel.transactionLiveData.getValue().getAmount());
-                transactionRequest.setCount(transactionViewModel.transactionLiveData.getValue().getCount());
-                transactionRequest.setProductName(transactionViewModel.transactionLiveData.getValue().getProductName());
-
                 if (adapter.getPayMethodNum() != null && adapter.getPayMethodType() != null){
-                    transactionRequest.setMethodNum(adapter.getPayMethodNum());
-                    transactionRequest.setMethodType(adapter.getPayMethodType());
-                    Log.e("fragment",""+adapter.getPayMethodType() + " , "+adapter.getPayMethodNum());
+                    transactionViewModel.recycleFragment.setValue(true);
+                    getFragmentManager().beginTransaction()
+                            .add(R.id.main_container_view,new TransactionPWFragment())
+                            .commit();
+                }else{
+                    Toast.makeText(getActivity(), "거래 수단을 선택해주세요.", Toast.LENGTH_SHORT).show();
                 }
-
-                transactionViewModel.transactionRequestMutableLiveData.setValue(transactionRequest);
-
-                Log.e("결제하기2",""+transactionRequest.getMethodNum()+" , "+transactionRequest.getMethodType()+" , "+transactionRequest.getProductName());
             }
         });
     }

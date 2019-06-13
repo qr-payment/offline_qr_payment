@@ -60,18 +60,17 @@ public class TransactionPWFragment extends Fragment {
                 //결제완료
                 transactionComplete();
             }else{
+                //회원가입시
                 resetPassword();
             }
         }
     }
 
-    public void transactionComplete(){
+    private void transactionComplete(){
         viewModel.user.getValue().setTransactionPw(viewModel.transactionPassword.getValue());
         viewModel.transactionRequestMutableLiveData.getValue().setTransactionPw(viewModel.transactionPassword.getValue());
         viewModel.sendTransaction();
-//        getFragmentManager().beginTransaction().remove(TransactionPWFragment.this).commit();
-//        getFragmentManager().popBackStack();
-
+        viewModel.recycleFragment.setValue(false);
     }
 
     public void deletePressed(boolean buttonState) {

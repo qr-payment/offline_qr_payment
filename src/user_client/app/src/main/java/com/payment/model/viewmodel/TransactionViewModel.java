@@ -164,6 +164,11 @@ public class TransactionViewModel extends ViewModel {
         });
     }
 
+    public void setTransactionRequest(TransactionRequest transactionRequest){
+        transactionRequestMutableLiveData.setValue(transactionRequest);
+        Log.e("Transaction Request viewmodel",""+transactionRequest.getProductName() + " , "+transactionRequest.getMethodType()+ " , "+transactionRequest.getMethodNum());
+    }
+
     public void initViewModels(){
         transactionPassword.setValue("");
         transactionPasswordLength.setValue(0);
