@@ -12,14 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.payment.R;
 import com.payment.databinding.FragmentTransactionViewBinding;
 import com.payment.model.PaymentMethods;
 import com.payment.model.TransactionRequest;
-import com.payment.model.User;
 import com.payment.model.viewmodel.TransactionViewModel;
 import com.payment.util.adapter.ViewPagerAdapter;
 
@@ -59,13 +57,10 @@ public class TransactionViewFragment extends Fragment{
 
         binding.transactionViewPager.getAdapter().getItemCount();
 
-        transactionViewModel.user.observe(requireActivity(), new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                if (user.getTransactionPw() != null){
-                    transactionRequest.setTransactionPw(user.getTransactionPw());
-                    Log.e("결제하기",""+transactionViewModel.user.getValue().getTransactionPw());
-                }
+        transactionViewModel.user.observe(requireActivity(), user -> {
+            if (user.getTransactionPw() != null){
+                transactionRequest.setTransactionPw(user.getTransactionPw());
+                Log.e("결제하기",""+transactionViewModel.user.getValue().getTransactionPw());
             }
         });
 
@@ -94,24 +89,15 @@ public class TransactionViewFragment extends Fragment{
         }
 
         //결제하기버튼
-        binding.sendTransaction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (adapter.getPayMethodNum() != null && adapter.getPayMethodType() != null){
-                    transactionViewModel.recycleFragment.setValue(true);
-                    getFragmentManager().beginTransaction()
-                            .add(R.id.main_container_view,new TransactionPWFragment())
-                            .commit();
-                }else{
-                    Toast.makeText(getActivity(), "거래 수단을 선택해주세요.", Toast.LENGTH_SHORT).show();
-                }
+        binding.sendTransaction.setOnClickListener(v -> {
+            if (adapter.getPayMethodNum() != null && adapter.getPayMethodType() != null){
+                transactionViewModel.recycleFragment.setValue(true);
+                getFragmentManager().beginTransaction()
+                        .add(R.id.main_container_view,new TransactionPWFragment())
+                        .commit();
+            }else{
+                Toast.makeText(getActivity(), "거래 수단을 선택해주세요.", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.e("fragment","onresume");
     }
 }
