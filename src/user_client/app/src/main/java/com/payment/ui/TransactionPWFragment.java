@@ -56,8 +56,21 @@ public class TransactionPWFragment extends Fragment {
         ImageView imageView = view.findViewWithTag(String.valueOf(viewModel.transactionPasswordLength.getValue()));
         imageView.setImageResource(R.drawable.dot1_24dp);
         if (viewModel.transactionPassword != null && viewModel.transactionPasswordLength.getValue() == PASSWORD_LENGTH) {
-            resetPassword();
+            if (viewModel.recycleFragment.getValue()){
+                //결제완료
+                transactionComplete();
+            }else{
+                //회원가입시
+                resetPassword();
+            }
         }
+    }
+
+    private void transactionComplete(){
+        viewModel.user.getValue().setTransactionPw(viewModel.transactionPassword.getValue());
+        viewModel.transactionRequestMutableLiveData.getValue().setTransactionPw(viewModel.transactionPassword.getValue());
+        viewModel.sendTransaction();
+        viewModel.recycleFragment.setValue(false);
     }
 
     public void deletePressed(boolean buttonState) {

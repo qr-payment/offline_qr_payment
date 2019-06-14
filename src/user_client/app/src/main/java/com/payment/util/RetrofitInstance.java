@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitInstance {
     private static Retrofit QR_retrofit;
     private static Retrofit retrofit;
-//    private static final String BASE_URL = "http://121.132.155.221:8080/";
+    private static Retrofit Tr_retrofit;
     private static final String BASE_URL = "http://223.194.128.154:8080/";
 
     public static Retrofit getRetrofitInstance() {
@@ -28,5 +28,15 @@ public class RetrofitInstance {
                     .build();
         }
         return QR_retrofit;
+    }
+
+    public static Retrofit getTrRetrofitInstance(String transactionUrl){
+        if (Tr_retrofit == null){
+            Tr_retrofit = new retrofit2.Retrofit.Builder()
+                    .baseUrl(transactionUrl)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return Tr_retrofit;
     }
 }
