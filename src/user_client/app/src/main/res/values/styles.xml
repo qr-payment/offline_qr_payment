@@ -50,6 +50,12 @@
         <item name="backgroundTint">#D50000</item>
     </style>
 
+    <style name="Widget.QR.Button4" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">17sp</item>
+        <item name="backgroundTint">#57B836</item>
+    </style>
+
     <style name="Widget.QR.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">#777777</item>
         <item name="android:textSize">12sp</item>
