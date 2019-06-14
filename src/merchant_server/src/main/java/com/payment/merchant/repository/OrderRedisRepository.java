@@ -1,6 +1,6 @@
 package com.payment.merchant.repository;
 
-import com.payment.merchant.model.Order;
+import com.payment.merchant.model.Redis.Order;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

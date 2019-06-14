@@ -1,16 +1,20 @@
-package com.payment.pay.model.response;
+package com.payment.merchant.model.connector.response;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.sql.Timestamp;
 
 @Getter
 @Setter
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TemporaryRes {
 
     private String payId;
-    
+
     private long reserveId;
     private String productName;
     private int amount;
@@ -19,5 +23,5 @@ public class TemporaryRes {
     private String methodNum;
     private long userIdx;
     private long merchantId;
-    
+
 }

@@ -13,5 +13,6 @@ public class QRScanRes {
     private String productName;
     private int amount;
     private String merchantName;
+    private int count;
 
 }
