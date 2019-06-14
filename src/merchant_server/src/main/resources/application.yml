@@ -25,9 +25,9 @@ spring:
   profiles: local
 
 url:
-  return: http://223.194.128.154:8081/merchant/payment
+  return: http://223.194.128.158:8081/merchant/payment/
   pay:
-    api: http://223.194.128.154:8082
+    api: http://223.194.128.158:8082
 ---
 spring:
   profiles: dev

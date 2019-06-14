@@ -55,13 +55,15 @@ public class OrderServiceImpl implements OrderService {
                 .count(count)
                 .userIdx(userIdx)
                 .merchantId(merchantId)
+                .id(redisId)
                 .build();
 
         ReserveRes reserveRes = payApiConnector.orderReserve(order);
 
+
         order.setReservedId(reserveRes.getReserveId());
         order.setReserveAt(System.currentTimeMillis() / 1000L);
-        order.setReturnUrl(returnUrl + reserveRes.getReserveId() + "L");
+        order.setReturnUrl(returnUrl + reserveRes.getReserveId());
         redisService.insertOrder(order);
 
         QRScanRes qrScanRes = QRScanRes.builder()
