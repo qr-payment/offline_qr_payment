@@ -23,6 +23,7 @@ import retrofit2.Response;
 
 public class TransactionViewModel extends ViewModel {
     private static final int PASSWORD_LENGTH = 4;
+    private static final String TAG = "TransactionViewModel";
     public MutableLiveData<ArrayList<String>> transactionNumList = new MutableLiveData<>();
     public MutableLiveData<String> transactionPassword = new MutableLiveData<>();
     public MutableLiveData<Integer> transactionPasswordLength = new MutableLiveData<>();
@@ -62,7 +63,8 @@ public class TransactionViewModel extends ViewModel {
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        Log.e("sendTransaction", "" + response.body().toString());
+                        Log.e(TAG, "" + response.body().toString() + " url -> "+transactionUrl.getValue());
+                        Log.e(TAG, "" + response.body().toString());
                     }
                 }
             }
@@ -82,9 +84,9 @@ public class TransactionViewModel extends ViewModel {
                     if (response.body() != null){
                         transactionLiveData.setValue(response.body().getBody());
                         userExistCard();
-                        Log.e("Scan Request Success Data-> ",""+transactionLiveData.getValue().toString());
+                        Log.e(TAG,""+transactionLiveData.getValue().toString());
                         transactionUrl.setValue(transactionLiveData.getValue().getUrl());
-                        Log.e("url",""+transactionLiveData.getValue().getUrl()+" , "+transactionUrl.getValue());
+                        Log.e(TAG,""+transactionLiveData.getValue().getUrl()+" , "+transactionUrl.getValue());
                     }
                 }
             }
@@ -104,7 +106,7 @@ public class TransactionViewModel extends ViewModel {
                     if (response.body() != null) {
                         cardInfo.setValue(new PaymentMethods());
                         cardInfo.getValue().setMethods(response.body().getBody().getMethods());
-                        Log.e("Response Card Info-> ",""+response.body().getBody().getMethods());
+                        Log.e(TAG,""+response.body().getBody().getMethods());
                         serverChecker.setValue(true);
                     }
                 }
@@ -125,7 +127,7 @@ public class TransactionViewModel extends ViewModel {
                     if (response.body() != null && response.body().getCode() == 0){
                         successCode_SignUp.setValue(response.body().getCode());
                         serverChecker.setValue(true);
-                        Log.e("SignUp Success-> ",""+response.body().toString());
+                        Log.e(TAG,"SignUp Success-> "+response.body().toString());
                     }
                 }
             }
@@ -166,7 +168,7 @@ public class TransactionViewModel extends ViewModel {
 
     public void setTransactionRequest(TransactionRequest transactionRequest){
         transactionRequestMutableLiveData.setValue(transactionRequest);
-        Log.e("Transaction Request viewmodel",""+transactionRequest.getProductName() + " , "+transactionRequest.getMethodType()+ " , "+transactionRequest.getMethodNum());
+        Log.e(TAG,"Transaction Request viewmodel -> "+transactionRequest.getProductName() + " , "+transactionRequest.getMethodType()+ " , "+transactionRequest.getMethodNum());
     }
 
     public void initViewModels(){

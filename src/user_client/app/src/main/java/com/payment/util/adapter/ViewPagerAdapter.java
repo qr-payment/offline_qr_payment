@@ -16,6 +16,10 @@ import com.payment.model.Method;
 import java.util.List;
 
 public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final int ADD_CARD_VIEW_TYPE = 1;
+    private static final int CARD_VIEW_VIEW_TYPE = 2;
+    private static final String TAG = "ViewPagerAdapter";
+
     private List<Method> mItems;
     private boolean imageCheck = true;
     private String payMethodNum;
@@ -30,7 +34,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-        if (viewType == 1) {
+        if (viewType == ADD_CARD_VIEW_TYPE) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewpager_addcard, parent, false);
             return new AddCardViewHolder(view);
         } else {
@@ -41,7 +45,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder.getItemViewType() == 2){
+        if (holder.getItemViewType() == CARD_VIEW_VIEW_TYPE){
             ((CardViewHolder)holder).binding.setCardViewModel(mItems.get(position));
             ((CardViewHolder)holder).binding.cardSelectedImageView.setOnClickListener(v -> {
                 if (!imageCheck){
@@ -51,7 +55,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     ((CardViewHolder)holder).binding.cardSelectedImageView.setImageResource(R.drawable.on_checked_24dp);
                     payMethodNum = mItems.get(position).getPaymentMethodNum();
                     payMethodType = mItems.get(position).getPaymentMethodType();
-                    Log.e("adapter",""+payMethodType+" , "+payMethodNum);
+                    Log.e(TAG,""+payMethodType+" , "+payMethodNum);
                     imageCheck = false;
                 }
             });
@@ -69,9 +73,9 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemViewType(int position) {
         if (position == mItems.size() - 1) {
-            return 1;
+            return ADD_CARD_VIEW_TYPE;
         } else {
-            return 2;
+            return CARD_VIEW_VIEW_TYPE;
         }
     }
 
