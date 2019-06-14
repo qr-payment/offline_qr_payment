@@ -36,6 +36,6 @@ public interface RetrofitService {
     @GET(" ")
     Call<ServerResponse<TransactionResponse>> qrScanUrl(@Header("userIdx") Long userIdx);
 
-    @POST("./")
-    Call<ServerResponse> transactionComplete(@Body TransactionRequest transactionRequest);
+    @POST(" ")
+    Call<ServerResponse> transactionComplete(@Header("userIdx") Long userIdx , @Body TransactionRequest transactionRequest);
 }

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.payment.R;
@@ -68,9 +69,16 @@ public class TransactionPWFragment extends Fragment {
 
     private void transactionComplete(){
         viewModel.user.getValue().setTransactionPw(viewModel.transactionPassword.getValue());
-        viewModel.transactionRequestMutableLiveData.getValue().setTransactionPw(viewModel.transactionPassword.getValue());
+        if (viewModel.transactionPassword.getValue() != null){
+            viewModel.transactionRequestMutableLiveData.getValue().setTransactionPw(viewModel.transactionPassword.getValue());
+        }
         viewModel.sendTransaction();
-        viewModel.recycleFragment.setValue(false);
+        viewModel.initTransaction();
+        //TODO:비밀번호 체크 및 에러메시지
+        getFragmentManager().beginTransaction()
+                .remove(this)
+                .commit();
+        getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     public void deletePressed(boolean buttonState) {
