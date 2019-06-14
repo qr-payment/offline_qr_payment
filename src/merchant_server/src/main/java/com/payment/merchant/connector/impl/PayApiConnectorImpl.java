@@ -64,7 +64,7 @@ public class PayApiConnectorImpl implements PayApiConnector {
         HttpEntity<Approve> request = new HttpEntity<>(approve, headers);
         PayApiResWrapper result = null;
 
-        ResponseEntity<PayApiResWrapper> responseEntity = restTemplate.exchange(apiUrl + "/pay/reserve",
+        ResponseEntity<PayApiResWrapper> responseEntity = restTemplate.exchange(apiUrl + "/pay/approve",
                 HttpMethod.POST,
                 request,
                 new ParameterizedTypeReference<PayApiResWrapper>() {});
