@@ -106,7 +106,7 @@ public class OrderServiceImpl implements OrderService {
 
         ResponseWrapper response = ResponseWrapper.builder()
                 .code(0)
-                .message("성공")
+                .message("SUCCESS")
                 .build();
 
         return response;
