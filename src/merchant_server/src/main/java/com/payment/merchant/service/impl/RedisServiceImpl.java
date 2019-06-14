@@ -46,7 +46,9 @@ public class RedisServiceImpl implements RedisService {
 
         Optional<Order> object = orderRedisRepository.findById(redisId);
 
-        return object.orElse(null);
+        Order order = object.get();
+
+        return order;
 
     }
 

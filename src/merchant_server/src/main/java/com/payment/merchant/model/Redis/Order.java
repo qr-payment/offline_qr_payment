@@ -39,8 +39,6 @@ public class Order implements Serializable {
                 orderName.equals(temporaryRes.getProductName()) &&
                 amount == temporaryRes.getAmount() &&
                 count == temporaryRes.getCount() &&
-                paymentMethod.equals(temporaryRes.getMethodType()) &&
-                paymentNum.equals(temporaryRes.getMethodNum()) &&
                 userIdx == temporaryRes.getUserIdx() &&
                 merchantId == temporaryRes.getMerchantId();
     }
