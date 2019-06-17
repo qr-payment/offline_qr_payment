@@ -58,13 +58,12 @@ public class TransactionViewModel extends ViewModel {
 
     public void sendTransaction(){
         RetrofitService tr_retrofit = RetrofitInstance.getTrRetrofitInstance(transactionUrl.getValue()).create(RetrofitService.class);
-        tr_retrofit.transactionComplete(transactionRequestMutableLiveData.getValue()).enqueue(new Callback<ServerResponse>() {
+        tr_retrofit.transactionComplete((Long) successCode_Login.getValue().getBody(), transactionRequestMutableLiveData.getValue()).enqueue(new Callback<ServerResponse>() {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        Log.e(TAG, "" + response.body().toString() + " url -> "+transactionUrl.getValue());
-                        Log.e(TAG, "" + response.body().toString());
+                        Log.e(TAG, "sendTransaction-> " + response.body().toString());
                     }
                 }
             }
@@ -164,6 +163,12 @@ public class TransactionViewModel extends ViewModel {
                 Log.e("SignIn onFailure",""+t.toString());
             }
         });
+    }
+
+    public void initTransaction(){
+        transactionPassword.setValue("");
+        transactionPasswordLength.setValue(0);
+        user.setValue(new User());
     }
 
     public void setTransactionRequest(TransactionRequest transactionRequest){
