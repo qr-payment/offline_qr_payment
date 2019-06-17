@@ -1,6 +1,7 @@
 package com.payment.merchant.controller;
 
 import com.payment.merchant.Document.QrScanRes;
+import com.payment.merchant.exception.InvalidDataException;
 import com.payment.merchant.model.request.Payment;
 import com.payment.merchant.model.response.QRScanRes;
 import com.payment.merchant.model.wrapper.ResponseWrapper;
@@ -12,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/merchant")
@@ -34,7 +38,11 @@ public class MerchantController {
     }
 
     @PostMapping("/payment")
-    public ResponseEntity<ResponseWrapper> payment(@RequestBody Payment payment, @RequestParam(value = "redisKey")String redisKey, @RequestParam(value = "reserveId")Long reserveId, @RequestHeader(value = "userIdx", required = false)Long userIdx) {
+    public ResponseEntity<ResponseWrapper> payment(@RequestBody @Valid Payment payment, @RequestParam(value = "redisKey")String redisKey, @RequestParam(value = "reserveId")Long reserveId, @RequestHeader(value = "userIdx", required = false)Long userIdx, BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            throw new InvalidDataException();
+        }
 
         ResponseWrapper response = orderService.payment(payment, redisKey, reserveId, userIdx);
 

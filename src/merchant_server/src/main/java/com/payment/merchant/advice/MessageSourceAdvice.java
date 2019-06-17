@@ -1,5 +1,6 @@
 package com.payment.merchant.advice;
 
+import com.payment.merchant.exception.PayServerException;
 import com.payment.merchant.model.wrapper.ResponseWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class MessageSourceAdvice implements ResponseBodyAdvice<ResponseWrapper> 
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-        return true;
+        return !returnType.getExecutable().getName().equals("payServerExceptionHandler");
     }
 
     @Override
