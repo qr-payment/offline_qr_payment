@@ -57,13 +57,6 @@ public class TransactionViewFragment extends Fragment{
 
         binding.transactionViewPager.getAdapter().getItemCount();
 
-        transactionViewModel.user.observe(requireActivity(), user -> {
-            if (user.getTransactionPw() != null){
-                transactionRequest.setTransactionPw(user.getTransactionPw());
-                Log.e("결제하기",""+transactionViewModel.user.getValue().getTransactionPw());
-            }
-        });
-
         return view;
     }
 
@@ -82,18 +75,18 @@ public class TransactionViewFragment extends Fragment{
         transactionRequest.setCount(transactionViewModel.transactionLiveData.getValue().getCount());
         transactionRequest.setProductName(transactionViewModel.transactionLiveData.getValue().getProductName());
 
-        if (adapter.getPayMethodNum() != null && adapter.getPayMethodType() != null){
-            transactionRequest.setMethodNum(adapter.getPayMethodNum());
-            transactionRequest.setMethodType(adapter.getPayMethodType());
-            transactionViewModel.setTransactionRequest(transactionRequest);
-        }
-
         //결제하기버튼
         binding.sendTransaction.setOnClickListener(v -> {
             if (adapter.getPayMethodNum() != null && adapter.getPayMethodType() != null){
                 transactionViewModel.recycleFragment.setValue(true);
+                transactionRequest.setMethodNum(adapter.getPayMethodNum());
+                transactionRequest.setMethodType(adapter.getPayMethodType());
+
+                transactionViewModel.setTransactionRequest(transactionRequest);
+
                 getFragmentManager().beginTransaction()
                         .add(R.id.main_container_view,new TransactionPWFragment())
+                        .addToBackStack(null)
                         .commit();
             }else{
                 Toast.makeText(getActivity(), "거래 수단을 선택해주세요.", Toast.LENGTH_SHORT).show();
