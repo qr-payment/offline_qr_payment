@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginTop="130dp"
-                android:text="@string/check_transaction_pw"
+                android:text="@string/input_password"
                 android:textColor="#313131"
                 android:textSize="23sp" />
 
@@ -222,7 +222,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:onClick="@{() -> fragment.deletePressed(false)}"
-                    android:text="지움" />
+                    android:text="@string/press_delete" />
 
             </LinearLayout>
         </LinearLayout>

@@ -43,5 +43,7 @@
     <string name="account_simple_transaction">계좌간편결제</string>
     <string name="card_simple_transaction">카드간편결제</string>
     <string name="transaction_info">결제정보</string>
+    <string name="press_delete">지움</string>
+    <string name="input_password">비밀번호 입력</string>
 
 </resources>

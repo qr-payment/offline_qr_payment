@@ -39,6 +39,8 @@ public class TransactionViewModel extends ViewModel {
     public MutableLiveData<TransactionRequest> transactionRequestMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<String> transactionUrl = new MutableLiveData<>();
     public MutableLiveData<Boolean> recycleFragment = new MutableLiveData<>();
+    public MutableLiveData<String> transactionResultMessage = new MutableLiveData<>();
+    public MutableLiveData<Boolean> transactionResult = new MutableLiveData<>();
 
     private ArrayList<String> list = new ArrayList<>();
 
@@ -54,6 +56,7 @@ public class TransactionViewModel extends ViewModel {
         user.setValue(new User());
         serverChecker.setValue(false);
         recycleFragment.setValue(false);
+        transactionResult.setValue(false);
     }
 
     public void sendTransaction(){
@@ -63,6 +66,13 @@ public class TransactionViewModel extends ViewModel {
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
+                        if (response.body().getCode() == 0){
+                            //성공
+                            transactionResult.setValue(true);
+                        }else{
+                            transactionResultMessage.setValue(response.body().getMessage());
+                            transactionResult.setValue(false);
+                        }
                         Log.e(TAG, "sendTransaction-> " + response.body().toString());
                     }
                 }
@@ -169,6 +179,13 @@ public class TransactionViewModel extends ViewModel {
         transactionPassword.setValue("");
         transactionPasswordLength.setValue(0);
         user.setValue(new User());
+        transactionResultMessage.setValue("");
+        transactionResult.setValue(false);
+    }
+
+    public void failTransactionInit(){
+        transactionPassword.setValue("");
+        transactionPasswordLength.setValue(0);
     }
 
     public void setTransactionRequest(TransactionRequest transactionRequest){
