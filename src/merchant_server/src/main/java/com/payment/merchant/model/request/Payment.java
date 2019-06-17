@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -14,9 +15,9 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class Payment {
 
-    @NotEmpty
+    @NotNull
     private Integer amount;
-    @NotEmpty
+    @NotNull
     private Integer count;
     @NotEmpty
     private String methodType;

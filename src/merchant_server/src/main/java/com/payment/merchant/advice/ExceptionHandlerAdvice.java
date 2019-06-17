@@ -1,7 +1,9 @@
 package com.payment.merchant.advice;
 
+import com.payment.merchant.exception.InvalidDataException;
 import com.payment.merchant.exception.InvalidHeaderException;
 import com.payment.merchant.exception.NotMatchOrderException;
+import com.payment.merchant.exception.PayServerException;
 import com.payment.merchant.model.wrapper.ResponseWrapper;
 import com.payment.merchant.model.wrapper.StatusCode;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +40,20 @@ public class ExceptionHandlerAdvice {
     @ResponseBody
     public ResponseEntity notMatchOrderExceptionHandler() {
         return new ResponseEntity<>(new ResponseWrapper<>(StatusCode.NOT_MATCH_ORDER), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(InvalidDataException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity invalidDataExceptionHandler() {
+        return new ResponseEntity<>(new ResponseWrapper<>(StatusCode.INVALID_DATA), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(PayServerException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity payServerExceptionHandler(PayServerException e) {
+        return new ResponseEntity<>(new ResponseWrapper<>(e.getCode(), e.getMessage()), HttpStatus.OK);
     }
 
 }
