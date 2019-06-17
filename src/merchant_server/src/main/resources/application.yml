@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active: local
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+server:
+  port: 8081
+
+restTemplate:
+  factory:
+    readTimeout: 5000
+    connectTimeout: 3000
+  httpClient:
+    maxConnTotal: 100
+    maxConnPerRoute: 5
+
+merchant:
+  name: QR Code 쇼핑몰
+  id: 0
+
+---
+spring:
+  profiles: local
+
+url:
+  return: http://223.194.133.146:8081/merchant/payment/
+  pay:
+    api: http://223.194.133.146:8082
+---
+spring:
+  profiles: dev
+
+---
+

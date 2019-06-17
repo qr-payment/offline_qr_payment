@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">qr_payment_client</string>
+    <string name="qr_app_name">QR Payment</string>
+    <string name="qr_hint_username">아이디</string>
+    <string name="qr_hint_password">비밀번호</string>
+    <string name="qr_button_next">로그인</string>
+    <string name="qr_button_regist">회원가입</string>
+    <string name="qr_button_findId">아이디 찾기</string>
+    <string name="qr_button_findPassword">비밀번호 찾기</string>
+    <string name="qr_hint_password_check">비밀번호 재확인</string>
+    <string name="qr_button_signup">회원가입</string>
+    <string name="qr_hint_name">이름</string>
+
+    <string name="password_length_error">Password must contain at least 8 characters.</string>
+    <string name="password_not_correct_error">Passwords do not match</string>
+    <string name="id_not_exist_error">This account does not exist</string>
+    <string name="id_not_correct_error">These ID do not match</string>
+    <string name="qr_hint_transaction">거래비밀번호</string>
+    <string name="qr_button_signup_next">다음</string>
+    <string name="check_transaction_pw">비밀번호 확인</string>
+    <string name="reset_transaction_pw">재배열</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="transaction_re_check">비밀번호 재확인</string>
+    <string name="set_transaction_pw">거래 비밀번호 설정</string>
+    <string name="login_null_error">아이디 또는 비밀번호를 모두 입력해주세요</string>
+    <string name="error_notsame_password">비밀번호가 다릅니다.</string>
+    <string name="error_null_info">필수정보입니다.</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="toolbar_name">QR_PAYMENT</string>
+    <string name="re_scan_error">Scan을 다시 해주세요.</string>
+    <string name="select_bank">은행선택</string>
+    <string name="card_number">카드번호</string>
+    <string name="nickname">별명</string>
+    <string name="card_regist">카드 등록</string>
+    <string name="card_num_null_error">카드번호를 모두 입력하세요</string>
+    <string name="account_number">계좌번호</string>
+    <string name="regist_account">계좌 등록</string>
+    <string name="transaction_send">결제하기</string>
+    <string name="account_simple_transaction">계좌간편결제</string>
+    <string name="card_simple_transaction">카드간편결제</string>
+    <string name="transaction_info">결제정보</string>
+
+</resources>

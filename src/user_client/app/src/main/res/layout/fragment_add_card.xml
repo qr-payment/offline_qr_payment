@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#ffffff"
+        tools:context=".ui.AddCardFragment">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:background="#ffffff"
+                android:text="결제수단 등록"
+                android:textAllCaps="true"
+                android:textSize="25sp" />
+            <include
+                android:id="@+id/cardView_layout"
+                layout="@layout/add_card_layout" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/input_card_layout"
+                layout="@layout/input_card_num_layout"/>
+
+            <include
+                android:id="@+id/input_account_layout"
+                layout="@layout/input_account_num_layout"/>
+
+        </FrameLayout>
+    </LinearLayout>
+</layout>

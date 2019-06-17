@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_test1"
+            android:icon="@drawable/dot2_24dp"
+            android:title="테스트1" />
+        <item
+            android:id="@+id/nav_test2"
+            android:icon="@drawable/dot1_24dp"
+            android:title="테스트2" />
+        <item
+            android:id="@+id/nav_test3"
+            android:icon="@drawable/dot2_24dp"
+            android:title="테스트3" />
+        <item
+            android:id="@+id/nav_test4"
+            android:icon="@drawable/dot1_24dp"
+            android:title="테스트4" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_test1_1"
+                android:icon="@drawable/dot2_24dp"
+                android:title="테스트5" />
+            <item
+                android:id="@+id/nav_test1_2"
+                android:icon="@drawable/dot1_24dp"
+                android:title="테스트6" />
+        </menu>
+    </item>
+
+</menu>

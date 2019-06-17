@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.payment.pay.database.PayMapper">
+
+    <insert id="insertReserve" parameterType="com.payment.pay.model.request.Reserve" useGeneratedKeys="true" keyProperty="reserveId">
+        INSERT INTO reservation (
+            merchant_id,
+            product_name,
+            amount,
+            count,
+            user_idx
+        )
+        VALUES (
+            #{merchantId},
+            #{productName},
+            #{amount},
+            #{count},
+            #{userIdx}
+        )
+    </insert>
+
+    <select id="getReserve" parameterType="Long" resultType="com.payment.pay.model.dao.ReserveDAO">
+        SELECT
+            reserve_id as reserveId,
+            merchant_id as merchantId,
+            UNIX_TIMESTAMP(create_at) as createAt,
+            amount,
+            product_name as productName,
+            count,
+            user_idx as userIdx,
+            status
+        FROM
+            reservation
+        where
+            reserve_id = #{value}
+    </select>
+
+    <insert id="insertTransaction" parameterType="com.payment.pay.model.request.Temporary" useGeneratedKeys="true" keyProperty="transactionIdx">
+        INSERT INTO transaction (
+            merchant_id,
+            product_name,
+            amount,
+            count,
+            user_idx,
+            pay_id,
+            reserve_id,
+            method_num,
+            method_type
+        )
+        VALUES (
+            #{merchantId},
+            #{productName},
+            #{amount},
+            #{count},
+            #{userIdx},
+            #{payId},
+            #{reserveId},
+            #{methodNum},
+            #{methodType}
+        )
+    </insert>
+
+    <update id="updateReserveToTemporary" parameterType="Long">
+        UPDATE
+            reservation
+        SET
+            status = 'Temporary'
+        WHERE
+            reserve_id = #{reserveId}
+    </update>
+
+    <select id="getTransaction" parameterType="com.payment.pay.model.request.Approve" resultType="com.payment.pay.model.dao.TransactionDAO">
+        SELECT
+            merchant_id as merchantId,
+            status,
+            pay_id as payId
+        FROM
+            transaction
+        WHERE
+            pay_id = #{payId}
+    </select>
+
+    <update id="approveTransaction" parameterType="com.payment.pay.model.request.Approve">
+        UPDATE
+            transaction
+        SET
+            status = 'Approve'
+        WHERE
+            pay_id = #{payId}
+    </update>
+
+</mapper>
