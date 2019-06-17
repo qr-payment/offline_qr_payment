@@ -24,4 +24,9 @@ public class ResponseWrapper<T> {
         this.body = body;
     }
 
+    public ResponseWrapper(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
 }

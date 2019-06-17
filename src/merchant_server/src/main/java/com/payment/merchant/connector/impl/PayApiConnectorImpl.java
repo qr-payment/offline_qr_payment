@@ -49,11 +49,12 @@ public class PayApiConnectorImpl implements PayApiConnector {
         PayApiResWrapper<ReserveRes> result = responseEntity.getBody();
 
         if(result == null) {
-            throw new PayServerException();
+            new PayServerException(result.getCode(), result.getMessage());
         } else if (result.getCode() == 0) {
             return result.getBody();
         }
-        throw new PayServerException();
+        new PayServerException(result.getCode(), result.getMessage());
+        return null;
     }
 
     @Override
@@ -72,7 +73,7 @@ public class PayApiConnectorImpl implements PayApiConnector {
         result = responseEntity.getBody();
 
         if(result == null || result.getCode() != 0) {
-            throw new PayServerException();
+            throw new PayServerException(result.getCode(), result.getMessage());
         }
 
     }
@@ -84,17 +85,19 @@ public class PayApiConnectorImpl implements PayApiConnector {
 
         HttpEntity<Temporary> request = new HttpEntity<>(temporary, headers);
 
-        PayApiResWrapper<TemporaryRes> result = restTemplate.exchange(apiUrl + "/pay/temporary",
+        ResponseEntity<PayApiResWrapper<TemporaryRes>> responseEntity = restTemplate.exchange(apiUrl + "/pay/temporary",
                 HttpMethod.POST,
                 request,
-                new ParameterizedTypeReference<PayApiResWrapper<TemporaryRes>>() {}).getBody();
+                new ParameterizedTypeReference<PayApiResWrapper<TemporaryRes>>() {});
+
+        PayApiResWrapper<TemporaryRes> result = responseEntity.getBody();
 
         if(result == null) {
-            throw new PayServerException();
+            throw new PayServerException(result.getCode(), result.getMessage());
         } else if (result.getCode() == 0) {
             return result.getBody();
         }
-        throw new PayServerException();
+        throw new PayServerException(result.getCode(), result.getMessage());
 
     }
 
