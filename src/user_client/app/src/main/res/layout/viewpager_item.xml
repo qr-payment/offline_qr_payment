@@ -90,7 +90,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center_vertical"
                     android:paddingStart="15dp"
-                    android:text="일시불"
+                    android:text="@string/payment_type"
                     android:textSize="20sp" />
 
             </LinearLayout>

@@ -88,14 +88,14 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
         ViewpagerItemBinding binding;
-        public CardViewHolder(@NonNull View itemView) {
+        CardViewHolder(@NonNull View itemView) {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
         }
     }
 
     class AddCardViewHolder extends RecyclerView.ViewHolder {
-        public AddCardViewHolder(@NonNull View itemView) {
+        AddCardViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }

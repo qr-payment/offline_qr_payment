@@ -49,7 +49,6 @@ public class TransactionPWFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         checkPasswordList = new ArrayList<>();
         binding.resetTransactionBtn.setOnClickListener(v -> viewModel.shuffleList());
-        
     }
 
     public void pressTransactionPW(boolean buttonState, String number) {

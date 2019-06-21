@@ -79,6 +79,7 @@ public class TransactionViewFragment extends Fragment{
         binding.sendTransaction.setOnClickListener(v -> {
             if (adapter.getPayMethodNum() != null && adapter.getPayMethodType() != null){
                 transactionViewModel.recycleFragment.setValue(true);
+
                 transactionRequest.setMethodNum(adapter.getPayMethodNum());
                 transactionRequest.setMethodType(adapter.getPayMethodType());
 
