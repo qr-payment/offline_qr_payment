@@ -54,4 +54,6 @@ dependencies {
     //lombok
     compileOnly 'org.projectlombok:lombok:1.18.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
+    //roundedimageview
+    compile 'com.makeramen:roundedimageview:2.3.0'
 }

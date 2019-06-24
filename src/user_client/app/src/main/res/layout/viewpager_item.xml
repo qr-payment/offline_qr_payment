@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -13,24 +13,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/round_corner"
         android:gravity="center"
         tools:context=".ui.TransactionViewFragment"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/card_form_CardView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            app:cardBackgroundColor="#EBEBEB"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="8dp">
+            app:cardCornerRadius="10dp"
+            android:layout_height="170dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:background="@drawable/dotted_border"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,6 +41,7 @@
                     android:id="@+id/bank_name_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:textColor="#CFCFCF"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="@{cardViewModel.bankName}"
@@ -74,6 +75,7 @@
                     android:id="@+id/card_paymentMethodNum_textView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textColor="#CFCFCF"
                     android:gravity="center"
                     android:text="@{cardViewModel.paymentMethodNum}"
                     android:textSize="18sp" />
@@ -86,9 +88,11 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/payment_type_textView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center_vertical"
+                    android:textColor="#CFCFCF"
                     android:paddingStart="15dp"
                     android:text="@string/payment_type"
                     android:textSize="20sp" />

@@ -1,6 +1,7 @@
 package com.payment.ui;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,14 +49,15 @@ public class TransactionViewFragment extends Fragment{
         transactionViewModel.serverChecker.setValue(false);
         cardList = new PaymentMethods();
         transactionRequest = new TransactionRequest();
+        binding.imageView2.setBackgroundColor(Color.rgb(69,78,151));
+        binding.imageView3.setBackgroundColor(Color.rgb(69,78,151));
+        binding.imageView4.setBackgroundColor(Color.rgb(221,53,46));
 
         if (transactionViewModel.cardInfo.getValue() != null){
             cardList.setMethods(transactionViewModel.cardInfo.getValue().getMethods());
             adapter = new ViewPagerAdapter(cardList.getMethods());
             binding.transactionViewPager.setAdapter(adapter);
         }
-
-        binding.transactionViewPager.getAdapter().getItemCount();
 
         return view;
     }
@@ -74,6 +76,7 @@ public class TransactionViewFragment extends Fragment{
         transactionRequest.setAmount(transactionViewModel.transactionLiveData.getValue().getAmount());
         transactionRequest.setCount(transactionViewModel.transactionLiveData.getValue().getCount());
         transactionRequest.setProductName(transactionViewModel.transactionLiveData.getValue().getProductName());
+
 
         //결제하기버튼
         binding.sendTransaction.setOnClickListener(v -> {

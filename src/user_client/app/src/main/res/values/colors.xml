@@ -8,4 +8,14 @@
     <color name="loginPageBackgroundColor">#F2F4F5</color>
     <color name="productGridBackgroundColor">#FFFFFF</color>
     <color name="colorControlActivated">#204E22</color>
+    <color name="ShinHan_card">#202A93</color>
+    <color name="SamSung_card">#0D59A5</color>
+    <color name="HyunDai_card">#217FF1</color>
+    <color name="BC_card">#AF2326</color>
+    <color name="KB_card">#F0C320</color>
+    <color name="Hana_card">#159397</color>
+    <color name="Lotte_card">#5600AA</color>
+    <color name="NH_card">#169238</color>
+    <color name="Citi_bank">#1493D0</color>
+    <color name="Kakao_bank">#F0CF11</color>
 </resources>

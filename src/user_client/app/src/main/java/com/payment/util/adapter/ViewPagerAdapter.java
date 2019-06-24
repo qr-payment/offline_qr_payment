@@ -1,5 +1,6 @@
 package com.payment.util.adapter;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,9 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == CARD_VIEW_VIEW_TYPE){
+            Log.e("cardName",""+mItems.get(position).getBankName()+"position->"+position+","+holder.getAdapterPosition());
             ((CardViewHolder)holder).binding.setCardViewModel(mItems.get(position));
+            setCardColor(holder, mItems.get(position).getBankName());
             ((CardViewHolder)holder).binding.cardSelectedImageView.setOnClickListener(v -> {
                 if (!imageCheck){
                     ((CardViewHolder)holder).binding.cardSelectedImageView.setImageResource(R.drawable.not_checked_24dp);
@@ -55,10 +58,53 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     ((CardViewHolder)holder).binding.cardSelectedImageView.setImageResource(R.drawable.on_checked_24dp);
                     payMethodNum = mItems.get(position).getPaymentMethodNum();
                     payMethodType = mItems.get(position).getPaymentMethodType();
+
                     Log.e(TAG,""+payMethodType+" , "+payMethodNum);
                     imageCheck = false;
                 }
             });
+        }
+    }
+
+    private void setCardColor(RecyclerView.ViewHolder holder, String cardName){
+        Log.e("carname",""+cardName);
+        switch (cardName){
+            case "신한":
+                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.ShinHan_card);
+                break;
+            case "삼성":
+                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.SamSung_card);
+                break;
+            case "현대":
+                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.HyunDai_card);
+                break;
+            case "BC":
+                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.BC_card);
+                break;
+            case "KB국민":
+                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.KB_card);
+                ((CardViewHolder)holder).binding.bankNameTextView.setTextColor(Color.BLACK);
+                ((CardViewHolder)holder).binding.paymentTypeTextView.setTextColor(Color.BLACK);
+                ((CardViewHolder)holder).binding.cardPaymentMethodNumTextView.setTextColor(Color.BLACK);
+                break;
+            case "하나":
+                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.Hana_card);
+                break;
+            case "롯데":
+                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.Lotte_card);
+                break;
+            case "농협":
+                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.NH_card);
+                break;
+            case "시티":
+                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.Citi_bank);
+                break;
+            case "카카오뱅크":
+                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.Kakao_bank);
+                ((CardViewHolder)holder).binding.bankNameTextView.setTextColor(Color.BLACK);
+                ((CardViewHolder)holder).binding.paymentTypeTextView.setTextColor(Color.BLACK);
+                ((CardViewHolder)holder).binding.cardPaymentMethodNumTextView.setTextColor(Color.BLACK);
+                break;
         }
     }
 
