@@ -56,4 +56,5 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
     //roundedimageview
     compile 'com.makeramen:roundedimageview:2.3.0'
+    compile 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 }

@@ -26,6 +26,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private String payMethodNum;
     private String payMethodType;
 
+
     public ViewPagerAdapter(List<Method> list){
         mItems = list;
         mItems.add(null);
@@ -70,38 +71,46 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         Log.e("carname",""+cardName);
         switch (cardName){
             case "신한":
-                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.ShinHan_card);
+                ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.shinhan);
+                ((CardViewHolder)holder).binding.cardFormLayout.setBackgroundResource(R.color.ShinHan_card);
                 break;
             case "삼성":
-                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.SamSung_card);
+                ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.samsung);
+                ((CardViewHolder)holder).binding.cardFormLayout.setBackgroundResource(R.color.SamSung_card);
                 break;
             case "현대":
-                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.HyunDai_card);
+                ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.hyundai);
+                ((CardViewHolder)holder).binding.cardFormLayout.setBackgroundResource(R.color.HyunDai_card);
                 break;
             case "BC":
-                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.BC_card);
+                ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.bc);
+                ((CardViewHolder)holder).binding.cardFormLayout.setBackgroundResource(R.color.BC_card);
                 break;
             case "KB국민":
-                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.KB_card);
-                ((CardViewHolder)holder).binding.bankNameTextView.setTextColor(Color.BLACK);
+                ((CardViewHolder)holder).binding.cardFormLayout.setBackgroundResource(R.color.KB_card);
+                ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.kb);
                 ((CardViewHolder)holder).binding.paymentTypeTextView.setTextColor(Color.BLACK);
                 ((CardViewHolder)holder).binding.cardPaymentMethodNumTextView.setTextColor(Color.BLACK);
                 break;
             case "하나":
-                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.Hana_card);
+                ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.hana);
+                ((CardViewHolder)holder).binding.cardFormLayout.setBackgroundResource(R.color.Hana_card);
                 break;
             case "롯데":
-                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.Lotte_card);
+                ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.lotte);
+                ((CardViewHolder)holder).binding.cardFormLayout.setBackgroundResource(R.color.Lotte_card);
                 break;
             case "농협":
-                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.NH_card);
+                ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.nh);
+                ((CardViewHolder)holder).binding.cardFormLayout.setBackgroundResource(R.color.NH_card);
                 break;
             case "시티":
-                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.Citi_bank);
+                ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.citi);
+                ((CardViewHolder)holder).binding.cardFormLayout.setBackgroundResource(R.color.Citi_bank);
                 break;
             case "카카오뱅크":
-                ((CardViewHolder)holder).binding.cardFormCardView.setBackgroundResource(R.color.Kakao_bank);
-                ((CardViewHolder)holder).binding.bankNameTextView.setTextColor(Color.BLACK);
+                ((CardViewHolder)holder).binding.cardFormLayout.setBackgroundResource(R.color.Kakao_bank);
+                ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.kakao);
                 ((CardViewHolder)holder).binding.paymentTypeTextView.setTextColor(Color.BLACK);
                 ((CardViewHolder)holder).binding.cardPaymentMethodNumTextView.setTextColor(Color.BLACK);
                 break;

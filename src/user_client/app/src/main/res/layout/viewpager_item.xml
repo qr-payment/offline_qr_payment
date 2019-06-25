@@ -9,11 +9,9 @@
             type="com.payment.model.Method" />
     </data>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/round_corner"
         android:gravity="center"
         tools:context=".ui.TransactionViewFragment"
         android:orientation="vertical">
@@ -21,84 +19,143 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card_form_CardView"
             android:layout_width="match_parent"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="6dp"
             android:layout_height="170dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card_form_Layout"
                 android:layout_width="match_parent"
-                android:background="@drawable/dotted_border"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/bank_name_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textColor="#CFCFCF"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@{cardViewModel.bankName}"
-                    android:paddingStart="10dp"
-                    android:textSize="20sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|right">
-
-                    <ImageView
-                        android:id="@+id/card_selected_imageView"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginRight="15dp"
-                        android:src="@drawable/not_checked_24dp" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/card_paymentMethodNum_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="#CFCFCF"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
                     android:gravity="center"
                     android:text="@{cardViewModel.paymentMethodNum}"
-                    android:textSize="18sp" />
+                    android:textColor="#CFCFCF"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_selected_imageView" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/card_selected_imageView"
+                    android:src="@drawable/not_checked_24dp"
+                    android:layout_width="41dp"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
                     android:id="@+id/payment_type_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center_vertical"
-                    android:textColor="#CFCFCF"
-                    android:paddingStart="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="10dp"
                     android:text="@string/payment_type"
-                    android:textSize="20sp" />
+                    android:textColor="#CFCFCF"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_paymentMethodNum_textView"
+                    app:layout_constraintVertical_bias="0.823" />
 
-            </LinearLayout>
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/card_brand_ImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginBottom="8dp"
+                    android:scaleType="fitStart"
+                    app:layout_constraintBottom_toTopOf="@+id/card_paymentMethodNum_textView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/bank_name_textView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:textColor="#CFCFCF"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:text="@{cardViewModel.bankName}"-->
+                    <!--android:paddingStart="10dp"-->
+                    <!--android:textSize="20sp" />-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:gravity="center|right">-->
+
+                    <!--<ImageView-->
+                        <!--android:id="@+id/card_selected_imageView"-->
+                        <!--android:layout_width="35dp"-->
+                        <!--android:layout_height="35dp"-->
+                        <!--android:layout_marginRight="15dp"-->
+                        <!--android:src="@drawable/not_checked_24dp" />-->
+
+                <!--</LinearLayout>-->
+
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/card_paymentMethodNum_textView"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:textColor="#CFCFCF"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="@{cardViewModel.paymentMethodNum}"-->
+                    <!--android:textSize="18sp" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_weight="1">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/payment_type_textView"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="left|center_vertical"-->
+                    <!--android:textColor="#CFCFCF"-->
+                    <!--android:paddingStart="15dp"-->
+                    <!--android:text="@string/payment_type"-->
+                    <!--android:textSize="20sp" />-->
+
+            <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 </layout>

@@ -5,6 +5,7 @@
     android:id="@+id/layout">
 
     <data>
+
         <variable
             name="transactionViewModel"
             type="com.payment.model.viewmodel.TransactionViewModel" />
@@ -12,247 +13,408 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:background="#ffffff"
         tools:context=".ui.TransactionViewFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
+                android:id="@+id/expand_button1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="5dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:layout_margin="10dp">
+                android:layout_marginRight="10dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="15dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="8dp"
-                        android:text="주문상품정보"
-                        android:textSize="20sp"
-                        android:textColor="#303030"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView2"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_weight="0.9"
+                    android:background="#F5F5F7">
 
                     <ImageView
-                        android:id="@+id/imageView2"
-                        android:src="@drawable/shopping"
-                        android:background="@drawable/imageview_border"
-                        android:padding="3dp"
+                        android:id="@+id/shoppingInfo_imgView"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="10dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:padding="3dp"
+                        android:src="@drawable/shopping"
                         tools:src="@tools:sample/avatars" />
 
                     <TextView
-                        android:id="@+id/merchant_name_textView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="8dp"
-                        android:textSize="17sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-                    <TextView
-                        android:id="@+id/product_name_textView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:textSize="17sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/merchant_name_textView" />
-
-                    <TextView
-                        android:id="@+id/amount_textView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:textSize="17sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/product_name_textView" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_margin="10dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="8dp"
+                        android:text="주문상품정보"
+                        android:textColor="#303030"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-                        <ImageView
-                            android:id="@+id/imageView3"
-                            android:src="@drawable/money"
-                            android:padding="3dp"
-                            android:background="@drawable/imageview_border"
-                            tools:src="@tools:sample/avatars"
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="10dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/arrow_image1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="#CFCFE0"
+                    android:src="@drawable/down_arrow" />
+
+            </LinearLayout>
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/expandable_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="300"
+                app:el_expanded="true">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginRight="11dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="15dp">
 
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:textColor="#303030"
+                            android:id="@+id/merchant_name_textView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="최종 결제금액"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                            android:textColor="#25252E"
+                            android:textSize="16sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/product_name_textView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="8dp"
+                            android:textColor="#25252E"
+                            android:textSize="15sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView5"
+                            app:layout_constraintTop_toBottomOf="@+id/merchant_name_textView" />
+
+                        <TextView
+                            android:id="@+id/amount_textView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:textColor="#146CDC"
+                            android:textSize="15sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView5"
+                            app:layout_constraintTop_toBottomOf="@+id/product_name_textView" />
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="70dp"
+                            android:layout_height="69dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="12dp"
+                            android:src="@drawable/sampleimage"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/merchant_name_textView"
+                            tools:srcCompat="@tools:sample/avatars" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+            <LinearLayout
+                android:id="@+id/expand_button2"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9"
+                    android:background="#F5F5F7">
+
+                    <ImageView
+                        android:id="@+id/shoppingInfo_imgView2"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
+                        android:padding="3dp"
+                        android:src="@drawable/money"
+                        tools:src="@tools:sample/avatars" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="8dp"
+                        android:text="최종 결제금액"
+                        android:textColor="#303030"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/arrow_image2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="#CFCFE0"
+                    android:src="@drawable/down_arrow" />
+            </LinearLayout>
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/expandable_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="300"
+                app:el_expanded="true">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginRight="11dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:gravity="center_vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="8dp"
-                            android:textSize="17sp"
-                            android:textColor="#3030E7"
-                            android:text="총 결제금액"/>
-
-                        <TextView
-                            android:id="@+id/result_amount_textView"
-                            android:gravity="right|center_vertical"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:textSize="17sp"
-                            android:paddingEnd="15dp"
-                            android:textColor="#3030E7"/>
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="8dp"
+                                android:gravity="center_vertical"
+                                android:text="결제금액"
+                                android:textColor="#146CDC"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/result_amount_textView2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="right|center_vertical"
+                                android:paddingEnd="15dp"
+                                android:textColor="#146CDC"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="8dp"
+                                android:gravity="center_vertical"
+                                android:text="할인금액"
+                                android:textColor="#146CDC"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="right|center_vertical"
+                                android:text="0 원"
+                                android:paddingEnd="15dp"
+                                android:textColor="#146CDC"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:background="#A1A1AF"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_height="1dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="8dp"
+                                android:gravity="center_vertical"
+                                android:text="총 결제금액"
+                                android:textColor="#146CDC"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/result_amount_textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="right|center_vertical"
+                                android:paddingEnd="15dp"
+                                android:textColor="#146CDC"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </net.cachapa.expandablelayout.ExpandableLayout>
 
-            </androidx.cardview.widget.CardView>
 
-
-            <androidx.cardview.widget.CardView
-                app:cardCornerRadius="3dp"
-                app:cardElevation="5dp"
+            <LinearLayout
+                android:id="@+id/expand_button3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_weight="0.9"
+                    android:background="#F5F5F7">
 
-                    <LinearLayout
+                    <ImageView
+                        android:id="@+id/shoppingInfo_imgView3"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"
+                        android:padding="3dp"
+                        android:src="@drawable/payment"
+                        tools:src="@tools:sample/avatars" />
+
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:padding="3dp"
-                            android:id="@+id/imageView4"
-                            android:src="@drawable/payment"
-                            android:background="@drawable/imageview_border"
-                            tools:src="@tools:sample/avatars"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="10dp" />
-
-                        <TextView
-                            android:textColor="#303030"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="8dp"
-                            android:text="@string/transaction_info"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/card_transaction_button"
-                            style="@style/Widget.QR.Button4"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            android:text="@string/card_simple_transaction" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/account_transaction_button"
-                            style="@style/Widget.QR.Button4"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            android:text="@string/account_simple_transaction" />
-
-                    </LinearLayout>
-
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/transaction_viewPager"
-                        android:layout_marginBottom="15dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="8dp"
+                        android:text="@string/transaction_info"
+                        android:textColor="#303030"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/arrow_image3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="#CFCFE0"
+                    android:src="@drawable/down_arrow" />
+            </LinearLayout>
+
+
+            <net.cachapa.expandablelayout.ExpandableLayout
+                android:id="@+id/expandable_layout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="300"
+                app:el_expanded="true">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="11dp"
+                    android:layout_marginLeft="11dp"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/card_transaction_button"
+                                style="@style/Widget.QR.Button4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:layout_weight="1"
+                                android:text="@string/card_simple_transaction" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/account_transaction_button"
+                                style="@style/Widget.QR.Button4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:layout_weight="1"
+                                android:text="@string/account_simple_transaction" />
+
+                        </LinearLayout>
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/transaction_viewPager"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </net.cachapa.expandablelayout.ExpandableLayout>
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/send_transaction"
                 style="@style/Widget.QR.Button2"
-                android:layout_gravity="bottom"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
-                android:text="@string/transaction_send"/>
+                android:layout_gravity="bottom"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/transaction_send" />
+
         </LinearLayout>
     </ScrollView>
 </layout>

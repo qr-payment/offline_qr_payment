@@ -22,6 +22,8 @@ import com.payment.model.TransactionRequest;
 import com.payment.model.viewmodel.TransactionViewModel;
 import com.payment.util.adapter.ViewPagerAdapter;
 
+import java.text.NumberFormat;
+
 public class TransactionViewFragment extends Fragment{
 
     private FragmentTransactionViewBinding binding;
@@ -49,9 +51,9 @@ public class TransactionViewFragment extends Fragment{
         transactionViewModel.serverChecker.setValue(false);
         cardList = new PaymentMethods();
         transactionRequest = new TransactionRequest();
-        binding.imageView2.setBackgroundColor(Color.rgb(69,78,151));
-        binding.imageView3.setBackgroundColor(Color.rgb(69,78,151));
-        binding.imageView4.setBackgroundColor(Color.rgb(221,53,46));
+        binding.shoppingInfoImgView.setBackgroundColor(Color.rgb(69,78,151));
+        binding.shoppingInfoImgView2.setBackgroundColor(Color.rgb(69,78,151));
+        binding.shoppingInfoImgView3.setBackgroundColor(Color.rgb(221,53,46));
 
         if (transactionViewModel.cardInfo.getValue() != null){
             cardList.setMethods(transactionViewModel.cardInfo.getValue().getMethods());
@@ -69,14 +71,47 @@ public class TransactionViewFragment extends Fragment{
         Log.e("transaction url",""+transactionViewModel.transactionLiveData.getValue().getUrl());
 
         binding.merchantNameTextView.setText(transactionViewModel.transactionLiveData.getValue().getMerchantName());
-        binding.resultAmountTextView.setText(Integer.toString(transactionViewModel.transactionLiveData.getValue().getAmount()));
-        binding.amountTextView.setText(Integer.toString(transactionViewModel.transactionLiveData.getValue().getAmount()));
+        String amount = NumberFormat.getInstance().format(transactionViewModel.transactionLiveData.getValue().getAmount());
+        binding.resultAmountTextView.setText(amount+" 원");
+        binding.resultAmountTextView2.setText(amount+" 원");
+        binding.amountTextView.setText(amount+" 원");
         binding.productNameTextView.setText(transactionViewModel.transactionLiveData.getValue().getProductName());
 
         transactionRequest.setAmount(transactionViewModel.transactionLiveData.getValue().getAmount());
         transactionRequest.setCount(transactionViewModel.transactionLiveData.getValue().getCount());
         transactionRequest.setProductName(transactionViewModel.transactionLiveData.getValue().getProductName());
 
+
+
+        binding.expandButton1.setOnClickListener(v -> {
+            if (binding.expandableLayout.isExpanded()) {
+                binding.arrowImage1.setImageResource(R.drawable.down_arrow);
+                binding.expandableLayout.collapse();
+            } else {
+                binding.arrowImage1.setImageResource(R.drawable.up_arrow);
+                binding.expandableLayout.expand();
+            }
+        });
+
+        binding.expandButton2.setOnClickListener(v -> {
+            if (binding.expandableLayout2.isExpanded()){
+                binding.arrowImage2.setImageResource(R.drawable.down_arrow);
+                binding.expandableLayout2.collapse();
+            }else{
+                binding.arrowImage2.setImageResource(R.drawable.up_arrow);
+                binding.expandableLayout2.expand();
+            }
+        });
+
+        binding.expandButton3.setOnClickListener(v -> {
+            if (binding.expandableLayout3.isExpanded()){
+                binding.arrowImage3.setImageResource(R.drawable.down_arrow);
+                binding.expandableLayout3.collapse();
+            }else{
+                binding.arrowImage3.setImageResource(R.drawable.up_arrow);
+                binding.expandableLayout3.expand();
+            }
+        });
 
         //결제하기버튼
         binding.sendTransaction.setOnClickListener(v -> {
