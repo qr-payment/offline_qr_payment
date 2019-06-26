@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.payment.R;
 import com.payment.databinding.FragmentTransactionViewBinding;
@@ -81,7 +82,24 @@ public class TransactionViewFragment extends Fragment{
         transactionRequest.setCount(transactionViewModel.transactionLiveData.getValue().getCount());
         transactionRequest.setProductName(transactionViewModel.transactionLiveData.getValue().getProductName());
 
+        binding.cardTotalPosition.setText(Integer.toString(adapter.getItemCount() - 1));
 
+        binding.transactionViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                if (position == adapter.getItemCount() - 1){
+                    binding.cardCurrentPosition.setVisibility(View.INVISIBLE);
+                    binding.cardTotalPosition.setVisibility(View.INVISIBLE);
+                    binding.cardPositionCheck.setVisibility(View.INVISIBLE);
+                }else{
+                    binding.cardCurrentPosition.setVisibility(View.VISIBLE);
+                    binding.cardTotalPosition.setVisibility(View.VISIBLE);
+                    binding.cardPositionCheck.setVisibility(View.VISIBLE);
+                    binding.cardCurrentPosition.setText(Integer.toString(position + 1));
+                }
+            }
+        });
 
         binding.expandButton1.setOnClickListener(v -> {
             if (binding.expandableLayout.isExpanded()) {

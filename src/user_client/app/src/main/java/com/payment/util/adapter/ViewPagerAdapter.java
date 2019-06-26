@@ -19,12 +19,14 @@ import java.util.List;
 public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int ADD_CARD_VIEW_TYPE = 1;
     private static final int CARD_VIEW_VIEW_TYPE = 2;
+    private static final int CARD_NUM_LENGTH = 16;
     private static final String TAG = "ViewPagerAdapter";
 
     private List<Method> mItems;
     private boolean imageCheck = true;
     private String payMethodNum;
     private String payMethodType;
+    private int currentPosition;
 
 
     public ViewPagerAdapter(List<Method> list){
@@ -48,9 +50,15 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder.getItemViewType() == CARD_VIEW_VIEW_TYPE){
-            Log.e("cardName",""+mItems.get(position).getBankName()+"position->"+position+","+holder.getAdapterPosition());
             ((CardViewHolder)holder).binding.setCardViewModel(mItems.get(position));
             setCardColor(holder, mItems.get(position).getBankName());
+            currentPosition = position;
+            if (mItems.get(position).getPaymentMethodNum().length() == CARD_NUM_LENGTH){
+                makeCardNumFormat(holder, mItems.get(position).getPaymentMethodNum());
+            }else{
+                ((CardViewHolder)holder).binding.cardPaymentMethodNumTextView.setText(mItems.get(position).getPaymentMethodNum());
+            }
+
             ((CardViewHolder)holder).binding.cardSelectedImageView.setOnClickListener(v -> {
                 if (!imageCheck){
                     ((CardViewHolder)holder).binding.cardSelectedImageView.setImageResource(R.drawable.not_checked_24dp);
@@ -59,7 +67,6 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     ((CardViewHolder)holder).binding.cardSelectedImageView.setImageResource(R.drawable.on_checked_24dp);
                     payMethodNum = mItems.get(position).getPaymentMethodNum();
                     payMethodType = mItems.get(position).getPaymentMethodType();
-
                     Log.e(TAG,""+payMethodType+" , "+payMethodNum);
                     imageCheck = false;
                 }
@@ -67,8 +74,28 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
+    public int getCurrentPosition(){
+        return currentPosition;
+    }
+
+
+    private void makeCardNumFormat(RecyclerView.ViewHolder holder, String cardNumbers){
+        if (cardNumbers.length() == CARD_NUM_LENGTH){
+            String maskingStr = "****";
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(cardNumbers.substring(0,4));
+            stringBuilder.append(maskingStr);
+            stringBuilder.append(maskingStr);
+            stringBuilder.append(cardNumbers.substring(12,16));
+            stringBuilder.insert(4, "    ");
+            stringBuilder.insert(12, "    ");
+            stringBuilder.insert(20, "    ");
+
+            ((CardViewHolder)holder).binding.cardPaymentMethodNumTextView.setText(stringBuilder.toString());
+        }
+    }
+
     private void setCardColor(RecyclerView.ViewHolder holder, String cardName){
-        Log.e("carname",""+cardName);
         switch (cardName){
             case "신한":
                 ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.shinhan);
@@ -111,7 +138,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             case "카카오뱅크":
                 ((CardViewHolder)holder).binding.cardFormLayout.setBackgroundResource(R.color.Kakao_bank);
                 ((CardViewHolder)holder).binding.cardBrandImageView.setImageResource(R.drawable.kakao);
-                ((CardViewHolder)holder).binding.paymentTypeTextView.setTextColor(Color.BLACK);
+                ((CardViewHolder)holder).binding.paymentTypeTextView.setTextColor(Color.DKGRAY);
                 ((CardViewHolder)holder).binding.cardPaymentMethodNumTextView.setTextColor(Color.BLACK);
                 break;
         }

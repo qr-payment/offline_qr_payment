@@ -224,7 +224,7 @@
                                 android:layout_marginStart="8dp"
                                 android:gravity="center_vertical"
                                 android:text="결제금액"
-                                android:textColor="#146CDC"
+                                android:textColor="#56585F"
                                 android:textSize="15sp" />
 
                             <TextView
@@ -233,14 +233,13 @@
                                 android:layout_height="match_parent"
                                 android:gravity="right|center_vertical"
                                 android:paddingEnd="15dp"
-                                android:textColor="#146CDC"
+                                android:textColor="#56585F"
                                 android:textSize="15sp" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="15dp"
                             android:layout_marginBottom="15dp"
                             android:orientation="horizontal">
 
@@ -250,25 +249,25 @@
                                 android:layout_marginStart="8dp"
                                 android:gravity="center_vertical"
                                 android:text="할인금액"
-                                android:textColor="#146CDC"
+                                android:textColor="#56585F"
                                 android:textSize="15sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="right|center_vertical"
-                                android:text="0 원"
                                 android:paddingEnd="15dp"
-                                android:textColor="#146CDC"
+                                android:text="0 원"
+                                android:textColor="#56585F"
                                 android:textSize="15sp" />
                         </LinearLayout>
 
                         <View
-                            android:background="#A1A1AF"
                             android:layout_width="match_parent"
+                            android:layout_height="1dp"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
-                            android:layout_height="1dp"/>
+                            android:background="#A1A1AF" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -284,7 +283,7 @@
                                 android:gravity="center_vertical"
                                 android:text="총 결제금액"
                                 android:textColor="#146CDC"
-                                android:textSize="15sp" />
+                                android:textSize="17sp" />
 
                             <TextView
                                 android:id="@+id/result_amount_textView"
@@ -293,7 +292,7 @@
                                 android:gravity="right|center_vertical"
                                 android:paddingEnd="15dp"
                                 android:textColor="#146CDC"
-                                android:textSize="15sp" />
+                                android:textSize="17sp" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -357,9 +356,9 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="11dp"
                     android:layout_marginLeft="11dp"
+                    android:layout_marginRight="11dp"
+                    android:layout_marginBottom="10dp"
                     app:cardCornerRadius="0dp"
                     app:cardElevation="1dp">
 
@@ -378,18 +377,26 @@
                                 style="@style/Widget.QR.Button4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
+                                android:layout_marginLeft="29dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="10dp"
                                 android:layout_weight="1"
-                                android:text="@string/card_simple_transaction" />
+                                android:text="@string/card_simple_transaction"
+                                android:textSize="15sp" />
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/account_transaction_button"
                                 style="@style/Widget.QR.Button4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="29dp"
+                                android:layout_marginBottom="10dp"
                                 android:layout_weight="1"
-                                android:text="@string/account_simple_transaction" />
+                                android:text="@string/account_simple_transaction"
+                                android:textSize="15sp" />
 
                         </LinearLayout>
 
@@ -398,6 +405,39 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="15dp" />
+
+                        <LinearLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/card_current_position"
+                                android:textColor="#00C853"
+                                android:gravity="end"
+                                android:textSize="14sp"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/card_position_check"
+                                android:text=" / "
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.1"/>
+
+                            <TextView
+                                android:id="@+id/card_total_position"
+                                android:textColor="#4D504D"
+                                android:gravity="start"
+                                android:layout_width="0dp"
+                                android:textSize="14sp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -410,8 +450,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_gravity="bottom"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:text="@string/transaction_send" />
 
