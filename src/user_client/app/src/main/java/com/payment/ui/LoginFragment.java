@@ -49,7 +49,6 @@ public class LoginFragment extends Fragment {
         viewModel.successCode_Login.observe(requireActivity(), serverResponse -> {
             if (serverResponse != null) {
                 if (serverResponse.getCode() == 0) {
-                    //TODO:User Index 내부저장해줘야함
                     Log.i("User Index",""+serverResponse.getBody());
                     if (getFragmentManager() != null) {
                         getFragmentManager().beginTransaction()
@@ -68,13 +67,13 @@ public class LoginFragment extends Fragment {
                 binding.passwordTextInput.setError(getString(R.string.login_null_error));
             } else {
                 //서버 없이 테스트
-//                getFragmentManager().beginTransaction()
-//                        .remove(this)
-//                        .commit();
-                binding.passwordTextInput.setError(null);
-                user.setId(binding.idEditText.getText().toString());
-                user.setPassword(binding.passwordEditText.getText().toString());
-                viewModel.callSignInServer(user);
+                getFragmentManager().beginTransaction()
+                        .remove(this)
+                        .commit();
+//                binding.passwordTextInput.setError(null);
+//                user.setId(binding.idEditText.getText().toString());
+//                user.setPassword(binding.passwordEditText.getText().toString());
+//                viewModel.callSignInServer(user);
             }
         });
 

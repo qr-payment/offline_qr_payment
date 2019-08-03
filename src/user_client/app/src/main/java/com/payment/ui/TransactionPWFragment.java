@@ -73,12 +73,21 @@ public class TransactionPWFragment extends Fragment {
             viewModel.transactionRequestMutableLiveData.getValue().setTransactionPw(viewModel.transactionPassword.getValue());
         }
         viewModel.sendTransaction();
-        viewModel.initTransaction();
-        //TODO:비밀번호 체크 및 에러메시지
-        getFragmentManager().beginTransaction()
-                .remove(this)
-                .commit();
-        getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        viewModel.transactionResult.observe(this, aBoolean -> {
+            if (aBoolean){
+                getFragmentManager().beginTransaction()
+                        .remove(TransactionPWFragment.this)
+                        .commit();
+                getFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                viewModel.initTransaction();
+            }else{
+                viewModel.failTransactionInit();
+                viewModel.shuffleList();
+                resetTransactionPassword();
+                binding.transactionPwState.setText(viewModel.transactionResultMessage.getValue());
+            }
+        });
     }
 
     public void deletePressed(boolean buttonState) {
@@ -114,5 +123,12 @@ public class TransactionPWFragment extends Fragment {
             getFragmentManager().popBackStack();
         }
         viewModel.initViewModels();
+    }
+
+    private void resetTransactionPassword(){
+        for (int i = 1; i <= PASSWORD_LENGTH; i++) {
+            ImageView imageView = view.findViewWithTag(String.valueOf(i));
+            imageView.setImageResource(R.drawable.dot2_24dp);
+        }
     }
 }
