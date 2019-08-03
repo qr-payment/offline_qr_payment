@@ -20,7 +20,6 @@
     <string name="check_transaction_pw">비밀번호 확인</string>
     <string name="reset_transaction_pw">재배열</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="transaction_re_check">비밀번호 재확인</string>
     <string name="set_transaction_pw">거래 비밀번호 설정</string>
@@ -43,5 +42,9 @@
     <string name="account_simple_transaction">계좌간편결제</string>
     <string name="card_simple_transaction">카드간편결제</string>
     <string name="transaction_info">결제정보</string>
+    <string name="press_delete">지움</string>
+    <string name="input_password">비밀번호 입력</string>
+    <string name="qr_payment">QR_PAYMENT</string>
+    <string name="payment_type">일시불</string>
 
 </resources>

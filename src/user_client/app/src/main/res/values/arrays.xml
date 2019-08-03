@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="bank">
-        <item>농협</item>
-        <item>국민</item>
         <item>신한</item>
-        <item>IBK</item>
-        <item>카카오뱅크</item>
-        <item>우리</item>
+        <item>삼성</item>
+        <item>현대</item>
+        <item>BC</item>
+        <item>KB국민</item>
         <item>하나</item>
+        <item>롯데</item>
+        <item>NH농협</item>
+        <item>시티</item>
+        <item>카카오뱅크</item>
     </string-array>
 </resources>

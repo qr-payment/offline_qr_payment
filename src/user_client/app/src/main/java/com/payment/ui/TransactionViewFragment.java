@@ -1,6 +1,7 @@
 package com.payment.ui;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.payment.R;
 import com.payment.databinding.FragmentTransactionViewBinding;
@@ -20,6 +22,8 @@ import com.payment.model.PaymentMethods;
 import com.payment.model.TransactionRequest;
 import com.payment.model.viewmodel.TransactionViewModel;
 import com.payment.util.adapter.ViewPagerAdapter;
+
+import java.text.NumberFormat;
 
 public class TransactionViewFragment extends Fragment{
 
@@ -48,14 +52,15 @@ public class TransactionViewFragment extends Fragment{
         transactionViewModel.serverChecker.setValue(false);
         cardList = new PaymentMethods();
         transactionRequest = new TransactionRequest();
+        binding.shoppingInfoImgView.setBackgroundColor(Color.rgb(69,78,151));
+        binding.shoppingInfoImgView2.setBackgroundColor(Color.rgb(69,78,151));
+        binding.shoppingInfoImgView3.setBackgroundColor(Color.rgb(221,53,46));
 
         if (transactionViewModel.cardInfo.getValue() != null){
             cardList.setMethods(transactionViewModel.cardInfo.getValue().getMethods());
             adapter = new ViewPagerAdapter(cardList.getMethods());
             binding.transactionViewPager.setAdapter(adapter);
         }
-
-        binding.transactionViewPager.getAdapter().getItemCount();
 
         return view;
     }
@@ -67,18 +72,70 @@ public class TransactionViewFragment extends Fragment{
         Log.e("transaction url",""+transactionViewModel.transactionLiveData.getValue().getUrl());
 
         binding.merchantNameTextView.setText(transactionViewModel.transactionLiveData.getValue().getMerchantName());
-        binding.resultAmountTextView.setText(Integer.toString(transactionViewModel.transactionLiveData.getValue().getAmount()));
-        binding.amountTextView.setText(Integer.toString(transactionViewModel.transactionLiveData.getValue().getAmount()));
+        String amount = NumberFormat.getInstance().format(transactionViewModel.transactionLiveData.getValue().getAmount());
+        binding.resultAmountTextView.setText(amount+" 원");
+        binding.resultAmountTextView2.setText(amount+" 원");
+        binding.amountTextView.setText(amount+" 원");
         binding.productNameTextView.setText(transactionViewModel.transactionLiveData.getValue().getProductName());
 
         transactionRequest.setAmount(transactionViewModel.transactionLiveData.getValue().getAmount());
         transactionRequest.setCount(transactionViewModel.transactionLiveData.getValue().getCount());
         transactionRequest.setProductName(transactionViewModel.transactionLiveData.getValue().getProductName());
 
+        binding.cardTotalPosition.setText(Integer.toString(adapter.getItemCount() - 1));
+
+        binding.transactionViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                if (position == adapter.getItemCount() - 1){
+                    binding.cardCurrentPosition.setVisibility(View.INVISIBLE);
+                    binding.cardTotalPosition.setVisibility(View.INVISIBLE);
+                    binding.cardPositionCheck.setVisibility(View.INVISIBLE);
+                }else{
+                    binding.cardCurrentPosition.setVisibility(View.VISIBLE);
+                    binding.cardTotalPosition.setVisibility(View.VISIBLE);
+                    binding.cardPositionCheck.setVisibility(View.VISIBLE);
+                    binding.cardCurrentPosition.setText(Integer.toString(position + 1));
+                }
+            }
+        });
+
+        binding.expandButton1.setOnClickListener(v -> {
+            if (binding.expandableLayout.isExpanded()) {
+                binding.arrowImage1.setImageResource(R.drawable.down_arrow);
+                binding.expandableLayout.collapse();
+            } else {
+                binding.arrowImage1.setImageResource(R.drawable.up_arrow);
+                binding.expandableLayout.expand();
+            }
+        });
+
+        binding.expandButton2.setOnClickListener(v -> {
+            if (binding.expandableLayout2.isExpanded()){
+                binding.arrowImage2.setImageResource(R.drawable.down_arrow);
+                binding.expandableLayout2.collapse();
+            }else{
+                binding.arrowImage2.setImageResource(R.drawable.up_arrow);
+                binding.expandableLayout2.expand();
+            }
+        });
+
+        binding.expandButton3.setOnClickListener(v -> {
+            if (binding.expandableLayout3.isExpanded()){
+                binding.arrowImage3.setImageResource(R.drawable.down_arrow);
+                binding.expandableLayout3.collapse();
+            }else{
+                binding.arrowImage3.setImageResource(R.drawable.up_arrow);
+                binding.expandableLayout3.expand();
+            }
+        });
+
         //결제하기버튼
         binding.sendTransaction.setOnClickListener(v -> {
             if (adapter.getPayMethodNum() != null && adapter.getPayMethodType() != null){
                 transactionViewModel.recycleFragment.setValue(true);
+
                 transactionRequest.setMethodNum(adapter.getPayMethodNum());
                 transactionRequest.setMethodType(adapter.getPayMethodType());
 
