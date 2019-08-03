@@ -1,9 +1,12 @@
 package com.payment;
 
+import androidx.fragment.app.testing.FragmentScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
+
+import com.payment.ui.LoginFragment;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,6 +24,8 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> activityRule =
             new ActivityTestRule<>(MainActivity.class);
 
+    FragmentScenario<LoginFragment> mLoginFragment;
+
     @Before
     public void setUp() throws Exception {
     }
@@ -32,5 +37,6 @@ public class MainActivityTest {
 
     @Test
     public void onCreate() {
+        mLoginFragment.recreate();
     }
 }
