@@ -3,11 +3,12 @@ package com.example.user_client_kotlin
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
+import com.example.user_client_kotlin.ui.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), LifecycleOwner {
     private val MY_PERMISSIONS_REQUEST_READ_CONTACTS = 100
@@ -15,6 +16,10 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val fragment = MainTransactionFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.container_frame, fragment, fragment.javaClass.getSimpleName())
+            .commit()
 
         //권한처리먼저?
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -27,8 +32,44 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
                     arrayOf(Manifest.permission.CAMERA),
                     MY_PERMISSIONS_REQUEST_READ_CONTACTS)
             }
-        }else{
+        }else {
             //권한을 이미 승인한 경우
+        }
+
+        bottomNav.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.action_first -> {
+                    val fragment = MainTransactionFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, fragment, fragment.javaClass.getSimpleName())
+                        .commit()
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.action_second -> {
+                    val fragment = TransferFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, fragment, fragment.javaClass.getSimpleName())
+                        .commit()
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.action_third -> {
+                    val fragment = InvestmentFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, fragment, fragment.javaClass.getSimpleName())
+                        .commit()
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.action_fourth -> {
+                    val fragment = HistoryFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, fragment, fragment.javaClass.getSimpleName())
+                        .commit()
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.action_fifth -> {
+                    val fragment = EtcFragment()
+                    supportFragmentManager.beginTransaction().replace(R.id.container_frame, fragment, fragment.javaClass.getSimpleName())
+                        .commit()
+                    return@setOnNavigationItemSelectedListener true
+                }
+            }
+            false
         }
     }
 
@@ -37,17 +78,11 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         when (requestCode) {
             MY_PERMISSIONS_REQUEST_READ_CONTACTS -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    Log.e("permission result callback ","권한 승인 ?")
+
                 } else {
-                    Log.e("permission result callback ","권한 거부")
+                    //make custom dialog
                 }
                 return
-            }
-
-            // Add other 'when' lines to check for other
-            // permissions this app might request.
-            else -> {
-                // Ignore all other requests.
             }
         }
     }

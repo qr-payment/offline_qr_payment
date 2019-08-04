@@ -54,4 +54,5 @@ dependencies {
 
     //anko
     implementation 'org.jetbrains.anko:anko:0.10.8'
+    implementation 'com.google.android.material:material:1.0.0'
 }
