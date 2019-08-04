@@ -17,9 +17,9 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragment = MainTransactionFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.container_frame, fragment, fragment.javaClass.getSimpleName())
-            .commit()
+//        val fragment = MainTransactionFragment()
+//        supportFragmentManager.beginTransaction().replace(R.id.container_frame, fragment, fragment.javaClass.getSimpleName())
+//            .commit()
 
         //권한처리먼저?
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
