@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_first"
+        android:icon="@drawable/first_24dp"
+        android:title="결제" />
+    <item
+        android:id="@+id/action_second"
+        android:icon="@drawable/second_24dp"
+        android:title="송금" />
+    <item
+        android:id="@+id/action_third"
+        android:icon="@drawable/third_24dp"
+        android:title="투자" />
+    <item
+        android:id="@+id/action_fourth"
+        android:icon="@drawable/fourth_24dp"
+        android:title="내역" />
+    <item
+        android:id="@+id/action_fifth"
+        android:icon="@drawable/fifth_24dp"
+        android:title="기타" />
+</menu>
